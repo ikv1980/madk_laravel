@@ -1,1 +1,1 @@
-# madk_laravel
+# Дипломный проект на Laravel 12

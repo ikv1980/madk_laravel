@@ -1,0 +1,76 @@
+version: '3.9'
+# Контейнеры в сети internal:
+# Смена прав на папке
+# sudo chown -R admin:admin ${PROJECT_FOLDER}
+# sudo chmod -R 755 ${PROJECT_FOLDER}
+
+services:
+  # NGINX -----------------------------------------------------------------------------------------
+  webserver:
+    image: nginx:alpine
+    container_name: ${PROJECT_NAME}-webserver
+    restart: unless-stopped
+    working_dir: /application
+    networks:
+      - internal
+    volumes:
+      - ./../:/application
+      - ./sourcefiles/nginx:/etc/nginx/conf.d # Подключаем конфигурацию Nginx
+    depends_on:
+      - php-fpm
+    ports:
+      - "${NGINX_PORT}:80" # Доступ к Nginx через порт 9090
+
+  php-fpm:
+    build: sourcefiles/php-fpm
+    container_name: ${PROJECT_NAME}-php-fpm
+    restart: unless-stopped
+    working_dir: /application
+    volumes:
+      - ./../:/application
+      - ./sourcefiles/php-fpm/php-ini-overrides.ini:/usr/local/etc/php/conf.d/99-overrides.ini
+    depends_on:
+      - mariadb
+    networks:
+      - internal
+
+# MARIADB -----------------------------------------------------------------------------------------
+  mariadb:
+    image: mariadb:latest
+    container_name: ${PROJECT_NAME}-mariadb
+    restart: unless-stopped
+    env_file:
+      - .env
+    environment:
+      MYSQL_ROOT_PASSWORD: '${DB_PASSWORD}'     # Замените на ваш пароль
+      MYSQL_DATABASE: ${DB_DATABASE}            # Имя вашей базы данных
+      MYSQL_USER: ${DB_USERNAME}                # Имя пользователя
+      MYSQL_PASSWORD: ${DB_PASSWORD}            # Пароль пользователя (можно сменить потом через phpMyAdmin)
+    ports:
+      - '${DB_PORT}:3306'
+    volumes:
+      - db_data:/var/lib/mysql
+    networks:
+      - internal
+
+# PHPMYADMIN --------------------------------------------------------------------------------------
+  phpmyadmin:
+    image: phpmyadmin:latest
+    container_name: ${PROJECT_NAME}-phpmyadmin
+    restart: unless-stopped
+    ports:
+      - 3000:80                       # Отображение порта 3000 на хосте на порт 80 контейнера
+    environment:
+      PMA_HOST: mariadb               # Указывает, что MariaDB будет доступна под именем "mariadb"
+      PMA_PORT: 3306                  # Порт MariaDB
+      PMA_ARBITRARY: 1                # Разрешает подключение к произвольным хостам
+    depends_on:
+      - mariadb
+    networks:
+      - internal
+volumes:
+  db_data:
+    driver: local
+networks:
+  internal:
+    driver: bridge                  # все контейнеры в одной сети
