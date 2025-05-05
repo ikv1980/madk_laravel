@@ -1,5 +1,5 @@
 # docker-laravel-postgres-nginx
-Simple docker-compose for Laravel, with postgresql, nginx and php-fpm
+Simple docker-compose for Laravel, with MariaDB, phpMyAdmin, Nginx and php-fpm
 
 # Contents
 + [Pre-requisites](#pre-requisites)
@@ -30,7 +30,7 @@ Simple docker-compose for Laravel, with postgresql, nginx and php-fpm
 + Run `docker-compose up -d` to start the containers.
 + Run `docker exec -it app-php-fpm php artisan key:generate`
 + Visit http://localhost to see your Laravel application.
-+ Try to connect 127.0.0.1:5432 to access Postgres
++ Try to connect 127.0.0.1:5000 to access Postgres
 + After starting, note that one directory and one file will be created with name *postgres* and file *data*, this files are Database archives
 
 # Usage
@@ -41,12 +41,13 @@ Simple docker-compose for Laravel, with postgresql, nginx and php-fpm
 + or some connand in deattach `docker exec -itd app-php-fpm <command>`
 
 # Images
-+ postgres:12.1-alpine
++ mariadb:latest
++ phpmyadmin:latest
 + nginx:alpine
-+ php74-fpm:latest
++ php:8.3-fpm
 
 # Laravel
-+ 6.14.0 version
++ 12.0 version
 
 # Source
 
