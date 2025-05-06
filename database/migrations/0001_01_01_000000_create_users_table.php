@@ -29,7 +29,7 @@ return new class extends Migration
             $table->foreignId('status')->nullable()->comment('статус');
             $table->timestamp('status_at')->comment('смена статуса');
 
-            $table->json('permissions')->nullable();
+            $table->json('permissions')->nullable()->comment('разрешения');
             $table->boolean('delete')->default(false);
 
             $table->rememberToken();
