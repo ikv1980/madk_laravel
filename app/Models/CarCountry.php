@@ -19,7 +19,7 @@ class CarCountry extends Model
     {
         return [
             'country_name' => 'string',
-            'deleted' => 'boolean',
+            'delete' => 'boolean',
             'created_at' => 'datetime',
             'updated_at' => 'datetime',
         ];

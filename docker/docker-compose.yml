@@ -42,12 +42,12 @@ services:
     env_file:
       - .env
     environment:
-      MYSQL_ROOT_PASSWORD: '${DB_PASSWORD}'     # Замените на ваш пароль
+      MYSQL_ROOT_PASSWORD: "${DB_PASSWORD}"     # Замените на ваш пароль
       MYSQL_DATABASE: ${DB_DATABASE}            # Имя вашей базы данных
       MYSQL_USER: ${DB_USERNAME}                # Имя пользователя
       MYSQL_PASSWORD: ${DB_PASSWORD}            # Пароль пользователя (можно сменить потом через phpMyAdmin)
     ports:
-      - '${DB_PORT}:3306'
+      - "${DB_PORT}:3306"
     volumes:
       - db_data:/var/lib/mysql
     networks:

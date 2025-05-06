@@ -19,7 +19,7 @@ class CarColor extends Model
     {
         return [
             'color_name' => 'string',
-            'deleted' => 'boolean',
+            'delete' => 'boolean',
             'created_at' => 'datetime',
             'updated_at' => 'datetime',
         ];

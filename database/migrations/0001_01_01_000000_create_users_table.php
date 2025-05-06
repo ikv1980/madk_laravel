@@ -12,11 +12,26 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('users', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
-            $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
+            $table->id()->from(100);
+            $table->string('login')->unique()->comment('логин');
+            $table->string('password')->comment('пароль');
+
+            $table->string('name')->comment('имя');
+            $table->string('surname')->comment('фамилия');
+            $table->string('patronymic')->comment('отчество');
+            $table->string('email')->unique()->comment('email');
+            $table->string('phone')->comment('телефон');
+            $table->date('birthday')->nullable()->comment('день рождения');
+
+            $table->foreignId('department')->nullable()->comment('отдел');
+            $table->foreignId('function')->nullable()->comment('должность');
+            $table->timestamp('start_work')->nullable()->comment('трудоустройство');
+            $table->foreignId('status')->nullable()->comment('статус');
+            $table->timestamp('status_at')->comment('смена статуса');
+
+            $table->json('permissions')->nullable();
+            $table->boolean('delete')->default(false);
+
             $table->rememberToken();
             $table->timestamps();
         });

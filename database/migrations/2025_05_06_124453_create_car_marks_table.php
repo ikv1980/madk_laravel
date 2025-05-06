@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('car_marks', function (Blueprint $table) {
             $table->id()->from(100);
             $table->string('mark_name');
-            $table->boolean('deleted')->default(false);
+            $table->boolean('delete')->default(false);
             $table->timestamps();
         });
     }

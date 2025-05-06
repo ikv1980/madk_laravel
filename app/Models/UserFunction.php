@@ -4,10 +4,10 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class CarType extends Model
+class UserFunction extends Model
 {
     protected $fillable = [
-        'type_name',
+        'function_name', 'function_description',
     ];
 
     protected $hidden = [
@@ -18,7 +18,8 @@ class CarType extends Model
     protected function casts(): array
     {
         return [
-            'type_name' => 'string',
+            'function_name' => 'string',
+            'function_description' => 'string',
             'delete' => 'boolean',
             'created_at' => 'datetime',
             'updated_at' => 'datetime',
