@@ -8,13 +8,13 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class UserDepartment extends Model
 {
     protected $fillable = [
-        'department_name', 'department_description','department_mail', 'delete',
+        'department_name', 'department_description','department_mail',
     ];
 
     protected $hidden = [
         'created_at',
         'updated_at',
-        'delete',
+        'deleted_at',
     ];
 
     protected function casts(): array
@@ -23,9 +23,9 @@ class UserDepartment extends Model
             'department_name' => 'string',
             'department_description' => 'string',
             'department_mail' => 'string',
-            'delete' => 'boolean',
             'created_at' => 'datetime',
             'updated_at' => 'datetime',
+            'deleted_at' => 'datetime',
         ];
     }
 

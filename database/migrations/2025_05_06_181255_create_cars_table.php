@@ -24,7 +24,7 @@ return new class extends Migration {
             $table->date('date_at')->comment('дата производства');
             $table->decimal('price', 10, 2)->comment('цена');
             $table->boolean('block')->comment('блок');
-            $table->boolean('delete')->default(false)->comment('удаление');
+            $table->softDeletes();
 
             // Внешние ключи
             $table->foreign('mark_id')->references('id')->on('car_marks')->onDelete('set null');

@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('department_name');
             $table->string('department_description');
             $table->string('department_mail');
-            $table->boolean('delete')->default(false);
+            $table->softDeletes();
             $table->timestamps();
         });
     }

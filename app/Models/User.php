@@ -12,14 +12,14 @@ class User extends Authenticatable
         'name', 'surname', 'patronymic',
         'email', 'phone','birthday',
         'department_id', 'function_id', 'start_work', 'status_id', 'status_at',
-        'permissions', 'delete'
+        'permissions',
     ];
 
     protected $hidden = [
         'password',
         'remember_token',
         'permissions',
-        'delete'
+        'deleted_at',
     ];
 
     protected function casts(): array
@@ -39,6 +39,7 @@ class User extends Authenticatable
             'status_at' => 'datetime',
             'permissions' => 'array',
             'password' => 'hashed',
+            'deleted_at' => 'datetime',
         ];
     }
 }

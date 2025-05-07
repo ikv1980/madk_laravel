@@ -8,22 +8,22 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class CarModel extends Model
 {
     protected $fillable = [
-        'model_name', 'delete',
+        'model_name',
     ];
 
     protected $hidden = [
         'created_at',
         'updated_at',
-        'delete',
+        'deleted_at',
     ];
 
     protected function casts(): array
     {
         return [
             'model_name' => 'string',
-            'delete' => 'boolean',
             'created_at' => 'datetime',
             'updated_at' => 'datetime',
+            'deleted_at' => 'datetime',
         ];
     }
 

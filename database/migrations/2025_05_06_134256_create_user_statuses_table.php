@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('user_statuses', function (Blueprint $table) {
             $table->id()->from(100);
             $table->string('type_name');
-            $table->boolean('delete')->default(false);
+            $table->softDeletes();
             $table->timestamps();
         });
     }

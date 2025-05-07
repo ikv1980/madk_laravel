@@ -14,16 +14,16 @@ class UserStatus extends Model
     protected $hidden = [
         'created_at',
         'updated_at',
-        'delete',
+        'deleted_at',
     ];
 
     protected function casts(): array
     {
         return [
             'status_name' => 'string',
-            'delete' => 'boolean',
             'created_at' => 'datetime',
             'updated_at' => 'datetime',
+            'deleted_at' => 'datetime',
         ];
     }
 

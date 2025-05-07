@@ -19,12 +19,12 @@ class Cars extends Model
         'date_at',
         'price',
         'block',
-        'delete',
     ];
 
     protected $hidden = [
         'created_at',
         'updated_at',
+        'deleted_at',
     ];
 
     protected function casts(): array
@@ -32,8 +32,8 @@ class Cars extends Model
         return [
             'price' => 'float',
             'block' => 'boolean',
-            'delete' => 'boolean',
             'date_at' => 'date',
+            'deleted_at' => 'datetime',
         ];
     }
 

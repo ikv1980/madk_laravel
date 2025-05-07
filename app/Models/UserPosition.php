@@ -8,13 +8,13 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class UserPosition extends Model
 {
     protected $fillable = [
-        'position_name', 'position_description', 'delete',
+        'position_name', 'position_description',
     ];
 
     protected $hidden = [
         'created_at',
         'updated_at',
-        'delete',
+        'deleted_at',
     ];
 
     protected function casts(): array
@@ -22,9 +22,9 @@ class UserPosition extends Model
         return [
             'position_name' => 'string',
             'position_description' => 'string',
-            'delete' => 'boolean',
             'created_at' => 'datetime',
             'updated_at' => 'datetime',
+            'deleted_at' => 'datetime',
         ];
     }
 

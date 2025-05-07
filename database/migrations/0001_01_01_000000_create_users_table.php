@@ -30,7 +30,7 @@ return new class extends Migration
             $table->timestamp('status_at')->comment('смена статуса');
 
             $table->json('permissions')->nullable()->comment('разрешения');
-            $table->boolean('delete')->default(false);
+            $table->softDeletes();
 
             $table->rememberToken();
             $table->timestamps();

@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('car_countries', function (Blueprint $table) {
             $table->id()->from(100);
             $table->string('country_name');
-            $table->boolean('delete')->default(false);
+            $table->softDeletes();
             $table->timestamps();
         });
     }
