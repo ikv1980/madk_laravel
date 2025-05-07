@@ -14,6 +14,7 @@ class CarMark extends Model
     protected $hidden = [
         'created_at',
         'updated_at',
+        'delete',
     ];
 
     protected function casts(): array

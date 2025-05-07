@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::table('users', function (Blueprint $table) {
             // Внешние ключи
             $table->foreign('department_id')->references('id')->on('user_departments')->onDelete('set null');
-            $table->foreign('function_id')->references('id')->on('user_functions')->onDelete('set null');
+            $table->foreign('position_id')->references('id')->on('user_positions')->onDelete('set null');
             $table->foreign('status_id')->references('id')->on('user_statuses')->onDelete('set null');
         });
     }
@@ -26,7 +26,7 @@ return new class extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             $table->dropForeign(['department_id']);
-            $table->dropForeign(['function_id']);
+            $table->dropForeign(['position_id']);
             $table->dropForeign(['status_id']);
         });
 

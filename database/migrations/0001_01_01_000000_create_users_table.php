@@ -18,14 +18,14 @@ return new class extends Migration
 
             $table->string('name')->comment('имя');
             $table->string('surname')->comment('фамилия');
-            $table->string('patronymic')->comment('отчество');
+            $table->string('patronymic')->nullable()->comment('отчество');
             $table->string('email')->unique()->comment('email');
-            $table->string('phone')->comment('телефон');
+            $table->string('phone')->nullable()->comment('телефон');
             $table->date('birthday')->nullable()->comment('день рождения');
 
             $table->foreignId('department_id')->nullable()->comment('отдел');
-            $table->foreignId('function_id')->nullable()->comment('должность');
-            $table->timestamp('start_work')->nullable()->comment('трудоустройство');
+            $table->foreignId('position_id')->nullable()->comment('должность');
+            $table->date('start_work')->nullable()->comment('трудоустройство');
             $table->foreignId('status_id')->nullable()->comment('статус');
             $table->timestamp('status_at')->comment('смена статуса');
 

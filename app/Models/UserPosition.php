@@ -5,22 +5,23 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class UserFunction extends Model
+class UserPosition extends Model
 {
     protected $fillable = [
-        'function_name', 'function_description', 'delete',
+        'position_name', 'position_description', 'delete',
     ];
 
     protected $hidden = [
         'created_at',
         'updated_at',
+        'delete',
     ];
 
     protected function casts(): array
     {
         return [
-            'function_name' => 'string',
-            'function_description' => 'string',
+            'position_name' => 'string',
+            'position_description' => 'string',
             'delete' => 'boolean',
             'created_at' => 'datetime',
             'updated_at' => 'datetime',

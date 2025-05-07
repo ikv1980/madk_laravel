@@ -11,10 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('user_functions', function (Blueprint $table) {
+        Schema::create('user_positions', function (Blueprint $table) {
             $table->id()->from(100);
-            $table->string('function_name');
-            $table->string('function_description');
+            $table->string('position_name');
+            $table->string('position_description');
             $table->boolean('delete')->default(false);
             $table->timestamps();
         });
@@ -25,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('user_functions');
+        Schema::dropIfExists('user_positions');
     }
 };

@@ -2,46 +2,42 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
-    /** @use HasFactory<\Database\Factories\UserFactory> */
-    use HasFactory, Notifiable;
-
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var list<string>
-     */
     protected $fillable = [
-        'name',
-        'email',
-        'password',
+        'login', 'password',
+        'name', 'surname', 'patronymic',
+        'email', 'phone','birthday',
+        'department_id', 'function_id', 'start_work', 'status_id', 'status_at',
+        'permissions', 'delete'
     ];
 
-    /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var list<string>
-     */
     protected $hidden = [
         'password',
         'remember_token',
+        'permissions',
+        'delete'
     ];
 
-    /**
-     * Get the attributes that should be cast.
-     *
-     * @return array<string, string>
-     */
     protected function casts(): array
     {
         return [
-            'email_verified_at' => 'datetime',
+            'login' => 'string',
+            'name' => 'string',
+            'surname' => 'string',
+            'patronymic' => 'string',
+            'email' => 'string',
+            'phone' => 'string',
+            'birthday' => 'date',
+            'department_id' => 'integer',
+            'function_id' => 'integer',
+            'start_work' => 'date',
+            'status_id' => 'integer',
+            'status_at' => 'datetime',
+            'permissions' => 'array',
             'password' => 'hashed',
         ];
     }
