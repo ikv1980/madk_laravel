@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class CarModel extends Model
 {
@@ -23,5 +24,10 @@ class CarModel extends Model
             'created_at' => 'datetime',
             'updated_at' => 'datetime',
         ];
+    }
+
+    public function cars(): HasMany
+    {
+        return $this->hasMany(Cars::class, 'model_id');
     }
 }

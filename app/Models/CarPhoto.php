@@ -3,12 +3,12 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class CarMark extends Model
+class CarPhoto extends Model
 {
     protected $fillable = [
-        'mark_name',
+        'car_id', 'url'
     ];
 
     protected $hidden = [
@@ -19,15 +19,14 @@ class CarMark extends Model
     protected function casts(): array
     {
         return [
-            'mark_name' => 'string',
-            'delete' => 'boolean',
+            'url' => 'string',
             'created_at' => 'datetime',
             'updated_at' => 'datetime',
         ];
     }
 
-    public function cars(): HasMany
+    public function car(): BelongsTo
     {
-        return $this->hasMany(Cars::class, 'mark_id');
+        return $this->belongsTo(Cars::class, 'car_id');
     }
 }

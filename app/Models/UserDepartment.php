@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class UserDepartment extends Model
 {
@@ -25,5 +26,10 @@ class UserDepartment extends Model
             'created_at' => 'datetime',
             'updated_at' => 'datetime',
         ];
+    }
+
+    public function cars(): HasMany
+    {
+        return $this->hasMany(Cars::class, 'department_id');
     }
 }

@@ -12,9 +12,10 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->foreign('department')->references('id')->on('user_departments')->onDelete('set null');
-            $table->foreign('function')->references('id')->on('user_functions')->onDelete('set null');
-            $table->foreign('status')->references('id')->on('user_statuses')->onDelete('set null');
+            // Внешние ключи
+            $table->foreign('department_id')->references('id')->on('user_departments')->onDelete('set null');
+            $table->foreign('function_id')->references('id')->on('user_functions')->onDelete('set null');
+            $table->foreign('status_id')->references('id')->on('user_statuses')->onDelete('set null');
         });
     }
 
@@ -24,9 +25,11 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->dropForeign(['department']);
-            $table->dropForeign(['function']);
-            $table->dropForeign(['status']);
+            $table->dropForeign(['department_id']);
+            $table->dropForeign(['function_id']);
+            $table->dropForeign(['status_id']);
         });
+
+        Schema::dropIfExists('users');
     }
 };

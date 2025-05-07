@@ -23,10 +23,10 @@ return new class extends Migration
             $table->string('phone')->comment('телефон');
             $table->date('birthday')->nullable()->comment('день рождения');
 
-            $table->foreignId('department')->nullable()->comment('отдел');
-            $table->foreignId('function')->nullable()->comment('должность');
+            $table->foreignId('department_id')->nullable()->comment('отдел');
+            $table->foreignId('function_id')->nullable()->comment('должность');
             $table->timestamp('start_work')->nullable()->comment('трудоустройство');
-            $table->foreignId('status')->nullable()->comment('статус');
+            $table->foreignId('status_id')->nullable()->comment('статус');
             $table->timestamp('status_at')->comment('смена статуса');
 
             $table->json('permissions')->nullable()->comment('разрешения');
