@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class CarCountry extends Model
 {
     protected $fillable = [
-        'country_name',
+        'country_name', 'delete',
     ];
 
     protected $hidden = [

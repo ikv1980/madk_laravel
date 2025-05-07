@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class UserDepartment extends Model
 {
     protected $fillable = [
-        'department_name', 'department_description','department_mail',
+        'department_name', 'department_description','department_mail', 'delete',
     ];
 
     protected $hidden = [

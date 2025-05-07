@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class UserFunction extends Model
 {
     protected $fillable = [
-        'function_name', 'function_description',
+        'function_name', 'function_description', 'delete',
     ];
 
     protected $hidden = [

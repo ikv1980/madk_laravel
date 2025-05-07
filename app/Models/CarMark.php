@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class CarMark extends Model
 {
     protected $fillable = [
-        'mark_name',
+        'mark_name', 'delete',
     ];
 
     protected $hidden = [

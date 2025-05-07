@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class CarType extends Model
 {
     protected $fillable = [
-        'type_name',
+        'type_name', 'delete',
     ];
 
     protected $hidden = [
