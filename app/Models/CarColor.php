@@ -31,4 +31,9 @@ class CarColor extends Model
     {
         return $this->hasMany(Cars::class, 'color_id');
     }
+
+    public function setColorNameAttribute($value)
+    {
+        $this->attributes['color_name'] = mb_strtolower($value);
+    }
 }

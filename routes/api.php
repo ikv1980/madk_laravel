@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\Api\V1\ColorController;
+use App\Http\Controllers\Api\V1\CarColorController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -10,6 +10,10 @@ Route::get('/user', function (Request $request) {
 
 
 Route::prefix('v1')->group(function () {
-    Route::apiResource('/colors', ColorController::class);
+    Route::apiResources([
+        # Laravel автоматически создает имена маршрутов:
+        # GET /api/v1/car-colors → api.v1.car-colors.index
+        'car-colors' => CarColorController::class,
+    ]);
 });
 
