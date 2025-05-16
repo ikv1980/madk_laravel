@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('car_colors', function (Blueprint $table) {
             $table->id()->from(100);
-            $table->string('color_name');
+            $table->string('color_name')->unique();
             $table->softDeletes();
             $table->timestamps();
         });
