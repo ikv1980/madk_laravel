@@ -31,4 +31,9 @@ class CarType extends Model
     {
         return $this->hasMany(Cars::class, 'type_id');
     }
+
+    public function setTypeNameAttribute($value)
+    {
+        $this->attributes['type_name'] = mb_strtolower($value);
+    }
 }
