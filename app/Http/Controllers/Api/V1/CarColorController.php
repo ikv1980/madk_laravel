@@ -50,6 +50,6 @@ class CarColorController extends Controller
     public function destroy(CarColor $carColor)
     {
         $carColor->delete();
-        return response()->json(null, 204);
+        return response()->json(null,  204);
     }
 }
