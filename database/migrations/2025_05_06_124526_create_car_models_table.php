@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('car_models', function (Blueprint $table) {
             $table->id()->from(100);
-            $table->string('model_name');
+            $table->string('model_name')->unique();
             $table->softDeletes();
             $table->timestamps();
         });
