@@ -23,8 +23,12 @@ class CarCountryController extends Controller
      */
     public function store(StoreCarCountryRequest $request)
     {
-        $carCountry = CarCountry::create($request->validated());
-        return response()->json($carCountry, 201);
+        try {
+            $carCountry = CarCountry::create($request->validated());
+            return response()->json($carCountry, 201);
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'Не удалось создать запись'], 500);
+        }
     }
 
     /**
@@ -36,13 +40,16 @@ class CarCountryController extends Controller
     }
 
     /**
-     * Update CarCountry::self::all() ;the specified resource in storage.
-     * return
+     * Update the specified resource in storage.
      */
     public function update(UpdateCarCountryRequest $request, CarCountry $carCountry)
     {
-        $carCountry->update($request->validated());
-        return response()->json($carCountry);
+        try {
+            $carCountry->update($request->validated());
+            return response()->json($carCountry);
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'Не удалось обновить запись'], 500);
+        }
     }
 
     /**

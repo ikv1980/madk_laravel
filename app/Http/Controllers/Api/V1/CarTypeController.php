@@ -23,8 +23,12 @@ class CarTypeController extends Controller
      */
     public function store(StoreCarTypeRequest $request)
     {
-        $carType = CarType::create($request->validated());
-        return response()->json($carType, 201);
+        try {
+            $carType = CarType::create($request->validated());
+            return response()->json($carType, 201);
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'Не удалось создать запись'], 500);
+        }
     }
 
     /**
@@ -36,13 +40,16 @@ class CarTypeController extends Controller
     }
 
     /**
-     * Update CarType::self::all() ;the specified resource in storage.
-     * return
+     * Update the specified resource in storage.
      */
     public function update(UpdateCarTypeRequest $request, CarType $carType)
     {
-        $carType->update($request->validated());
-        return response()->json($carType);
+        try {
+            $carType->update($request->validated());
+            return response()->json($carType);
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'Не удалось обновить запись'], 500);
+        }
     }
 
     /**

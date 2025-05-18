@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\CarColor;
 use App\Http\Requests\StoreCarColorRequest;
 use App\Http\Requests\UpdateCarColorRequest;
+
 class CarColorController extends Controller
 {
     /**
@@ -22,8 +23,12 @@ class CarColorController extends Controller
      */
     public function store(StoreCarColorRequest $request)
     {
-        $carColor = CarColor::create($request->validated());
-        return response()->json($carColor, 201);
+        try {
+            $carColor = CarColor::create($request->validated());
+            return response()->json($carColor, 201);
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'Не удалось создать запись'], 500);
+        }
     }
 
     /**
@@ -35,13 +40,16 @@ class CarColorController extends Controller
     }
 
     /**
-     * Update CarColor::self::all() ;the specified resource in storage.
-     * return
+     * Update the specified resource in storage.
      */
     public function update(UpdateCarColorRequest $request, CarColor $carColor)
     {
-        $carColor->update($request->validated());
-        return response()->json($carColor);
+        try {
+            $carColor->update($request->validated());
+            return response()->json($carColor);
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'Не удалось обновить запись'], 500);
+        }
     }
 
     /**
@@ -50,6 +58,6 @@ class CarColorController extends Controller
     public function destroy(CarColor $carColor)
     {
         $carColor->delete();
-        return response()->json(null,  204);
+        return response()->json(null, 204);
     }
 }
