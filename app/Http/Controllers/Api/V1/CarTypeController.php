@@ -3,9 +3,9 @@
 namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Api\V1\StoreCarTypeRequest;
+use App\Http\Requests\Api\V1\UpdateCarTypeRequest;
 use App\Models\CarType;
-use App\Http\Requests\StoreCarTypeRequest;
-use App\Http\Requests\UpdateCarTypeRequest;
 
 class CarTypeController extends Controller
 {

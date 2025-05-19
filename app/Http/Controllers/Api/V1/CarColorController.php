@@ -3,9 +3,9 @@
 namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Api\V1\StoreCarColorRequest;
+use App\Http\Requests\Api\V1\UpdateCarColorRequest;
 use App\Models\CarColor;
-use App\Http\Requests\StoreCarColorRequest;
-use App\Http\Requests\UpdateCarColorRequest;
 
 class CarColorController extends Controller
 {
