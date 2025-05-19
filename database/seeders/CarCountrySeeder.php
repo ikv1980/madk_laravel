@@ -6,7 +6,7 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
-class CountrySeeder extends Seeder
+class CarCountrySeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -14,7 +14,7 @@ class CountrySeeder extends Seeder
     public function run(): void
     {
         // Вызов сидера отдельно
-        // php artisan db:seed --class=CountrySeeder
+        // php artisan db:seed --class=CarCountrySeeder
         $countries = ['Австралия','Австрия','Беларусь','Бразилия','Великобритания','Вьетнам','Германия','Дания','Израиль','Индия','Иран','Испания','Италия','Китай','Латвия','Малайзия','Мексика','Нидерланды','Норвегия','Объединённые Арабские Эмираты','Польша','Россия','Румыния','Северная Америка','Сербия','США','Таиланд','Тайвань','Турция','Узбекистан','Украина','Франция','Хорватия','Чехия','Швейцария','Швеция','Южная Корея','Япония'];
         $data = [];
 

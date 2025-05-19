@@ -6,7 +6,7 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
-class ColorSeeder extends Seeder
+class CarColorSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -14,7 +14,7 @@ class ColorSeeder extends Seeder
     public function run(): void
     {
         // Вызов сидера отдельно
-        // php artisan db:seed --class=ColorSeeder
+        // php artisan db:seed --class=CarColorSeeder
         $colors = ['белый', 'бронзовый', 'голубой', 'желтый', 'зеленый', 'золотой', 'индиго', 'коричневый', 'красный', 'оранжевый', 'розовый', 'серебрянный', 'серый', 'синий', 'сиреневый', 'фиолетовый', 'черный'];
         $data = [];
 

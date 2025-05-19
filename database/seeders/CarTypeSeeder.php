@@ -6,7 +6,7 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
-class TypeSeeder extends Seeder
+class CarTypeSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -14,7 +14,7 @@ class TypeSeeder extends Seeder
     public function run(): void
     {
         // Вызов сидера отдельно
-        // php artisan db:seed --class=TypeSeeder
+        // php artisan db:seed --class=CarTypeSeeder
         $types = ['седан','купе','хэтчбек','лифтбек','фастбэк','универсал','кроссовер','внедорожник','пикап','легковой фургон','минивэн','компактвэн','микровэн','кабриолет','родстер','ландо','лимузин'];
         $data = [];
 
