@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api\V1;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\V1\StoreCarColorRequest;
 use App\Http\Requests\Api\V1\UpdateCarColorRequest;
+use App\Http\Resources\Api\V1\CarColorResource;
 use App\Models\CarColor;
 
 class CarColorController extends Controller
@@ -14,8 +15,7 @@ class CarColorController extends Controller
      */
     public function index()
     {
-        $carColors = CarColor::all();
-        return response()->json($carColors);
+        return CarColorResource::collection(CarColor::query()->paginate());
     }
 
     /**
@@ -24,8 +24,7 @@ class CarColorController extends Controller
     public function store(StoreCarColorRequest $request)
     {
         try {
-            $carColor = CarColor::create($request->validated());
-            return response()->json($carColor, 201);
+            return new CarColorResource(CarColor::create($request->validated()));
         } catch (\Exception $e) {
             return response()->json(['error' => 'Не удалось создать запись'], 500);
         }
@@ -36,7 +35,7 @@ class CarColorController extends Controller
      */
     public function show(CarColor $carColor)
     {
-        return response()->json($carColor);
+        return new CarColorResource($carColor);
     }
 
     /**
@@ -46,7 +45,7 @@ class CarColorController extends Controller
     {
         try {
             $carColor->update($request->validated());
-            return response()->json($carColor);
+            return new CarColorResource($carColor);
         } catch (\Exception $e) {
             return response()->json(['error' => 'Не удалось обновить запись'], 500);
         }
@@ -57,7 +56,23 @@ class CarColorController extends Controller
      */
     public function destroy(CarColor $carColor)
     {
+        // Мягкое удаление
         $carColor->delete();
+        // Жесткое удаление
+        // $carColor->forceDelete();
         return response()->json(null, 204);
+    }
+
+    public function restore(int $id): CarColorResource
+    {
+        $carColor = CarColor::withTrashed()->findOrFail($id);
+
+        if (!$carColor->trashed()) {
+            return response()->json(['message' => 'Запись не удалена'], 400);
+        }
+
+        $carColor->restore();
+
+        return new CarColorResource($carColor);
     }
 }

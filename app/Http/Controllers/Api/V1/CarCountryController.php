@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api\V1;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\V1\StoreCarCountryRequest;
 use App\Http\Requests\Api\V1\UpdateCarCountryRequest;
+use App\Http\Resources\Api\V1\CarCountryResource;
 use App\Models\CarCountry;
 
 class CarCountryController extends Controller
@@ -14,8 +15,7 @@ class CarCountryController extends Controller
      */
     public function index()
     {
-        $carCountries = CarCountry::all();
-        return response()->json($carCountries);
+        return CarCountryResource::collection(CarCountry::query()->paginate());
     }
 
     /**
@@ -24,8 +24,7 @@ class CarCountryController extends Controller
     public function store(StoreCarCountryRequest $request)
     {
         try {
-            $carCountry = CarCountry::create($request->validated());
-            return response()->json($carCountry, 201);
+            return new CarCountryResource(CarCountry::create($request->validated()));
         } catch (\Exception $e) {
             return response()->json(['error' => 'Не удалось создать запись'], 500);
         }
@@ -36,7 +35,7 @@ class CarCountryController extends Controller
      */
     public function show(CarCountry $carCountry)
     {
-        return response()->json($carCountry);
+        return new CarCountryResource($carCountry);
     }
 
     /**
@@ -46,7 +45,7 @@ class CarCountryController extends Controller
     {
         try {
             $carCountry->update($request->validated());
-            return response()->json($carCountry);
+            return new CarCountryResource($carCountry);
         } catch (\Exception $e) {
             return response()->json(['error' => 'Не удалось обновить запись'], 500);
         }
@@ -57,7 +56,23 @@ class CarCountryController extends Controller
      */
     public function destroy(CarCountry $carCountry)
     {
+        // Мягкое удаление
         $carCountry->delete();
+        // Жесткое удаление
+        // $carCountry->forceDelete();
         return response()->json(null, 204);
+    }
+
+    public function restore(int $id): CarCountryResource
+    {
+        $carCountry = CarType::withTrashed()->findOrFail($id);
+
+        if (!$carCountry->trashed()) {
+            return response()->json(['message' => 'Запись не удалена'], 400);
+        }
+
+        $carCountry->restore();
+
+        return new CarCountryResource($carCountry);
     }
 }

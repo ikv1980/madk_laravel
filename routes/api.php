@@ -19,5 +19,9 @@ Route::prefix('v1')->group(function () {
         'car-countries' => CarCountryController::class,
         'car-types' => CarTypeController::class,
     ]);
+    // Маршруты для восстановления записей
+    Route::patch('car-colors/{id}/restore', [CarColorController::class, 'restore']);
+    Route::patch('car-counties/{id}/restore', [CarCountryController::class, 'restore']);
+    Route::patch('car-types/{id}/restore', [CarTypeController::class, 'restore']);
 });
 

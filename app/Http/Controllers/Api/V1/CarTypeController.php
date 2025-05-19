@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api\V1;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\V1\StoreCarTypeRequest;
 use App\Http\Requests\Api\V1\UpdateCarTypeRequest;
+use App\Http\Resources\Api\V1\CarTypeResource;
 use App\Models\CarType;
 
 class CarTypeController extends Controller
@@ -14,8 +15,7 @@ class CarTypeController extends Controller
      */
     public function index()
     {
-        $cartypes = CarType::all();
-        return response()->json($cartypes);
+        return CarTypeResource::collection(CarType::query()->paginate());
     }
 
     /**
@@ -24,8 +24,7 @@ class CarTypeController extends Controller
     public function store(StoreCarTypeRequest $request)
     {
         try {
-            $carType = CarType::create($request->validated());
-            return response()->json($carType, 201);
+            return new CarTypeResource(CarType::create($request->validated()));
         } catch (\Exception $e) {
             return response()->json(['error' => 'Не удалось создать запись'], 500);
         }
@@ -36,7 +35,7 @@ class CarTypeController extends Controller
      */
     public function show(CarType $carType)
     {
-        return response()->json($carType);
+        return new CarTypeResource($carType);
     }
 
     /**
@@ -46,7 +45,7 @@ class CarTypeController extends Controller
     {
         try {
             $carType->update($request->validated());
-            return response()->json($carType);
+            return new CarTypeResource($carType);
         } catch (\Exception $e) {
             return response()->json(['error' => 'Не удалось обновить запись'], 500);
         }
@@ -57,7 +56,23 @@ class CarTypeController extends Controller
      */
     public function destroy(CarType $carType)
     {
+        // Мягкое удаление
         $carType->delete();
+        // Жесткое удаление
+        // $carType->forceDelete();
         return response()->json(null, 204);
+    }
+
+    public function restore(int $id): CarTypeResource
+    {
+        $carType = CarType::withTrashed()->findOrFail($id);
+
+        if (!$carType->trashed()) {
+            return response()->json(['message' => 'Запись не удалена'], 400);
+        }
+
+        $carType->restore();
+
+        return new CarTypeResource($carType);
     }
 }
