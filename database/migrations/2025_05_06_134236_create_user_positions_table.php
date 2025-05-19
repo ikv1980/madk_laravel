@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('user_positions', function (Blueprint $table) {
-            $table->id()->from(100);
+            $table->id();
             $table->string('position_name')->unique();
             $table->string('position_description');
             $table->softDeletes();

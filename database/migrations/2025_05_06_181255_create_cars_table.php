@@ -11,7 +11,7 @@ return new class extends Migration {
     public function up(): void
     {
         Schema::create('cars', function (Blueprint $table) {
-            $table->id()->from(100);
+            $table->id();
 
             $table->foreignId('mark_id')->nullable()->comment('марка');
             $table->foreignId('model_id')->nullable()->comment('модель');
