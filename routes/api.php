@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\Api\V1\CarColorController;
 use App\Http\Controllers\Api\V1\CarCountryController;
+use App\Http\Controllers\Api\V1\CarMarkController;
+use App\Http\Controllers\Api\V1\CarModelController;
 use App\Http\Controllers\Api\V1\CarTypeController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -17,11 +19,15 @@ Route::prefix('v1')->group(function () {
         # GET /api/v1/car-colors → api.v1.car-colors.index
         'car-colors' => CarColorController::class,
         'car-countries' => CarCountryController::class,
+        'car-marks' => CarMarkController::class,
+        'car-models' => CarModelController::class,
         'car-types' => CarTypeController::class,
     ]);
     // Маршруты для восстановления записей
     Route::patch('car-colors/{id}/restore', [CarColorController::class, 'restore']);
     Route::patch('car-counties/{id}/restore', [CarCountryController::class, 'restore']);
+    Route::patch('car-marks/{id}/restore', [CarMarkController::class, 'restore']);
+    Route::patch('car-models/{id}/restore', [CarModelController::class, 'restore']);
     Route::patch('car-types/{id}/restore', [CarTypeController::class, 'restore']);
 });
 
