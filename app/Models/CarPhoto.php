@@ -14,7 +14,6 @@ class CarPhoto extends Model
     protected $hidden = [
         'created_at',
         'updated_at',
-        'deleted_at'
     ];
 
     protected function casts(): array
@@ -23,7 +22,6 @@ class CarPhoto extends Model
             'url' => 'string',
             'created_at' => 'datetime',
             'updated_at' => 'datetime',
-            'deleted_at' => 'datetime',
         ];
     }
 
