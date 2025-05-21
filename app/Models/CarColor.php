@@ -32,7 +32,7 @@ class CarColor extends Model
 
     public function cars(): HasMany
     {
-        return $this->hasMany(Cars::class, 'color_id');
+        return $this->hasMany(Car::class, 'color_id');
     }
 
     public function setColorNameAttribute($value)

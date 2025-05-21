@@ -32,6 +32,6 @@ class CarMark extends Model
 
     public function cars(): HasMany
     {
-        return $this->hasMany(Cars::class, 'mark_id');
+        return $this->hasMany(Car::class, 'mark_id');
     }
 }

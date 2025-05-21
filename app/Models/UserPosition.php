@@ -28,8 +28,8 @@ class UserPosition extends Model
         ];
     }
 
-    public function cars(): HasMany
+    public function users(): HasMany
     {
-        return $this->hasMany(Cars::class, 'function_id');
+        return $this->hasMany(User::class, 'function_id');
     }
 }

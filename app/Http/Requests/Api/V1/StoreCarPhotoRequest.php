@@ -23,7 +23,7 @@ class StoreCarPhotoRequest extends FormRequest
     {
         return [
             'car_id' => 'required|exists:cars,id',  // Проверяем, что car_id существует
-            'photo' => 'required|images|mimes:jpeg,jpg,png,webp|max:2048',  // До 2 МБ
+            'photo' => 'required|image|mimes:jpeg,jpg,png,webp|max:2048',  // До 2 МБ
         ];
     }
 }

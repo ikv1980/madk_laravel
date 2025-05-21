@@ -32,7 +32,7 @@ class CarType extends Model
 
     public function cars(): HasMany
     {
-        return $this->hasMany(Cars::class, 'type_id');
+        return $this->hasMany(Car::class, 'type_id');
     }
 
     public function setTypeNameAttribute($value)
