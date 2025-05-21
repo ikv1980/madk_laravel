@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('car_mark_model_country', function (Blueprint $table) {
+        Schema::create('car_mark_model_countries', function (Blueprint $table) {
             $table->id();
 
             // Внешние ключи

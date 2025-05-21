@@ -31,7 +31,7 @@ class CarMarkModelCountrySeeder extends Seeder
         }
 
         DB::connection(env('CONNECTION_FOR_SEED'))
-            ->table('car_mark_model_country')
+            ->table('car_mark_model_countries')
             ->insertOrIgnore($data);
     }
 }
