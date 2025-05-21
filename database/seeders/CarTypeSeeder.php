@@ -19,7 +19,8 @@ class CarTypeSeeder extends Seeder
         $data = [];
 
         foreach ($types as $type) {
-            $data[] = ['type_name' => $type,
+            $data[] = [
+                'type_name' => $type,
                 'created_at' => now(),
                 'updated_at' => now()
             ];

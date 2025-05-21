@@ -30,8 +30,19 @@ class CarMark extends Model
         ];
     }
 
+    /**
+     * Получить все автомобили для этой модели.
+     */
     public function cars(): HasMany
     {
         return $this->hasMany(Car::class, 'mark_id');
+    }
+
+    /**
+     * Получить все связи с моделями и странами для этой марки.
+     */
+    public function markModelCountries(): HasMany
+    {
+        return $this->hasMany(CarMarkModelCountry::class, 'mark_id');
     }
 }

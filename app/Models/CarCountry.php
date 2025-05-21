@@ -30,8 +30,19 @@ class CarCountry extends Model
         ];
     }
 
+    /**
+     * Получить все автомобили для этой страны.
+     */
     public function cars(): HasMany
     {
         return $this->hasMany(Car::class, 'country_id');
+    }
+
+    /**
+     * Получить все связи с моделями и марками для этой страны.
+     */
+    public function markModelCountries(): HasMany
+    {
+        return $this->hasMany(CarMarkModelCountry::class, 'country_id');
     }
 }

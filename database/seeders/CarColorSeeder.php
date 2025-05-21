@@ -19,7 +19,8 @@ class CarColorSeeder extends Seeder
         $data = [];
 
         foreach ($colors as $color) {
-            $data[] = ['color_name' => $color,
+            $data[] = [
+                'color_name' => $color,
                 'created_at' => now(),
                 'updated_at' => now()
             ];

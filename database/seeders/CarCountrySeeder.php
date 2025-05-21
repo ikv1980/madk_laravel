@@ -19,7 +19,8 @@ class CarCountrySeeder extends Seeder
         $data = [];
 
         foreach ($countries as $country) {
-            $data[] = ['country_name' => $country,
+            $data[] = [
+                'country_name' => $country,
                 'created_at' => now(),
                 'updated_at' => now()
             ];
