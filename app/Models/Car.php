@@ -9,11 +9,9 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class Car extends Model
 {
     protected $fillable = [
-        'mark',
-        'model',
-        'country',
-        'type',
-        'color',
+        'mark_model_country_id',
+        'type_id',
+        'color_id',
         'vin',
         'pts',
         'date_at',
@@ -30,6 +28,11 @@ class Car extends Model
     protected function casts(): array
     {
         return [
+            'mark_model_country_id' => 'integer',
+            'type_id' => 'integer',
+            'color_id' => 'integer',
+            'vin' => 'string',
+            'pts' => 'string',
             'price' => 'float',
             'block' => 'boolean',
             'date_at' => 'date',
@@ -38,27 +41,11 @@ class Car extends Model
     }
 
     /**
-     * Получить марку автомобиля.
+     * Получить связь марка-модель-страна.
      */
-    public function mark(): BelongsTo
+    public function markModelCountry(): BelongsTo
     {
-        return $this->belongsTo(CarMark::class);
-    }
-
-    /**
-     * Получить модель автомобиля.
-     */
-    public function model(): BelongsTo
-    {
-        return $this->belongsTo(CarModel::class);
-    }
-
-    /**
-     * Получить страну производства.
-     */
-    public function country(): BelongsTo
-    {
-        return $this->belongsTo(CarCountry::class);
+        return $this->belongsTo(CarMarkModelCountry::class);
     }
 
     /**

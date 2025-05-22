@@ -23,9 +23,9 @@ return new class extends Migration
             $table->unique(['mark_id', 'model_id', 'country_id']);
 
             // Индексы для ускорения запросов
-            // $table->index(['mark_id', 'model_id']);
-            // $table->index(['mark_id', 'country_id']);
-            // $table->index(['model_id', 'country_id']);
+            $table->index(['mark_id', 'model_id']);
+            $table->index(['mark_id', 'country_id']);
+            $table->index(['model_id', 'country_id']);
 
             // Внешние ключи
             $table->foreign('mark_id')->references('id')->on('car_marks')->onDelete('cascade')->onUpdate('cascade');
@@ -41,6 +41,12 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('car_mark_model_country');
+        Schema::table('car_mark_model_countries', function (Blueprint $table) {
+            $table->dropForeign(['mark_id']);
+            $table->dropForeign(['model_id']);
+            $table->dropForeign(['country_id']);
+        });
+
+        Schema::dropIfExists('car_mark_model_countries');
     }
 };

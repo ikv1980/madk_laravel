@@ -13,9 +13,9 @@ return new class extends Migration {
         Schema::create('cars', function (Blueprint $table) {
             $table->id();
 
-            $table->foreignId('mark_id')->nullable()->comment('марка');
-            $table->foreignId('model_id')->nullable()->comment('модель');
-            $table->foreignId('country_id')->nullable()->comment('страна');
+            // Единая связь на комбинацию марка-модель-страна
+            $table->foreignId('mark_model_country_id')->nullable()->comment('марка-модель-страна');
+
             $table->foreignId('type_id')->nullable()->comment('тип кузова');
             $table->foreignId('color_id')->nullable()->comment('цвет');
 
@@ -27,11 +27,9 @@ return new class extends Migration {
             $table->softDeletes();
 
             // Внешние ключи
-            $table->foreign('mark_id')->references('id')->on('car_marks')->onDelete('set null');
-            $table->foreign('model_id')->references('id')->on('car_models')->onDelete('set null');
-            $table->foreign('country_id')->references('id')->on('car_countries')->onDelete('set null');
-            $table->foreign('type_id')->references('id')->on('car_types')->onDelete('set null');
-            $table->foreign('color_id')->references('id')->on('car_colors')->onDelete('set null');
+            $table->foreign('mark_model_country_id')->references('id')->on('car_mark_model_countries')->onDelete('cascade');
+            $table->foreign('type_id')->references('id')->on('car_types')->onDelete('cascade');
+            $table->foreign('color_id')->references('id')->on('car_colors')->onDelete('cascade');
 
             $table->timestamps();
         });
@@ -43,10 +41,7 @@ return new class extends Migration {
     public function down(): void
     {
         Schema::table('cars', function (Blueprint $table) {
-            // Удаляем внешние ключи
-            $table->dropForeign(['mark_id']);
-            $table->dropForeign(['model_id']);
-            $table->dropForeign(['country_id']);
+            $table->dropForeign(['mark_model_country_id']);
             $table->dropForeign(['type_id']);
             $table->dropForeign(['color_id']);
         });
