@@ -3,7 +3,9 @@
 use App\Http\Controllers\Api\V1\CarColorController;
 use App\Http\Controllers\Api\V1\CarCountryController;
 use App\Http\Controllers\Api\V1\CarMarkController;
+use App\Http\Controllers\Api\V1\CarMarkModelCountryController;
 use App\Http\Controllers\Api\V1\CarModelController;
+use App\Http\Controllers\Api\V1\CarPhotoController;
 use App\Http\Controllers\Api\V1\CarTypeController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -21,7 +23,9 @@ Route::prefix('v1')->group(function () {
         'car-countries' => CarCountryController::class,
         'car-marks' => CarMarkController::class,
         'car-models' => CarModelController::class,
+        'car-mark-model-countries' => CarMarkModelCountryController::class,
         'car-types' => CarTypeController::class,
+        'car-photos' => CarPhotoController::class,
     ]);
     // Маршруты для восстановления записей
     Route::patch('car-colors/{id}/restore', [CarColorController::class, 'restore']);
@@ -29,5 +33,8 @@ Route::prefix('v1')->group(function () {
     Route::patch('car-marks/{id}/restore', [CarMarkController::class, 'restore']);
     Route::patch('car-models/{id}/restore', [CarModelController::class, 'restore']);
     Route::patch('car-types/{id}/restore', [CarTypeController::class, 'restore']);
+
+    // Маршруты для фотографий автомобиля
+    Route::get('/cars/{car}/photos', [CarPhotoController::class, 'showByCar']);
 });
 
