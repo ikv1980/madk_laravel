@@ -53,6 +53,7 @@ class CarResource extends JsonResource
             'price' => $this->price,
             'block' => $this->block,
             'date_at' => Carbon::parse($this->date_at)->format('Y-m-d H:i:s'),
+            'photos' => $this->photos,
         ];
     }
 }

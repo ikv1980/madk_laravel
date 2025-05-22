@@ -41,14 +41,14 @@ class StoreCarRequest extends FormRequest
                 'required',
                 'string',
                 'size:17',
-                'regex:/^[A-HJ-NPR-Z0-9]{17}$/',
+                'regex:/^[A-HJ-NPQ-Z0-9]{17}$/',
                 'unique:cars,vin',
             ],
             'pts' => [
                 'required',
                 'string',
                 'size:10',
-                'regex:/^\d{2}T[A-Z]{6}$/',
+                'regex:/^\d{2}T[A-Z]{1}[0-9]{6}$/',
                 'unique:cars,pts',
             ],
             'price' => [
