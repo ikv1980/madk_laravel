@@ -25,6 +25,7 @@ class StoreCarMarkModelCountryRequest extends FormRequest
         return [
             'mark_id' => [
                 'required',
+                'integer',
                 'exists:car_marks,id',
                 Rule::unique('car_mark_model_countries')
                     ->where(function ($query) {
@@ -35,10 +36,12 @@ class StoreCarMarkModelCountryRequest extends FormRequest
             ],
             'model_id' => [
                 'required',
+                'integer',
                 'exists:car_models,id',
             ],
             'country_id' => [
                 'required',
+                'integer',
                 'exists:car_countries,id',
             ],
         ];

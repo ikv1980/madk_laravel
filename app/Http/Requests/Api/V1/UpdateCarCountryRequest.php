@@ -23,8 +23,13 @@ class UpdateCarCountryRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'country_name' => ['required', 'string', 'min:3', 'max:50',
-                Rule::unique('car_countries', 'country_name')->ignore($this->car_country->id)],
+            'country_name' => [
+                'required',
+                'string',
+                'min:3',
+                'max:50',
+                Rule::unique('car_countries', 'country_name')->ignore($this->car_country->id),
+            ],
         ];
     }
 }

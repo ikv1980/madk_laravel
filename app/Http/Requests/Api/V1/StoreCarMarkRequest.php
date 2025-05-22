@@ -22,7 +22,12 @@ class StoreCarMarkRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'mark_name' => ['required','string','max:100','unique:car_marks,mark_name'],
+            'mark_name' => [
+                'required',
+                'string',
+                'max:100',
+                'unique:car_marks,mark_name',
+            ],
         ];
     }
 }

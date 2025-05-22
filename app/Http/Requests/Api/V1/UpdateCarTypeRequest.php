@@ -23,8 +23,13 @@ class UpdateCarTypeRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'type_name' => ['required', 'string', 'min:3', 'max:50',
-                Rule::unique('car_types', 'type_name')->ignore($this->car_type->id)],
+            'type_name' => [
+                'required',
+                'string',
+                'min:3',
+                'max:50',
+                Rule::unique('car_types', 'type_name')->ignore($this->car_type->id),
+            ],
         ];
     }
 }

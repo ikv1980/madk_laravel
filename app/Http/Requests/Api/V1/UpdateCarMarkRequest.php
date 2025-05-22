@@ -23,8 +23,12 @@ class UpdateCarMarkRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'mark_name' => ['required', 'string', 'max:100',
-                Rule::unique('car_marks', 'mark_name')->ignore($this->car_mark->id)],
+            'mark_name' => [
+                'required',
+                'string',
+                'max:100',
+                Rule::unique('car_marks', 'mark_name')->ignore($this->car_mark->id),
+            ],
         ];
     }
 }

@@ -22,8 +22,15 @@ class StoreCarPhotoRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'car_id' => 'required|exists:cars,id',
-            'photo' => 'required|image|mimes:jpeg,jpg,png,webp|max:2048',
+            'car_id' => [
+                'required',
+                'exists:cars,id',
+            ],
+            'photo' => [
+                'required',
+                'image',
+                'mimes:jpeg,jpg,png,webp|max:2048',
+            ]
         ];
     }
 }

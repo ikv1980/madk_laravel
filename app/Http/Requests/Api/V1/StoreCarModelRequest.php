@@ -22,7 +22,12 @@ class StoreCarModelRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'model_name' => ['required','string','max:100','unique:car_models,model_name'],
+            'model_name' => [
+                'required',
+                'string',
+                'max:100',
+                'unique:car_models,model_name',
+            ],
         ];
     }
 }

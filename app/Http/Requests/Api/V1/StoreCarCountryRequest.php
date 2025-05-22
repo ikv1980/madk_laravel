@@ -22,7 +22,13 @@ class StoreCarCountryRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'country_name' => ['required', 'string', 'min:3', 'max:50', 'unique:car_countries,country_name'],
+            'country_name' => [
+                'required',
+                'string',
+                'min:3',
+                'max:50',
+                'unique:car_countries,country_name',
+            ],
         ];
     }
 }

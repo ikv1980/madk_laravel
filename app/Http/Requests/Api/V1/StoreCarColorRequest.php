@@ -22,7 +22,13 @@ class StoreCarColorRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'color_name' => ['required','string','min:3','max:50','unique:car_colors,color_name'],
+            'color_name' => [
+                'required',
+                'string',
+                'min:3',
+                'max:50',
+                'unique:car_colors,color_name',
+            ],
         ];
     }
 }

@@ -23,8 +23,13 @@ class UpdateCarColorRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'color_name' => ['required', 'string', 'min:3', 'max:50',
-                Rule::unique('car_colors', 'color_name')->ignore($this->car_color->id)],
+            'color_name' => [
+                'required',
+                'string',
+                'min:3',
+                'max:50',
+                Rule::unique('car_colors', 'color_name')->ignore($this->car_color->id),
+            ],
         ];
     }
 }

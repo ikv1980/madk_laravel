@@ -23,8 +23,12 @@ class UpdateCarModelRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'model_name' => ['required', 'string', 'max:100',
-                Rule::unique('car_models', 'model_name')->ignore($this->car_model->id)],
+            'model_name' => [
+                'required',
+                'string',
+                'max:100',
+                Rule::unique('car_models', 'model_name')->ignore($this->car_model->id),
+            ],
         ];
     }
 }
