@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\V1\StoreCarPhotoRequest;
-use App\Http\Requests\Api\V1\UpdateCarPhotoRequest;
 use App\Http\Resources\Api\V1\CarPhotoResource;
 use App\Models\CarPhoto;
 use App\Models\Car;
@@ -79,7 +78,9 @@ class CarPhotoController extends Controller
         }
     }
 
-    // Фото конкретного авто
+    /**
+     * Фото конкретного авто
+     */
     public function showByCar(Car $car)
     {
         return CarPhotoResource::collection($car->photos);

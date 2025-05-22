@@ -68,7 +68,10 @@ class CarColorController extends Controller
         }
     }
 
-    public function restore(int $id): CarColorResource
+    /**
+     * Restore the specified resource from storage.
+     */
+    public function restore(int $id)
     {
         $carColor = CarColor::withTrashed()->findOrFail($id);
 

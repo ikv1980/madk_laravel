@@ -68,7 +68,10 @@ class CarModelController extends Controller
         }
     }
 
-    public function restore(int $id): CarModelResource
+    /**
+     * Restore the specified resource from storage.
+     */
+    public function restore(int $id)
     {
         $carModel = CarModel::withTrashed()->findOrFail($id);
 

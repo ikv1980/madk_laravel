@@ -68,7 +68,10 @@ class CarMarkController extends Controller
         }
     }
 
-    public function restore(int $id): CarMarkResource
+    /**
+     * Restore the specified resource from storage.
+     */
+    public function restore(int $id)
     {
         $carMark = CarMark::withTrashed()->findOrFail($id);
 

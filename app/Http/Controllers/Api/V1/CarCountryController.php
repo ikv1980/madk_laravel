@@ -68,9 +68,12 @@ class CarCountryController extends Controller
         }
     }
 
-    public function restore(int $id): CarCountryResource
+    /**
+     * Restore the specified resource from storage.
+     */
+    public function restore(int $id)
     {
-        $carCountry = CarType::withTrashed()->findOrFail($id);
+        $carCountry = CarCountry::withTrashed()->findOrFail($id);
 
         if (!$carCountry->trashed()) {
             return response()->json(['message' => 'Запись не удалена'], 400);
