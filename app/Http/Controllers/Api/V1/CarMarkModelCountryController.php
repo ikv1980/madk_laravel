@@ -28,7 +28,7 @@ class CarMarkModelCountryController extends Controller
         try {
             return new CarMarkModelCountryResource(CarMarkModelCountry::create($request->validated()));
         } catch (\Exception $e) {
-            return response()->json(['error' => 'Не удалось создать запись'], 500);
+            return response()->json(['error' => 'Не удалось создать запись: ' . $e->getMessage()], 500);
         }
     }
 
@@ -49,7 +49,7 @@ class CarMarkModelCountryController extends Controller
             $carMarkModelCountry->update($request->validated());
             return new CarMarkModelCountryResource($carMarkModelCountry->load(['mark', 'model', 'country']));
         } catch (\Exception $e) {
-            return response()->json(['error' => 'Не удалось обновить запись'], 500);
+            return response()->json(['error' => 'Не удалось обновить запись: ' . $e->getMessage()], 500);
         }
     }
 
@@ -58,7 +58,15 @@ class CarMarkModelCountryController extends Controller
      */
     public function destroy(CarMarkModelCountry $carMarkModelCountry)
     {
-        $carMarkModelCountry->delete();
-        return response()->json(null, 204);
+        try {
+            // Мягкое удаление
+            $carMarkModelCountry->delete();
+            // Жесткое удаление
+            // $carMarkModelCountry->forceDelete();
+            return response()->json(null, 204);
+        } catch (\Exception $e) {
+            // Обработка исключения
+            return response()->json(['error' => 'Ошибка при удалении: ' . $e->getMessage()], 500);
+        }
     }
 }

@@ -26,7 +26,7 @@ class CarTypeController extends Controller
         try {
             return new CarTypeResource(CarType::create($request->validated()));
         } catch (\Exception $e) {
-            return response()->json(['error' => 'Не удалось создать запись'], 500);
+            return response()->json(['error' => 'Не удалось создать запись: ' . $e->getMessage()], 500);
         }
     }
 
@@ -47,7 +47,7 @@ class CarTypeController extends Controller
             $carType->update($request->validated());
             return new CarTypeResource($carType);
         } catch (\Exception $e) {
-            return response()->json(['error' => 'Не удалось обновить запись'], 500);
+            return response()->json(['error' => 'Не удалось обновить запись: ' . $e->getMessage()], 500);
         }
     }
 
@@ -56,11 +56,16 @@ class CarTypeController extends Controller
      */
     public function destroy(CarType $carType)
     {
-        // Мягкое удаление
-        $carType->delete();
-        // Жесткое удаление
-        // $carType->forceDelete();
-        return response()->json(null, 204);
+        try {
+            // Мягкое удаление
+            $carType->delete();
+            // Жесткое удаление
+            // $carType->forceDelete();
+            return response()->json(null, 204);
+        } catch (\Exception $e) {
+            // Обработка исключения
+            return response()->json(['error' => 'Ошибка при удалении: ' . $e->getMessage()], 500);
+        }
     }
 
     public function restore(int $id): CarTypeResource

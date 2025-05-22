@@ -26,7 +26,7 @@ class CarColorController extends Controller
         try {
             return new CarColorResource(CarColor::create($request->validated()));
         } catch (\Exception $e) {
-            return response()->json(['error' => 'Не удалось создать запись'], 500);
+            return response()->json(['error' => 'Не удалось создать запись: ' . $e->getMessage()], 500);
         }
     }
 
@@ -47,7 +47,7 @@ class CarColorController extends Controller
             $carColor->update($request->validated());
             return new CarColorResource($carColor);
         } catch (\Exception $e) {
-            return response()->json(['error' => 'Не удалось обновить запись'], 500);
+            return response()->json(['error' => 'Не удалось обновить запись: ' . $e->getMessage()], 500);
         }
     }
 
@@ -56,11 +56,16 @@ class CarColorController extends Controller
      */
     public function destroy(CarColor $carColor)
     {
-        // Мягкое удаление
-        $carColor->delete();
-        // Жесткое удаление
-        // $carColor->forceDelete();
-        return response()->json(null, 204);
+        try {
+            // Мягкое удаление
+            $carColor->delete();
+            // Жесткое удаление
+            // $carColor->forceDelete();
+            return response()->json(null, 204);
+        } catch (\Exception $e) {
+            // Обработка исключения
+            return response()->json(['error' => 'Ошибка при удалении: ' . $e->getMessage()], 500);
+        }
     }
 
     public function restore(int $id): CarColorResource

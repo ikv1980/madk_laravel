@@ -26,7 +26,7 @@ class CarCountryController extends Controller
         try {
             return new CarCountryResource(CarCountry::create($request->validated()));
         } catch (\Exception $e) {
-            return response()->json(['error' => 'Не удалось создать запись'], 500);
+            return response()->json(['error' => 'Не удалось создать запись: ' . $e->getMessage()], 500);
         }
     }
 
@@ -47,7 +47,7 @@ class CarCountryController extends Controller
             $carCountry->update($request->validated());
             return new CarCountryResource($carCountry);
         } catch (\Exception $e) {
-            return response()->json(['error' => 'Не удалось обновить запись'], 500);
+            return response()->json(['error' => 'Не удалось обновить запись: ' . $e->getMessage()], 500);
         }
     }
 
@@ -56,11 +56,16 @@ class CarCountryController extends Controller
      */
     public function destroy(CarCountry $carCountry)
     {
-        // Мягкое удаление
-        $carCountry->delete();
-        // Жесткое удаление
-        // $carCountry->forceDelete();
-        return response()->json(null, 204);
+        try {
+            // Мягкое удаление
+            $carCountry->delete();
+            // Жесткое удаление
+            // $carCountry->forceDelete();
+            return response()->json(null, 204);
+        } catch (\Exception $e) {
+            // Обработка исключения
+            return response()->json(['error' => 'Ошибка при удалении: ' . $e->getMessage()], 500);
+        }
     }
 
     public function restore(int $id): CarCountryResource

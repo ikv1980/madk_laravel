@@ -26,53 +26,58 @@ class CarMarkController extends Controller
         try {
             return new CarMarkResource(CarMark::create($request->validated()));
         } catch (\Exception $e) {
-            return response()->json(['error' => 'Не удалось создать запись'], 500);
+            return response()->json(['error' => 'Не удалось создать запись: ' . $e->getMessage()], 500);
         }
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(CarMark $CarMark)
+    public function show(CarMark $carMark)
     {
-        return new CarMarkResource($CarMark);
+        return new CarMarkResource($carMark);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateCarMarkRequest $request, CarMark $CarMark)
+    public function update(UpdateCarMarkRequest $request, CarMark $carMark)
     {
         try {
-            $CarMark->update($request->validated());
-            return new CarMarkResource($CarMark);
+            $carMark->update($request->validated());
+            return new CarMarkResource($carMark);
         } catch (\Exception $e) {
-            return response()->json(['error' => 'Не удалось обновить запись'], 500);
+            return response()->json(['error' => 'Не удалось обновить запись: ' . $e->getMessage()], 500);
         }
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(CarMark $CarMark)
+    public function destroy(CarMark $carMark)
     {
-        // Мягкое удаление
-        $CarMark->delete();
-        // Жесткое удаление
-        // $CarMark->forceDelete();
-        return response()->json(null, 204);
+        try {
+            // Мягкое удаление
+            $carMark->delete();
+            // Жесткое удаление
+            // $carMark->forceDelete();
+            return response()->json(null, 204);
+        } catch (\Exception $e) {
+            // Обработка исключения
+            return response()->json(['error' => 'Ошибка при удалении: ' . $e->getMessage()], 500);
+        }
     }
 
     public function restore(int $id): CarMarkResource
     {
-        $CarMark = CarMark::withTrashed()->findOrFail($id);
+        $carMark = CarMark::withTrashed()->findOrFail($id);
 
-        if (!$CarMark->trashed()) {
+        if (!$carMark->trashed()) {
             return response()->json(['message' => 'Запись не удалена'], 400);
         }
 
-        $CarMark->restore();
+        $carMark->restore();
 
-        return new CarMarkResource($CarMark);
+        return new CarMarkResource($carMark);
     }
 }

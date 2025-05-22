@@ -26,53 +26,58 @@ class CarModelController extends Controller
         try {
             return new CarModelResource(CarModel::create($request->validated()));
         } catch (\Exception $e) {
-            return response()->json(['error' => 'Не удалось создать запись'], 500);
+            return response()->json(['error' => 'Не удалось создать запись: ' . $e->getMessage()], 500);
         }
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(CarModel $CarModel)
+    public function show(CarModel $carModel)
     {
-        return new CarModelResource($CarModel);
+        return new CarModelResource($carModel);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateCarModelRequest $request, CarModel $CarModel)
+    public function update(UpdateCarModelRequest $request, CarModel $carModel)
     {
         try {
-            $CarModel->update($request->validated());
-            return new CarModelResource($CarModel);
+            $carModel->update($request->validated());
+            return new CarModelResource($carModel);
         } catch (\Exception $e) {
-            return response()->json(['error' => 'Не удалось обновить запись'], 500);
+            return response()->json(['error' => 'Не удалось обновить запись: ' . $e->getMessage()], 500);
         }
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(CarModel $CarModel)
+    public function destroy(CarModel $carModel)
     {
-        // Мягкое удаление
-        $CarModel->delete();
-        // Жесткое удаление
-        // $CarModel->forceDelete();
-        return response()->json(null, 204);
+        try {
+            // Мягкое удаление
+            $carModel->delete();
+            // Жесткое удаление
+            // $carModel->forceDelete();
+            return response()->json(null, 204);
+        } catch (\Exception $e) {
+            // Обработка исключения
+            return response()->json(['error' => 'Ошибка при удалении: ' . $e->getMessage()], 500);
+        }
     }
 
     public function restore(int $id): CarModelResource
     {
-        $CarModel = CarModel::withTrashed()->findOrFail($id);
+        $carModel = CarModel::withTrashed()->findOrFail($id);
 
-        if (!$CarModel->trashed()) {
+        if (!$carModel->trashed()) {
             return response()->json(['message' => 'Запись не удалена'], 400);
         }
 
-        $CarModel->restore();
+        $carModel->restore();
 
-        return new CarModelResource($CarModel);
+        return new CarModelResource($carModel);
     }
 }
