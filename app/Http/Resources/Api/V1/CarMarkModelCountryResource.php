@@ -17,21 +17,23 @@ class CarMarkModelCountryResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'mark_id' => $this->mark_id,
-            //'mark_name' => $this->mark->mark_name,
-            'mark_name' => $this->whenLoaded('mark', function () {
-                return $this->mark?->mark_name;
+            'mark' => $this->whenLoaded('mark', function () {
+                return [
+                    'id' => $this->mark?->id,
+                    'name' => $this->mark?->mark_name,
+                ];
             }),
-
-            'model_id' => $this->model_id,
-            //'model_name' => $this->model->model_name,
-            'model_name' => $this->whenLoaded('model', function () {
-                return $this->model?->model_name;
+            'model' => $this->whenLoaded('model', function () {
+                return [
+                    'id' => $this->model?->id,
+                    'name' => $this->model?->model_name,
+                ];
             }),
-            'country_id' => $this->country_id,
-            //'country_name' => $this->country->country_name,
-            'country_name' => $this->whenLoaded('country', function () {
-                return $this->country?->country_name;
+            'country' => $this->whenLoaded('country', function () {
+                return [
+                    'id' => $this->country?->id,
+                    'name' => $this->country?->country_name,
+                ];
             }),
             'created_at' => Carbon::parse($this->created_at)->format('Y-m-d H:i:s'),
             'updated_at' => Carbon::parse($this->updated_at)->format('Y-m-d H:i:s'),
