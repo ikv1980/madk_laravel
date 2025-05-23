@@ -53,4 +53,12 @@ class CarMarkModelCountry extends Model
     {
         return $this->belongsTo(CarCountry::class);
     }
+
+    /**
+     * Получить все автомобили этой конкретной модели.
+     */
+    public function cars(): HasMany
+    {
+        return $this->hasMany(Car::class, 'car_mark_model_country_id');
+    }
 }

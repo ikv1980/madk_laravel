@@ -14,10 +14,9 @@ return new class extends Migration {
             $table->id();
 
             // Единая связь на комбинацию марка-модель-страна
-            $table->foreignId('mark_model_country_id')->nullable()->comment('марка-модель-страна');
-
-            $table->foreignId('type_id')->nullable()->comment('тип кузова');
-            $table->foreignId('color_id')->nullable()->comment('цвет');
+            $table->foreignId('mark_model_country_id')->constrained('car_mark_model_countries')->onDelete('restrict');
+            $table->foreignId('type_id')->constrained('car_types')->onDelete('cascade');
+            $table->foreignId('color_id')->constrained('car_colors')->onDelete('cascade');
 
             $table->string('vin', 20)->unique()->comment('VIN');
             $table->string('pts', 20)->unique()->comment('PTS');
@@ -25,11 +24,6 @@ return new class extends Migration {
             $table->decimal('price', 10, 2)->comment('цена');
             $table->boolean('block')->comment('блок');
             $table->softDeletes();
-
-            // Внешние ключи
-            $table->foreign('mark_model_country_id')->references('id')->on('car_mark_model_countries')->onDelete('cascade');
-            $table->foreign('type_id')->references('id')->on('car_types')->onDelete('cascade');
-            $table->foreign('color_id')->references('id')->on('car_colors')->onDelete('cascade');
 
             $table->timestamps();
         });

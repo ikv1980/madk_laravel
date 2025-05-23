@@ -24,7 +24,7 @@ class UserDepartmentSeeder extends Seeder
             $data[] = [
                 'department_name' => $department,
                 'department_description' => fake()->realText(50),
-                'department_mail' => strtolower(fake()->word()) . '@tomware.it',
+                'department_mail' => fake()->unique()->safeemail(),
                 'created_at' => now(),
                 'updated_at' => now()
             ];
