@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('user_positions', function (Blueprint $table) {
             $table->id();
             $table->string('position_name')->unique();
-            $table->string('position_description');
+            $table->text('position_description')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

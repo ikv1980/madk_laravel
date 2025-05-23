@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('user_departments', function (Blueprint $table) {
             $table->id();
             $table->string('department_name')->unique();
-            $table->string('department_description');
+            $table->text('department_description')->nullable();
             $table->string('department_mail')->unique();
             $table->softDeletes();
             $table->timestamps();

@@ -43,7 +43,6 @@ class UpdateCarRequest extends FormRequest
                 'string',
                 'size:17',
                 'regex:/^[A-HJ-NPQ-Z0-9]{17}$/',
-                'unique:cars,vin',
                 Rule::unique('cars', 'vin')->ignore($this->car->id),
             ],
             'pts' => [
@@ -51,7 +50,6 @@ class UpdateCarRequest extends FormRequest
                 'string',
                 'size:10',
                 'regex:/^\d{2}T[A-Z]{1}[0-9]{6}$/',
-                'unique:cars,pts',
                 Rule::unique('cars', 'pts')->ignore($this->car->id),
             ],
             'price' => [

@@ -27,7 +27,7 @@ return new class extends Migration
             $table->foreignId('position_id')->nullable()->comment('должность');
             $table->date('start_work')->nullable()->comment('трудоустройство');
             $table->foreignId('status_id')->nullable()->comment('статус');
-            $table->timestamp('status_at')->comment('смена статуса');
+            $table->date('status_at')->comment('смена статуса');
 
             $table->json('permissions')->nullable()->comment('разрешения');
             $table->softDeletes();

@@ -13,7 +13,8 @@ return new class extends Migration
     {
         Schema::create('user_statuses', function (Blueprint $table) {
             $table->id();
-            $table->string('type_name')->unique();
+            $table->string('status_name')->unique();
+            $table->unsignedInteger('status_number')->unique();
             $table->softDeletes();
             $table->timestamps();
         });
