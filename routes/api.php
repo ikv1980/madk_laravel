@@ -36,7 +36,7 @@ Route::prefix('v1')->group(function () {
         'car-photos' => CarPhotoController::class,
 
         // Пользователи.
-        'uses' => UserController::class,
+        'users' => UserController::class,
         'user-departments' => UserDepartmentController::class,
         'user-positions' => UserPositionController::class,
         'user-department-positions' => UserDepartmentPositionController::class,

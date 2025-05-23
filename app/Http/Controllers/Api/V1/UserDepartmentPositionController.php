@@ -6,8 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\V1\StoreUserDepartmentPositionRequest;
 use App\Http\Requests\Api\V1\UpdateUserDepartmentPositionRequest;
 use App\Http\Resources\Api\V1\UserDepartmentPositionResource;
-use App\Http\Resources\Api\V1\CarMarkResource;
-use App\Models\CarMark;
 use App\Models\UserDepartmentPosition;
 
 class UserDepartmentPositionController extends Controller
