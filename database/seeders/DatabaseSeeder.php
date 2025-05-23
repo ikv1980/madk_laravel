@@ -25,6 +25,11 @@ class DatabaseSeeder extends Seeder
             CarMarkSeeder::class,
             CarModelSeeder::class,
             CarTypeSeeder::class,
-            CarMarkModelCountrySeeder::class]);
+            CarMarkModelCountrySeeder::class,
+
+            UserDepartmentSeeder::class,
+            UserPositionSeeder::class,
+            UserStatusSeeder::class,
+        ]);
     }
 }

@@ -1,13 +1,17 @@
 <?php
 
-use App\Http\Controllers\Api\V1\CarColorController;
 use App\Http\Controllers\Api\V1\CarController;
+use App\Http\Controllers\Api\V1\CarColorController;
 use App\Http\Controllers\Api\V1\CarCountryController;
 use App\Http\Controllers\Api\V1\CarMarkController;
 use App\Http\Controllers\Api\V1\CarMarkModelCountryController;
 use App\Http\Controllers\Api\V1\CarModelController;
 use App\Http\Controllers\Api\V1\CarPhotoController;
 use App\Http\Controllers\Api\V1\CarTypeController;
+use App\Http\Controllers\Api\V1\UserController;
+use App\Http\Controllers\Api\V1\UserDepartmentController;
+use App\Http\Controllers\Api\V1\UserPositionController;
+use App\Http\Controllers\Api\V1\UserStatusController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -20,6 +24,7 @@ Route::prefix('v1')->group(function () {
     Route::apiResources([
         # Laravel автоматически создает имена маршрутов:
         # GET /api/v1/car-colors → api.v1.car-colors.index
+        # Автомобили.
         'cars' => CarController::class,
         'car-colors' => CarColorController::class,
         'car-countries' => CarCountryController::class,
@@ -28,6 +33,14 @@ Route::prefix('v1')->group(function () {
         'car-mark-model-countries' => CarMarkModelCountryController::class,
         'car-types' => CarTypeController::class,
         'car-photos' => CarPhotoController::class,
+
+        // Пользователи.
+        'uses' => UserController::class,
+        'user-departments' => UserDepartmentController::class,
+        'user-positions' => UserPositionController::class,
+        'user-statuses' => UserStatusController::class,
+
+        // Заказы
     ]);
     // Маршруты для восстановления записей
     Route::patch('cars/{id}/restore', [CarController::class, 'restore']);
@@ -37,7 +50,19 @@ Route::prefix('v1')->group(function () {
     Route::patch('car-models/{id}/restore', [CarModelController::class, 'restore']);
     Route::patch('car-types/{id}/restore', [CarTypeController::class, 'restore']);
 
-    // Маршруты для фотографий автомобиля
+    Route::patch('users/{id}/restore', [UserController::class, 'restore']);
+    Route::patch('user-departments/{id}/restore', [UserDepartmentController::class, 'restore']);
+    Route::patch('user-positions/{id}/restore', [UserPositionController::class, 'restore']);
+    Route::patch('user-statuses/{id}/restore', [UserStatusController::class, 'restore']);
+
+
+    // Все фотографии автомобиля
     Route::get('cars/{car}/photos', [CarPhotoController::class, 'showByCar']);
+    // Все пользователи департамента
+    Route::get('user-departments/{id}/users', [UserDepartmentController::class, 'showUsersOfDepartment']);
+    // Все пользователи должности
+    Route::get('user-positions/{id}/users', [UserPositionController::class, 'showUsersOfPosition']);
+    // Все пользователи статуса
+    Route::get('user-statuses/{id}/users', [UserStatusController::class, 'showUsersOfStatus']);
 });
 
