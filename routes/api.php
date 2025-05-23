@@ -10,6 +10,7 @@ use App\Http\Controllers\Api\V1\CarPhotoController;
 use App\Http\Controllers\Api\V1\CarTypeController;
 use App\Http\Controllers\Api\V1\UserController;
 use App\Http\Controllers\Api\V1\UserDepartmentController;
+use App\Http\Controllers\Api\V1\UserDepartmentPositionController;
 use App\Http\Controllers\Api\V1\UserPositionController;
 use App\Http\Controllers\Api\V1\UserStatusController;
 use Illuminate\Http\Request;
@@ -38,6 +39,7 @@ Route::prefix('v1')->group(function () {
         'uses' => UserController::class,
         'user-departments' => UserDepartmentController::class,
         'user-positions' => UserPositionController::class,
+        'user-department-positions' => UserDepartmentPositionController::class,
         'user-statuses' => UserStatusController::class,
 
         // Заказы
@@ -53,6 +55,7 @@ Route::prefix('v1')->group(function () {
     Route::patch('users/{id}/restore', [UserController::class, 'restore']);
     Route::patch('user-departments/{id}/restore', [UserDepartmentController::class, 'restore']);
     Route::patch('user-positions/{id}/restore', [UserPositionController::class, 'restore']);
+    Route::patch('user-department-positions/{id}/restore', [UserDepartmentPositionController::class, 'restore']);
     Route::patch('user-statuses/{id}/restore', [UserStatusController::class, 'restore']);
 
 

@@ -26,7 +26,8 @@ class CarMarkModelCountryController extends Controller
     public function store(StoreCarMarkModelCountryRequest $request)
     {
         try {
-            return new CarMarkModelCountryResource(CarMarkModelCountry::create($request->validated()));
+            $carMarkModelCountry = CarMarkModelCountry::create($request->validated());
+            return new CarMarkModelCountryResource($carMarkModelCountry->load(['mark', 'model', 'country']));
         } catch (\Exception $e) {
             return response()->json(['error' => 'Не удалось создать запись: ' . $e->getMessage()], 500);
         }

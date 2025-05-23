@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -35,5 +36,10 @@ class UserDepartment extends Model
     public function users(): HasMany
     {
         return $this->hasMany(User::class, 'department_id');
+    }
+
+    public function positions(): BelongsToMany
+    {
+        return $this->belongsToMany(UserPosition::class, 'user_department_positions');
     }
 }
