@@ -30,6 +30,11 @@ class UpdateUserStatusRequest extends FormRequest
                 'max:50',
                 Rule::unique('user_statuses', 'status_name')->ignore($this->user_status->id),
             ],
+            'status_number' => [
+                'required',
+                'integer',
+                Rule::unique('user_statuses', 'status_number')->ignore($this->user_status->id),
+            ],
         ];
     }
 }

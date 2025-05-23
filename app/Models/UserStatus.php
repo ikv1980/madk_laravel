@@ -11,7 +11,7 @@ class UserStatus extends Model
     use SoftDeletes;
 
     protected $fillable = [
-        'status_name',
+        'status_name', 'status_number'
     ];
 
     protected $hidden = [
@@ -24,6 +24,7 @@ class UserStatus extends Model
     {
         return [
             'status_name' => 'string',
+            'status_number' => 'integer',
             'created_at' => 'datetime',
             'updated_at' => 'datetime',
             'deleted_at' => 'datetime',

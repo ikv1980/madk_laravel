@@ -29,6 +29,11 @@ class StoreUserStatusRequest extends FormRequest
                 'max:50',
                 'unique:user_statuses,status_name',
             ],
+            'status_number' => [
+                'required',
+                'integer',
+                'unique:user_statuses,status_number',
+            ],
         ];
     }
 }

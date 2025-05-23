@@ -11,7 +11,7 @@ class UserDepartment extends Model
     use SoftDeletes;
 
     protected $fillable = [
-        'department_name', 'department_description','department_mail',
+        'department_name', 'department_description', 'department_mail',
     ];
 
     protected $hidden = [
