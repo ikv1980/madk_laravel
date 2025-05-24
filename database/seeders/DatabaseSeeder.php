@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\User;
+use Database\Factories\CarFactory;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -26,12 +27,22 @@ class DatabaseSeeder extends Seeder
             CarModelSeeder::class,
             CarTypeSeeder::class,
             CarMarkModelCountrySeeder::class,
+            CarSeeder::class,
 
             UserDepartmentSeeder::class,
             UserPositionSeeder::class,
             UserDepartmentPositionSeeder::class,
             UserStatusSeeder::class,
             UserSeeder::class,
+
+            DeliverySeeder::class,
+            PaymentSeeder::class,
+            StatusSeeder::class,
+            ClientSeeder::class,
+            UserSeeder::class,
+            OrderSeeder::class,
+            OrderCarSeeder::class,
+            OrderStatusSeeder::class,
         ]);
     }
 }

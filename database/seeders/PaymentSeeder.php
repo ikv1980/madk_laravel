@@ -2,11 +2,10 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
-class UserStatusSeeder extends Seeder
+class PaymentSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -14,27 +13,24 @@ class UserStatusSeeder extends Seeder
     public function run(): void
     {
         // Вызов сидера отдельно
-        // php artisan db:seed --class=UserStatusSeeder
-        $statuses = [
-            'работает',
-            'уволен',
-            'в отпуске',
-            'на больничном',
+        // php artisan db:seed --class=PaymentSeeder
+        $payments = [
+            'Оплата картой',
+            'Оплата наличными',
+            'Безналичный расчет',
         ];
         $data = [];
-        $i = 1;
 
-        foreach ($statuses as $status) {
+        foreach ($payments as $payment) {
             $data[] = [
-                'status_name' => $status,
-                'status_number' => $i++,
+                'payment_name' => $payment,
                 'created_at' => now(),
                 'updated_at' => now()
             ];
         }
 
         DB::connection(env('CONNECTION_FOR_SEED'))
-            ->table('user_statuses')
+            ->table('payments')
             ->insertOrIgnore($data);
     }
 }

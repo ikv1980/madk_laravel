@@ -16,9 +16,6 @@ return new class extends Migration
             $table->foreignId('order_id')->constrained('orders')->onDelete('cascade');
             $table->foreignId('status_id')->constrained('statuses')->onDelete('cascade');
 
-            // Уникальность на двойку: department_id, position_id
-            $table->unique(['order_id', 'status_id'], 'unique_order_status');
-
             $table->softDeletes();
             $table->timestamps();
         });

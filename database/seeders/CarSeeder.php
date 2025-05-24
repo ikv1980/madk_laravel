@@ -2,10 +2,10 @@
 
 namespace Database\Seeders;
 
-use App\Models\User;
+use App\Models\Car;
 use Illuminate\Database\Seeder;
 
-class UserSeeder extends Seeder
+class CarSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -13,7 +13,7 @@ class UserSeeder extends Seeder
     public function run(): void
     {
         // Вызов сидера отдельно
-        // php artisan db:seed --class=UserSeeder
-        User::factory(15)->create();
+        // php artisan db:seed --class=CarSeeder
+        Car::factory(10)->create();
     }
 }

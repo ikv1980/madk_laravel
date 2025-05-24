@@ -24,6 +24,9 @@ class UserFactory extends Factory
      */
     public function definition(): array
     {
+        // Русская локаль для фейковых данных
+        $faker = \Faker\Factory::create('ru_RU');
+
         // Выбираем случайную пару [department_id, position_id] из UserDepartmentPositionSeeder
         $departmentPositionPairs = new UserDepartmentPositionSeeder();
         $pair = fake()->randomElement($departmentPositionPairs->items);
@@ -31,21 +34,21 @@ class UserFactory extends Factory
         return [
             'login' => $this->faker->unique()->userName(),
             'password' => static::$password ??= Hash::make('password'),
-            'name' => fake()->firstName(),
-            'surname' => fake()->lastName(),
-            'patronymic' => fake()->randomElement([
+            'name' => $faker->firstNameMale(),
+            'surname' => $faker->lastName(),
+            'patronymic' => $faker->randomElement([
                 'Сергеевич', 'Александрович', 'Иванович', 'Михайлович', 'Владимирович',
                 'Алексеевич', 'Дмитриевич', 'Николаевич', 'Павлович', 'Викторович',
             ]),
-            'email' => fake()->unique()->safeEmail(),
-            'phone' => fake()->phoneNumber(),
-            'birthday' => fake()->date('Y-m-d', '-20 years'),
+            'email' => $faker->unique()->safeEmail(),
+            'phone' => '+79' . $faker->numerify('#########'),
+            'birthday' => $faker->date('Y-m-d', '-20 years'),
             'department_id' => $pair[0],
             'position_id' => $pair[1],
-            'start_work' => fake()->date('Y-m-d', 'now'),
-            'status_id' => fake()->numberBetween(1, 4),
-            'status_at' => fake()->date('Y-m-d', 'now'),
-            'permissions' => fake()->randomElement([
+            'start_work' => $faker->date('Y-m-d', 'now'),
+            'status_id' => $faker->numberBetween(1, 4),
+            'status_at' => $faker->date('Y-m-d', 'now'),
+            'permissions' => $faker->randomElement([
                 ['view_users' => 'edit_users'],
                 ['view_reports' => 'edit_reports'],
                 ['view_users' => 'read_only', 'view_reports' => 'read_only'],

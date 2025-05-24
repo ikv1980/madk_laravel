@@ -2,10 +2,10 @@
 
 namespace Database\Seeders;
 
-use App\Models\User;
+use App\Models\OrderStatus;
 use Illuminate\Database\Seeder;
 
-class UserSeeder extends Seeder
+class OrderStatusSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -13,7 +13,7 @@ class UserSeeder extends Seeder
     public function run(): void
     {
         // Вызов сидера отдельно
-        // php artisan db:seed --class=UserSeeder
-        User::factory(15)->create();
+        // php artisan db:seed --class=OrderStatusSeeder
+        OrderStatus::factory(20)->create();
     }
 }

@@ -24,7 +24,8 @@ class CarController extends Controller
     public function store(StoreCarRequest $request)
     {
         try {
-            return new CarResource(Car::create($request->validated()));
+            $user = Car::create($request->validated());
+            return new CarResource($user->load(['markModelCountry.mark', 'markModelCountry.model', 'markModelCountry.country', 'type', 'color', 'photos']));
         } catch (\Exception $e) {
             return response()->json(['error' => 'Не удалось создать запись: ' . $e->getMessage()], 500);
         }
