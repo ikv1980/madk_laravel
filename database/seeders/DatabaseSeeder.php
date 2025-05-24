@@ -31,6 +31,7 @@ class DatabaseSeeder extends Seeder
             UserPositionSeeder::class,
             UserDepartmentPositionSeeder::class,
             UserStatusSeeder::class,
+            UserSeeder::class,
         ]);
     }
 }

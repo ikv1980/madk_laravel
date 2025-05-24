@@ -50,7 +50,7 @@ class UserResource extends JsonResource
                 ];
             }),
 
-            'permissions' => $this->permissions ? json_decode($this->permissions, true) : null,
+            'permissions' => $this->permissions,
 
             'created_at' => Carbon::parse($this->created_at)->format('Y-m-d H:i:s'),
             'updated_at' => Carbon::parse($this->updated_at)->format('Y-m-d H:i:s'),

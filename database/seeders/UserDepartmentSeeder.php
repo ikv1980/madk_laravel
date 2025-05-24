@@ -20,6 +20,7 @@ class UserDepartmentSeeder extends Seeder
         $departments = [
             'Дирекция',
             'Бухгалтерия',
+            'Отдел кадров',
             'Отдел продаж',
             'Отдел маркетинга',
             'IT отдел',

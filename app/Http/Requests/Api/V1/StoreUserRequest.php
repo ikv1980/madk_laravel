@@ -13,6 +13,8 @@ class StoreUserRequest extends FormRequest
     public function authorize(): bool
     {
         return true;
+        // Проверяем, имеет ли пользователь право создавать пользователей
+        // return auth()->check() && auth()->user()->hasPermission('create_users');
     }
 
     /**
@@ -86,7 +88,7 @@ class StoreUserRequest extends FormRequest
             ],
             'permissions' => [
                 'nullable',
-                'json'
+                'array'
             ],
         ];
     }
