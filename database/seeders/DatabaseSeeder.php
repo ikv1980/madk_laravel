@@ -29,6 +29,7 @@ class DatabaseSeeder extends Seeder
 
             UserDepartmentSeeder::class,
             UserPositionSeeder::class,
+            UserDepartmentPositionSeeder::class,
             UserStatusSeeder::class,
         ]);
     }

@@ -18,8 +18,7 @@ return new class extends Migration {
             $table->foreignId('country_id')->constrained('car_countries')->onDelete('cascade');
 
             // Уникальность на тройку: mark_id, model_id, country_id
-            $table->unique(['mark_id', 'model_id', 'country_id']);
-
+            $table->unique(['mark_id', 'model_id', 'country_id'], 'unique_mark_model_country');
             $table->timestamps();
         });
     }

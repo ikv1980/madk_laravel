@@ -16,7 +16,7 @@ return new class extends Migration {
             $table->foreignId('position_id')->constrained('user_positions')->onDelete('cascade');
 
             // Уникальность на двойку: department_id, position_id
-            $table->unique(['department_id', 'position_id']);
+            $table->unique(['department_id', 'position_id'], 'unique_department_position');
 
             $table->softDeletes();
             $table->timestamps();
