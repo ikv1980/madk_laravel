@@ -61,11 +61,10 @@ Route::prefix('v1')->group(function () {
 
     // Все фотографии автомобиля
     Route::get('cars/{car}/photos', [CarPhotoController::class, 'showByCar']);
-    // Все пользователи департамента
-    Route::get('user-departments/{id}/users', [UserDepartmentController::class, 'showUsersOfDepartment']);
-    // Все пользователи должности
-    Route::get('user-positions/{id}/users', [UserPositionController::class, 'showUsersOfPosition']);
-    // Все пользователи статуса
-    Route::get('user-statuses/{id}/users', [UserStatusController::class, 'showUsersOfStatus']);
+
+    // Какие есть должности в отделе
+    Route::get('user-departments/{department}/positions', [UserDepartmentPositionController::class, 'getPositionsByDepartment']);
+    // В каких отделах присутствует указанная должность
+    Route::get('user-positions/{position}/departments', [UserDepartmentPositionController::class, 'getDepartmentBtPositions']);
 });
 

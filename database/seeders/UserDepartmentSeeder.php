@@ -17,7 +17,13 @@ class UserDepartmentSeeder extends Seeder
         $faker = Faker::create();
         // Вызов сидера отдельно
         // php artisan db:seed --class=UserDepartmentSeeder
-        $departments = ['Дирекция', 'Бухгалтерия','Отдел продаж','Отдел маркетинга','IT отдел','Склад',];
+        $departments = [
+            'Дирекция',
+            'Бухгалтерия',
+            'Отдел продаж',
+            'Отдел маркетинга',
+            'IT отдел',
+            'Склад',];
         $data = [];
 
         foreach ($departments as $department) {

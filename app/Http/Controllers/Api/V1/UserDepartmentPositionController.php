@@ -6,7 +6,11 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\V1\StoreUserDepartmentPositionRequest;
 use App\Http\Requests\Api\V1\UpdateUserDepartmentPositionRequest;
 use App\Http\Resources\Api\V1\UserDepartmentPositionResource;
+use App\Http\Resources\Api\V1\UserDepartmentResource;
+use App\Http\Resources\Api\V1\UserPositionResource;
+use App\Models\UserDepartment;
 use App\Models\UserDepartmentPosition;
+use App\Models\UserPosition;
 
 class UserDepartmentPositionController extends Controller
 {
@@ -83,5 +87,29 @@ class UserDepartmentPositionController extends Controller
         $userDepartmentPosition->restore();
 
         return new UserDepartmentPositionResource($userDepartmentPosition->load(['department', 'position']));
+    }
+
+    /**
+     * Список всех должностей в отделе.
+     */
+    public function getPositionsByDepartment(UserDepartment $department)
+    {
+        return UserPositionResource::collection(
+            $department
+                ->positions()
+                ->get()
+        );
+    }
+
+    /**
+     * Список отделов, имеющих указанную должность.
+     */
+    public function getDepartmentBtPositions(UserPosition $position)
+    {
+        return UserDepartmentResource::collection(
+            $position
+                ->departments()
+                ->get()
+        );
     }
 }

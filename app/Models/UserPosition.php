@@ -39,6 +39,6 @@ class UserPosition extends Model
 
     public function departments(): BelongsToMany
     {
-        return $this->belongsToMany(UserDepartment::class, 'user_department_positions');
+        return $this->belongsToMany(UserDepartment::class, 'user_department_positions', 'position_id', 'department_id');
     }
 }
