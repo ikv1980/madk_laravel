@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\OrderCar;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class OrderCarSeeder extends Seeder
 {
@@ -14,6 +15,13 @@ class OrderCarSeeder extends Seeder
     {
         // Вызов сидера отдельно
         // php artisan db:seed --class=OrderCarSeeder
-        OrderCar::factory(20)->create();
+
+        // Создаем данные через фабрику, но не сохраняем сразу
+        $data = OrderCar::factory(20)->make()->toArray();
+
+        // Вставляем все записи, игнорируя дубликаты
+        DB::connection(env('CONNECTION_FOR_SEED'))
+            ->table('order_cars')
+            ->insertOrIgnore($data);
     }
 }
