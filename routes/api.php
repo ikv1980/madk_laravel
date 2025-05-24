@@ -8,6 +8,7 @@ use App\Http\Controllers\Api\V1\CarMarkModelCountryController;
 use App\Http\Controllers\Api\V1\CarModelController;
 use App\Http\Controllers\Api\V1\CarPhotoController;
 use App\Http\Controllers\Api\V1\CarTypeController;
+use App\Http\Controllers\Api\V1\DeliveryController;
 use App\Http\Controllers\Api\V1\PaymentController;
 use App\Http\Controllers\Api\V1\UserController;
 use App\Http\Controllers\Api\V1\UserDepartmentController;
@@ -45,6 +46,7 @@ Route::prefix('v1')->group(function () {
 
         // Заказы
         'payments' => PaymentController::class,
+        'deliveries' => DeliveryController::class,
 
     ]);
     // Маршруты для восстановления записей
@@ -62,6 +64,7 @@ Route::prefix('v1')->group(function () {
     Route::patch('user-statuses/{id}/restore', [UserStatusController::class, 'restore']);
 
     Route::patch('payments/{id}/restore', [PaymentController::class, 'restore']);
+    Route::patch('deliveries/{id}/restore', [DeliveryController::class, 'restore']);
 
 
 
