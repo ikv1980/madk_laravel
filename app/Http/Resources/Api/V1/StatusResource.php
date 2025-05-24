@@ -6,7 +6,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class UserStatusResource extends JsonResource
+class StatusResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -18,7 +18,8 @@ class UserStatusResource extends JsonResource
         return [
             'id' => $this->id,
             'status_name' => $this->status_name,
-            'status_number' =>$this->status_number,
+            'status_description' => $this->status_description,
+            'status_number' => $this->status_number,
             'created_at' => Carbon::parse($this->created_at)->format('Y-m-d H:i:s'),
             'updated_at' => Carbon::parse($this->updated_at)->format('Y-m-d H:i:s'),
         ];

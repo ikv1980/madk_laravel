@@ -10,6 +10,7 @@ use App\Http\Controllers\Api\V1\CarPhotoController;
 use App\Http\Controllers\Api\V1\CarTypeController;
 use App\Http\Controllers\Api\V1\DeliveryController;
 use App\Http\Controllers\Api\V1\PaymentController;
+use App\Http\Controllers\Api\V1\StatusController;
 use App\Http\Controllers\Api\V1\UserController;
 use App\Http\Controllers\Api\V1\UserDepartmentController;
 use App\Http\Controllers\Api\V1\UserDepartmentPositionController;
@@ -27,6 +28,7 @@ Route::prefix('v1')->group(function () {
     Route::apiResources([
         # Laravel автоматически создает имена маршрутов:
         # GET /api/v1/car-colors → api.v1.car-colors.index
+
         # Автомобили.
         'cars' => CarController::class,
         'car-colors' => CarColorController::class,
@@ -36,35 +38,36 @@ Route::prefix('v1')->group(function () {
         'car-mark-model-countries' => CarMarkModelCountryController::class,
         'car-types' => CarTypeController::class,
         'car-photos' => CarPhotoController::class,
-
         // Пользователи.
         'users' => UserController::class,
         'user-departments' => UserDepartmentController::class,
         'user-positions' => UserPositionController::class,
         'user-department-positions' => UserDepartmentPositionController::class,
         'user-statuses' => UserStatusController::class,
-
         // Заказы
         'payments' => PaymentController::class,
         'deliveries' => DeliveryController::class,
+        'statuses' => StatusController::class,
 
     ]);
-    // Маршруты для восстановления записей
+    // Маршруты для восстановления записей.
+    # Автомобили.
     Route::patch('cars/{id}/restore', [CarController::class, 'restore']);
     Route::patch('car-colors/{id}/restore', [CarColorController::class, 'restore']);
     Route::patch('car-counties/{id}/restore', [CarCountryController::class, 'restore']);
     Route::patch('car-marks/{id}/restore', [CarMarkController::class, 'restore']);
     Route::patch('car-models/{id}/restore', [CarModelController::class, 'restore']);
     Route::patch('car-types/{id}/restore', [CarTypeController::class, 'restore']);
-
+    // Пользователи.
     Route::patch('users/{id}/restore', [UserController::class, 'restore']);
     Route::patch('user-departments/{id}/restore', [UserDepartmentController::class, 'restore']);
     Route::patch('user-positions/{id}/restore', [UserPositionController::class, 'restore']);
     Route::patch('user-department-positions/{id}/restore', [UserDepartmentPositionController::class, 'restore']);
     Route::patch('user-statuses/{id}/restore', [UserStatusController::class, 'restore']);
-
+    // Заказы.
     Route::patch('payments/{id}/restore', [PaymentController::class, 'restore']);
     Route::patch('deliveries/{id}/restore', [DeliveryController::class, 'restore']);
+    Route::patch('statuses/{id}/restore', [StatusController::class, 'restore']);
 
 
 
