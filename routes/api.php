@@ -8,6 +8,7 @@ use App\Http\Controllers\Api\V1\CarMarkModelCountryController;
 use App\Http\Controllers\Api\V1\CarModelController;
 use App\Http\Controllers\Api\V1\CarPhotoController;
 use App\Http\Controllers\Api\V1\CarTypeController;
+use App\Http\Controllers\Api\V1\PaymentController;
 use App\Http\Controllers\Api\V1\UserController;
 use App\Http\Controllers\Api\V1\UserDepartmentController;
 use App\Http\Controllers\Api\V1\UserDepartmentPositionController;
@@ -43,6 +44,8 @@ Route::prefix('v1')->group(function () {
         'user-statuses' => UserStatusController::class,
 
         // Заказы
+        'payments' => PaymentController::class,
+
     ]);
     // Маршруты для восстановления записей
     Route::patch('cars/{id}/restore', [CarController::class, 'restore']);
@@ -57,6 +60,10 @@ Route::prefix('v1')->group(function () {
     Route::patch('user-positions/{id}/restore', [UserPositionController::class, 'restore']);
     Route::patch('user-department-positions/{id}/restore', [UserDepartmentPositionController::class, 'restore']);
     Route::patch('user-statuses/{id}/restore', [UserStatusController::class, 'restore']);
+
+    Route::patch('payments/{id}/restore', [PaymentController::class, 'restore']);
+
+
 
 
     // Все фотографии автомобиля
