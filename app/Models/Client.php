@@ -13,7 +13,7 @@ class Client extends Model
 
     protected $fillable = [
         'client_name',
-        'client_email',
+        'client_mail',
         'client_phone',
         'client_address',
         'client_add_data',
@@ -30,7 +30,7 @@ class Client extends Model
     {
         return [
             'client_name' => 'string',
-            'client_email' => 'string',
+            'client_mail' => 'string',
             'client_phone' => 'string',
             'client_address' => 'string',
             'client_add_data' => 'string',
