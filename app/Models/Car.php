@@ -74,4 +74,16 @@ class Car extends Model
     {
         return $this->hasMany(CarPhoto::class, 'car_id');
     }
+
+    /**
+     * Получить все заказы с в которых есть этот автомобиль.
+     */
+    public function orders()
+    {
+        return $this->belongsToMany(Car::class, 'order_cars', 'car_id', 'order_id');
+    }
+    public function orderCars(): HasMany
+    {
+        return $this->hasMany(OrderCar::class);
+    }
 }

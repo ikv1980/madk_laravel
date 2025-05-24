@@ -55,7 +55,7 @@ class CarMarkModelCountry extends Model
     }
 
     /**
-     * Получить все автомобили этой конкретной модели.
+     * Получить все автомобили этой конкретной марка-модель-страна.
      */
     public function cars(): HasMany
     {
