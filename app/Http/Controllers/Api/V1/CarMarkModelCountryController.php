@@ -6,8 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\V1\StoreCarMarkModelCountryRequest;
 use App\Http\Requests\Api\V1\UpdateCarMarkModelCountryRequest;
 use App\Http\Resources\Api\V1\CarMarkModelCountryResource;
-use App\Http\Resources\Api\V1\CarMarkResource;
-use App\Models\CarMark;
 use App\Models\CarMarkModelCountry;
 
 class CarMarkModelCountryController extends Controller

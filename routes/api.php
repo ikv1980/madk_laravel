@@ -10,6 +10,7 @@ use App\Http\Controllers\Api\V1\CarPhotoController;
 use App\Http\Controllers\Api\V1\CarTypeController;
 use App\Http\Controllers\Api\V1\ClientController;
 use App\Http\Controllers\Api\V1\DeliveryController;
+use App\Http\Controllers\Api\V1\OrderController;
 use App\Http\Controllers\Api\V1\PaymentController;
 use App\Http\Controllers\Api\V1\StatusController;
 use App\Http\Controllers\Api\V1\UserController;
@@ -50,6 +51,7 @@ Route::prefix('v1')->group(function () {
         'deliveries' => DeliveryController::class,
         'statuses' => StatusController::class,
         'clients' => ClientController::class,
+        'orders' => OrderController::class,
 
     ]);
     // Маршруты для восстановления записей.
@@ -71,7 +73,7 @@ Route::prefix('v1')->group(function () {
     Route::patch('deliveries/{id}/restore', [DeliveryController::class, 'restore']);
     Route::patch('statuses/{id}/restore', [StatusController::class, 'restore']);
     Route::patch('clients/{id}/restore', [ClientController::class, 'restore']);
-
+    Route::patch('orders/{id}/restore', [OrderController::class, 'restore']);
 
 
     // Все фотографии автомобиля
