@@ -45,7 +45,7 @@ class Order extends Model
     /**
      * Получить клиента.
      */
-    public function client()
+    public function client(): BelongsTo
     {
         return $this->belongsTo(Client::class);
     }
@@ -84,6 +84,17 @@ class Order extends Model
     public function orderStatuses(): HasMany
     {
         return $this->hasMany(OrderStatus::class);
+    }
+
+    /**
+     * Получить последний статус заказа.
+     */
+    public function lastStatus()
+    {
+        return $this->belongsToMany(Status::class, 'order_statuses', 'order_id', 'status_id')
+            ->withPivot('created_at')
+            ->latest()
+            ->limit(1);
     }
 
     /**

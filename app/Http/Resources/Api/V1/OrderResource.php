@@ -22,11 +22,11 @@ class OrderResource extends JsonResource
             'id' => $this->id,
             'user' => $this->whenLoaded('user', function () {
                 return [
-                    'id' => $this->user?->id,
-                    'name' => $this->user?->surname . ' ' . $this->user?->name,
-                    'department' => $this->user?->department?->department_name,
-                    'position' => $this->user?->position?->position_name,
-                    'phone' => $this->user?->phone,
+                    'id' => $this->user->id,
+                    'name' => $this->user->surname . ' ' . $this->user->name,
+                    'department' => $this->user->department?->department_name,
+                    'position' => $this->user->position?->position_name,
+                    'phone' => $this->user->phone,
                 ];
             }),
             'client' => $this->whenLoaded('client', function () {
@@ -34,26 +34,29 @@ class OrderResource extends JsonResource
             }),
             'payment' => $this->whenLoaded('payment', function () {
                 return [
-                    'id' => $this->payment?->id,
-                    'name' => $this->payment?->payment_name,
+                    'id' => $this->payment->id,
+                    'name' => $this->payment->payment_name,
                 ];
             }),
             'delivery' => $this->whenLoaded('delivery', function () {
                 return [
-                    'id' => $this->delivery?->id,
-                    'delivery' => $this->delivery?->delivery_name,
+                    'id' => $this->delivery->id,
+                    'delivery' => $this->delivery->delivery_name,
                 ];
             }),
             // Только для просмотра одного заказа
-            'statuses' => $this->when(request()->routeIs('orders.show'), function () {
-                return $this->statuses->map(function ($status) {
-                    return [
-                        'id' => $status->id,
-                        'status_name' => $status->status_name,
-                        'created_at' => Carbon::parse($status->created_at)->format('Y-m-d H:i:s'),
-                    ];
-                });
-            }),
+            'statuses' => $this->when(
+                request()->routeIs('orders.show') && $this->whenLoaded('statuses'),
+                function () {
+                    return $this->statuses->map(function ($status) {
+                        return [
+                            'id' => $status->id,
+                            'status_name' => $status->status_name,
+                            'created_at' => Carbon::parse($status->created_at)->format('Y-m-d H:i:s'),
+                        ];
+                    });
+                }),
+            // Только для просмотра одного заказа
             'cars' => $this->when(request()->routeIs('orders.show'), function () {
                 return $this->cars->map(function ($car) {
                     return [
