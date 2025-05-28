@@ -9,7 +9,12 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 return Application::configure(basePath: dirname(__DIR__))
     ->withRouting(
         web: __DIR__.'/../routes/web.php',
-        api: __DIR__.'/../routes/api.php',
+        api: [
+            __DIR__.'/../routes/api.php',
+//            __DIR__ . '/../routes/apiCars.php',
+//            __DIR__ . '/../routes/apiUser.php',
+//            __DIR__ . '/../routes/apiOrders.php',
+        ],
         commands: __DIR__.'/../routes/console.php',
         health: '/up',
     )
