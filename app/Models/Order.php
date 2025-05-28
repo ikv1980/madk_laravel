@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -77,13 +78,10 @@ class Order extends Model
     /**
      * Получить все статусы заказа.
      */
-    public function statuses()
+    public function statuses(): BelongsToMany
     {
-        return $this->belongsToMany(Status::class, 'order_statuses', 'order_id', 'status_id');
-    }
-    public function orderStatuses(): HasMany
-    {
-        return $this->hasMany(OrderStatus::class);
+        return $this
+            ->belongsToMany(Status::class, 'order_statuses', 'order_id', 'status_id');
     }
 
     /**
@@ -103,9 +101,5 @@ class Order extends Model
     public function cars()
     {
         return $this->belongsToMany(Car::class, 'order_cars', 'order_id', 'car_id');
-    }
-    public function orderCars(): HasMany
-    {
-        return $this->hasMany(OrderCar::class);
     }
 }

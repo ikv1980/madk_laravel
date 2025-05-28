@@ -37,10 +37,8 @@ class Status extends Model
      */
     public function orders()
     {
-        return $this->belongsToMany(Order::class, 'order_status', 'status_id', 'order_id');
-    }
-    public function orderStatuses(): HasMany
-    {
-        return $this->hasMany(OrderStatus::class);
+        return $this
+            ->belongsToMany(Order::class, 'order_statuses', 'status_id', 'order_id')
+            ->withTimestamps();
     }
 }

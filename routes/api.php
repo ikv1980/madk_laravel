@@ -10,7 +10,9 @@ use App\Http\Controllers\Api\V1\CarPhotoController;
 use App\Http\Controllers\Api\V1\CarTypeController;
 use App\Http\Controllers\Api\V1\ClientController;
 use App\Http\Controllers\Api\V1\DeliveryController;
+use App\Http\Controllers\Api\V1\OrderCarController;
 use App\Http\Controllers\Api\V1\OrderController;
+use App\Http\Controllers\Api\V1\OrderStatusController;
 use App\Http\Controllers\Api\V1\PaymentController;
 use App\Http\Controllers\Api\V1\StatusController;
 use App\Http\Controllers\Api\V1\UserController;
@@ -26,7 +28,7 @@ Route::get('/user', function (Request $request) {
 })->middleware('auth:sanctum');
 
 
-Route::prefix('v1')->group(function () {
+Route::prefix('v1')->group(callback: function () {
     Route::apiResources([
         # Laravel автоматически создает имена маршрутов:
         # GET /api/v1/car-colors → api.v1.car-colors.index
@@ -52,6 +54,8 @@ Route::prefix('v1')->group(function () {
         'statuses' => StatusController::class,
         'clients' => ClientController::class,
         'orders' => OrderController::class,
+        'order-cars' => OrderCarController::class,
+        'order-statuses' => OrderStatusController::class,
 
     ]);
     // Маршруты для восстановления записей.
@@ -74,14 +78,25 @@ Route::prefix('v1')->group(function () {
     Route::patch('statuses/{id}/restore', [StatusController::class, 'restore']);
     Route::patch('clients/{id}/restore', [ClientController::class, 'restore']);
     Route::patch('orders/{id}/restore', [OrderController::class, 'restore']);
+    Route::patch('order-cars/{id}/restore', [OrderCarController::class, 'restore']);
+    Route::patch('order-statuses/{id}/restore', [OrderStatusController::class, 'restore']);
 
 
-    // Все фотографии автомобиля
+    // Все фотографии автомобиля.
     Route::get('cars/{car}/photos', [CarPhotoController::class, 'showByCar']);
 
-    // Какие есть должности в отделе
+    // Какие есть должности в отделе.
     Route::get('user-departments/{department}/positions', [UserDepartmentPositionController::class, 'getPositionsByDepartment']);
-    // В каких отделах присутствует указанная должность
+    // В каких отделах присутствует указанная должность.
     Route::get('user-positions/{position}/departments', [UserDepartmentPositionController::class, 'getDepartmentBtPositions']);
-});
 
+    // Список всех автомобилей в заказе.
+    Route::get('orders/{order}/cars', [OrderCarController::class, 'getCarsByOrder']);
+    // Список заказов, имеющих в составе указанный автомобиль должность.
+    Route::get('cars/{car}/orders', [OrderCarController::class, 'getOrdersByCar']);
+
+    // Список всех статусов в заказе.
+    Route::get('orders/{order}/statuses', [OrderStatusController::class, 'getStatusesByOrder']);
+    // Список заказов, имеющих определенный статус.
+    Route::get('statuses/{status}/orders', [OrderStatusController::class, 'getOrdersByStatus']);
+});
