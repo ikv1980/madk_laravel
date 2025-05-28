@@ -20,26 +20,26 @@ class CarResource extends JsonResource
             'mark_model_country_id' => $this->mark_model_country_id,
             'mark' => $this->whenLoaded('markModelCountry', function () {
                 return [
-                    'id' => $this->markModelCountry?->mark?->id,
-                    'name' => $this->markModelCountry?->mark?->mark_name,
+                    'id' => $this->markModelCountry->mark?->id,
+                    'name' => $this->markModelCountry->mark?->mark_name,
                 ];
             }),
             'model' => $this->whenLoaded('markModelCountry', function () {
                 return [
-                    'id' => $this->markModelCountry?->model?->id,
-                    'name' => $this->markModelCountry?->model?->model_name,
+                    'id' => $this->markModelCountry->model?->id,
+                    'name' => $this->markModelCountry->model?->model_name,
                 ];
             }),
             'country' => $this->whenLoaded('markModelCountry', function () {
                 return [
-                    'id' => $this->markModelCountry?->country?->id,
-                    'name' => $this->markModelCountry?->country?->country_name,
+                    'id' => $this->markModelCountry->country?->id,
+                    'name' => $this->markModelCountry->country?->country_name,
                 ];
             }),
             'type' => $this->whenLoaded('type', function () {
                 return [
-                    'id' => $this->type?->id,
-                    'name' => $this->type?->type_name,
+                    'id' => $this->type->id,
+                    'name' => $this->type->type_name,
                 ];
             }),
             'color' => $this->whenLoaded('color', function () {
@@ -52,7 +52,7 @@ class CarResource extends JsonResource
             'pts' => $this->pts,
             'price' => $this->price,
             'block' => $this->block,
-            'date_at' => Carbon::parse($this->date_at)->format('Y-m-d H:i:s'),
+            'date_at' => formatDate($this->date_at),
             'photos' => $this->photos,
         ];
     }

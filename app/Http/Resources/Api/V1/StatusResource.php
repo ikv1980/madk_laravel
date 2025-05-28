@@ -20,8 +20,8 @@ class StatusResource extends JsonResource
             'status_name' => $this->status_name,
             'status_description' => $this->status_description,
             'status_number' => $this->status_number,
-            'created_at' => Carbon::parse($this->created_at)->format('Y-m-d H:i:s'),
-            'updated_at' => Carbon::parse($this->updated_at)->format('Y-m-d H:i:s'),
+            'created_at' => formatDate($this->created_at),
+            'updated_at' => formatDate($this->updated_at),
         ];
     }
 }

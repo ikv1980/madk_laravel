@@ -29,8 +29,8 @@ class UserDepartmentPositionResource extends JsonResource
                     'name' => $this->position?->position_name,
                 ];
             }),
-            'created_at' => Carbon::parse($this->created_at)->format('Y-m-d H:i:s'),
-            'updated_at' => Carbon::parse($this->updated_at)->format('Y-m-d H:i:s'),
+            'created_at' => formatDate($this->created_at),
+            'updated_at' => formatDate($this->updated_at),
         ];
     }
 }

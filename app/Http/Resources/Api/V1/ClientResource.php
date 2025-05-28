@@ -23,8 +23,8 @@ class ClientResource extends JsonResource
             'client_address' => $this->client_address,
             'client_add_data' => $this->client_add_data,
             'client_status' => $this->client_status,
-            'created_at' => Carbon::parse($this->created_at)->format('Y-m-d H:i:s'),
-            'updated_at' => Carbon::parse($this->updated_at)->format('Y-m-d H:i:s'),
+            'created_at' => formatDate($this->created_at),
+            'updated_at' => formatDate($this->updated_at),
         ];
     }
 }

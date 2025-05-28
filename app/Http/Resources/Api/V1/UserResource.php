@@ -26,9 +26,9 @@ class UserResource extends JsonResource
 
             'email' => $this->email,
             'phone' => $this->phone,
-            'birthday' => Carbon::parse($this->birthday)->format('Y-m-d'),
+            'birthday' => formatDate($this->birthday, 'Y-m-d'),
 
-            'start_work' => Carbon::parse($this->start_work)->format('Y-m-d'),
+            'start_work' => formatDate($this->start_work, 'Y-m-d'),
 
             'department' => $this->whenLoaded('department', function () {
                 return [
@@ -46,14 +46,14 @@ class UserResource extends JsonResource
                 return [
                     'id' => $this->status?->id,
                     'name' => $this->status?->status_name,
-                    'status_at' => Carbon::parse($this->status_at)->format('Y-m-d'),
+                    'status_at' => formatDate($this->status_at, 'Y-m-d'),
                 ];
             }),
 
             'permissions' => $this->permissions,
 
-            'created_at' => Carbon::parse($this->created_at)->format('Y-m-d H:i:s'),
-            'updated_at' => Carbon::parse($this->updated_at)->format('Y-m-d H:i:s'),
+            'created_at' => formatDate($this->created_at),
+            'updated_at' => formatDate($this->updated_at),
         ];
     }
 }

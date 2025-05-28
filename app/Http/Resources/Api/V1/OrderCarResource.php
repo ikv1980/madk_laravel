@@ -29,7 +29,7 @@ class OrderCarResource extends JsonResource
                             return [
                                 'id' => $status->id,
                                 'status_name' => $status->status_name,
-                                'created_at' => Carbon::parse($status->pivot->created_at)->format('Y-m-d H:i:s'),
+                                'created_at' => formatDate($status->pivot->created_at),
                             ];
                         });
                     }),
@@ -47,8 +47,8 @@ class OrderCarResource extends JsonResource
                 ];
             }),
 
-            'created_at' => Carbon::parse($this->created_at)->format('Y-m-d H:i:s'),
-            'updated_at' => Carbon::parse($this->updated_at)->format('Y-m-d H:i:s'),
+            'created_at' => formatDate($this->created_at),
+            'updated_at' => formatDate($this->updated_at),
         ];
     }
 }

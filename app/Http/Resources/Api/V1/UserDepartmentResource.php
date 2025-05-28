@@ -20,8 +20,8 @@ class UserDepartmentResource extends JsonResource
             'department_name' => $this->department_name,
             'department_description' => $this->department_description,
             'department_mail' => $this->department_mail,
-            'created_at' => Carbon::parse($this->created_at)->format('Y-m-d H:i:s'),
-            'updated_at' => Carbon::parse($this->updated_at)->format('Y-m-d H:i:s'),
+            'created_at' => formatDate($this->created_at),
+            'updated_at' => formatDate($this->updated_at),
         ];
     }
 }

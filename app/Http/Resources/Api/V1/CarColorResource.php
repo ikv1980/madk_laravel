@@ -18,8 +18,8 @@ class CarColorResource extends JsonResource
         return [
             'id' => $this->id,
             'color_name' => $this->color_name,
-            'created_at' => Carbon::parse($this->created_at)->format('Y-m-d H:i:s'),
-            'updated_at' => Carbon::parse($this->updated_at)->format('Y-m-d H:i:s'),
+            'created_at' => formatDate($this->created_at),
+            'updated_at' => formatDate($this->updated_at),
         ];
     }
 }

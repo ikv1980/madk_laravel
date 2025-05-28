@@ -19,8 +19,8 @@ class UserPositionResource extends JsonResource
             'id' => $this->id,
             'position_name' => $this->position_name,
             'position_description' => $this->position_description,
-            'created_at' => Carbon::parse($this->created_at)->format('Y-m-d H:i:s'),
-            'updated_at' => Carbon::parse($this->updated_at)->format('Y-m-d H:i:s'),
+            'created_at' => formatDate($this->created_at),
+            'updated_at' => formatDate($this->updated_at),
         ];
     }
 }

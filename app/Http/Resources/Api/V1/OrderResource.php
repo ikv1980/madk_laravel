@@ -52,7 +52,7 @@ class OrderResource extends JsonResource
                         return [
                             'id' => $status->id,
                             'status_name' => $status->status_name,
-                            'created_at' => Carbon::parse($status->created_at)->format('Y-m-d H:i:s'),
+                            'created_at' => formatDate($status->created_at),
                         ];
                     });
                 }),
@@ -69,8 +69,8 @@ class OrderResource extends JsonResource
                 });
             }),
             'delivery_address' => $this->delivery_address,
-            'created_at' => Carbon::parse($this->created_at)->format('Y-m-d H:i:s'),
-            'updated_at' => Carbon::parse($this->updated_at)->format('Y-m-d H:i:s'),
+            'created_at' => formatDate($this->created_at),
+            'updated_at' => formatDate($this->updated_at),
         ];
     }
 }
