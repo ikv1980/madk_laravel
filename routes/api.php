@@ -28,7 +28,7 @@ Route::get('/user', function (Request $request) {
 })->middleware('auth:sanctum');
 
 
-Route::prefix('v1')->group(callback: function () {
+Route::prefix('v1')->middleware(['throttle:api',])->group(callback: function () {
     Route::apiResources([
         # Laravel автоматически создает имена маршрутов:
         # GET /api/v1/car-colors → api.v1.car-colors.index
@@ -58,29 +58,31 @@ Route::prefix('v1')->group(callback: function () {
         'order-statuses' => OrderStatusController::class,
 
     ]);
-    // Маршруты для восстановления записей.
-    # Автомобили.
-    Route::patch('cars/{id}/restore', [CarController::class, 'restore']);
-    Route::patch('car-colors/{id}/restore', [CarColorController::class, 'restore']);
-    Route::patch('car-counties/{id}/restore', [CarCountryController::class, 'restore']);
-    Route::patch('car-marks/{id}/restore', [CarMarkController::class, 'restore']);
-    Route::patch('car-models/{id}/restore', [CarModelController::class, 'restore']);
-    Route::patch('car-types/{id}/restore', [CarTypeController::class, 'restore']);
-    // Пользователи.
-    Route::patch('users/{id}/restore', [UserController::class, 'restore']);
-    Route::patch('user-departments/{id}/restore', [UserDepartmentController::class, 'restore']);
-    Route::patch('user-positions/{id}/restore', [UserPositionController::class, 'restore']);
-    Route::patch('user-department-positions/{id}/restore', [UserDepartmentPositionController::class, 'restore']);
-    Route::patch('user-statuses/{id}/restore', [UserStatusController::class, 'restore']);
-    // Заказы.
-    Route::patch('payments/{id}/restore', [PaymentController::class, 'restore']);
-    Route::patch('deliveries/{id}/restore', [DeliveryController::class, 'restore']);
-    Route::patch('statuses/{id}/restore', [StatusController::class, 'restore']);
-    Route::patch('clients/{id}/restore', [ClientController::class, 'restore']);
-    Route::patch('orders/{id}/restore', [OrderController::class, 'restore']);
-    Route::patch('order-cars/{id}/restore', [OrderCarController::class, 'restore']);
-    Route::patch('order-statuses/{id}/restore', [OrderStatusController::class, 'restore']);
 
+    Route::group(['middleware' => ['throttle:api']], function () {
+        // Маршруты для восстановления записей.
+        # Автомобили.
+        Route::patch('cars/{id}/restore', [CarController::class, 'restore']);
+        Route::patch('car-colors/{id}/restore', [CarColorController::class, 'restore']);
+        Route::patch('car-counties/{id}/restore', [CarCountryController::class, 'restore']);
+        Route::patch('car-marks/{id}/restore', [CarMarkController::class, 'restore']);
+        Route::patch('car-models/{id}/restore', [CarModelController::class, 'restore']);
+        Route::patch('car-types/{id}/restore', [CarTypeController::class, 'restore']);
+        // Пользователи.
+        Route::patch('users/{id}/restore', [UserController::class, 'restore']);
+        Route::patch('user-departments/{id}/restore', [UserDepartmentController::class, 'restore']);
+        Route::patch('user-positions/{id}/restore', [UserPositionController::class, 'restore']);
+        Route::patch('user-department-positions/{id}/restore', [UserDepartmentPositionController::class, 'restore']);
+        Route::patch('user-statuses/{id}/restore', [UserStatusController::class, 'restore']);
+        // Заказы.
+        Route::patch('payments/{id}/restore', [PaymentController::class, 'restore']);
+        Route::patch('deliveries/{id}/restore', [DeliveryController::class, 'restore']);
+        Route::patch('statuses/{id}/restore', [StatusController::class, 'restore']);
+        Route::patch('clients/{id}/restore', [ClientController::class, 'restore']);
+        Route::patch('orders/{id}/restore', [OrderController::class, 'restore']);
+        Route::patch('order-cars/{id}/restore', [OrderCarController::class, 'restore']);
+        Route::patch('order-statuses/{id}/restore', [OrderStatusController::class, 'restore']);
+    });
 
     // Все фотографии автомобиля.
     Route::get('cars/{car}/photos', [CarPhotoController::class, 'showByCar']);
