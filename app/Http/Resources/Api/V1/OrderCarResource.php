@@ -23,7 +23,7 @@ class OrderCarResource extends JsonResource
                 return [
                     'id' => $this->order->id,
                     'client' => $this->order->client?->client_name,
-                    'user' => $user ? ($user->name . ' ' . $user->surname) : null,
+                    'user' => $user ? ($user->firstname . ' ' . $user->surname) : null,
                     'last_status' => $this->whenLoaded('order.lastStatus', function () {
                         return $this->order->lastStatus->map(function ($status) {
                             return [

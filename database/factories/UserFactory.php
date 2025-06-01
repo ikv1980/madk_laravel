@@ -34,7 +34,7 @@ class UserFactory extends Factory
         return [
             'login' => $this->faker->unique()->userName(),
             'password' => static::$password ??= Hash::make('password'),
-            'name' => $faker->firstNameMale(),
+            'firstname' => $faker->firstNameMale(),
             'surname' => $faker->lastName(),
             'patronymic' => $faker->randomElement([
                 'Сергеевич', 'Александрович', 'Иванович', 'Михайлович', 'Владимирович',
