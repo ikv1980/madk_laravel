@@ -52,7 +52,7 @@ class StoreUserRequest extends FormRequest
                 'max:50'
             ],
             'email' => [
-                'required',
+                'nullable',
                 'email',
                 'unique:users,email',
                 'max:50'
@@ -83,7 +83,7 @@ class StoreUserRequest extends FormRequest
                 'exists:user_statuses,id'
             ],
             'status_at' => [
-                'required',
+                'nullable',
                 'date'
             ],
             'permissions' => [

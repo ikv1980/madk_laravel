@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('name')->comment('имя');
             $table->string('surname')->comment('фамилия');
             $table->string('patronymic')->nullable()->comment('отчество');
-            $table->string('email')->unique()->comment('email');
+            $table->string('email')->unique()->nullable()->comment('email');
             $table->string('phone')->nullable()->comment('телефон');
             $table->date('birthday')->nullable()->comment('день рождения');
 
@@ -28,7 +28,7 @@ return new class extends Migration
 
             $table->date('start_work')->nullable()->comment('трудоустройство');
             $table->foreignId('status_id')->nullable()->comment('статус');
-            $table->date('status_at')->comment('смена статуса');
+            $table->date('status_at')->nullable()->comment('смена статуса');
 
             $table->json('permissions')->nullable()->comment('разрешения');
             $table->softDeletes();

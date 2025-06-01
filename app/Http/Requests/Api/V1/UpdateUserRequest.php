@@ -50,7 +50,7 @@ class UpdateUserRequest extends FormRequest
                 'max:50'
             ],
             'email' => [
-                'required',
+                'nullable',
                 'email',
                 'max:50',
                 Rule::unique('users', 'email')->ignore($this->user->id),
@@ -81,7 +81,7 @@ class UpdateUserRequest extends FormRequest
                 'exists:user_statuses,id'
             ],
             'status_at' => [
-                'required',
+                'nullable',
                 'date'
             ],
             'permissions' => [

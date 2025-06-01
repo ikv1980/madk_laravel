@@ -7,10 +7,11 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
 {
-    use SoftDeletes, HasFactory;
+    use SoftDeletes, HasFactory, HasApiTokens;
 
     protected $fillable = [
         'login', 'password',
@@ -31,6 +32,7 @@ class User extends Authenticatable
     {
         return [
             'login' => 'string',
+            'password' => 'hashed',
             'name' => 'string',
             'surname' => 'string',
             'patronymic' => 'string',
@@ -43,7 +45,7 @@ class User extends Authenticatable
             'status_id' => 'integer',
             'status_at' => 'date',
             'permissions' => 'array',
-            'password' => 'hashed',
+
             'deleted_at' => 'datetime',
         ];
     }
