@@ -13,6 +13,7 @@ return Application::configure(basePath: dirname(__DIR__))
         ],
         api: [
             __DIR__ . '/../routes/api.php',
+            __DIR__ . '/../routes/auth.php',
 //            __DIR__ . '/../routes/apiCars.php',
 //            __DIR__ . '/../routes/apiUser.php',
 //            __DIR__ . '/../routes/apiOrders.php',

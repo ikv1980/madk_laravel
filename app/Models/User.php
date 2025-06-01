@@ -25,6 +25,8 @@ class User extends Authenticatable
         'password',
         'remember_token',
         'permissions',
+        'created_at',
+        'updated_at',
         'deleted_at',
     ];
 
@@ -45,7 +47,6 @@ class User extends Authenticatable
             'status_id' => 'integer',
             'status_at' => 'date',
             'permissions' => 'array',
-
             'deleted_at' => 'datetime',
         ];
     }

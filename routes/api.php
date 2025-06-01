@@ -28,7 +28,7 @@ Route::get('/user', function (Request $request) {
 })->middleware('auth:sanctum');
 
 
-Route::prefix('v1')->middleware(['throttle:api',])->group(callback: function () {
+Route::prefix('v1')->middleware(['throttle:api',])->group(function () {
     Route::apiResources([
         # Laravel автоматически создает имена маршрутов:
         # GET /api/v1/car-colors → api.v1.car-colors.index
@@ -59,12 +59,12 @@ Route::prefix('v1')->middleware(['throttle:api',])->group(callback: function () 
 
     ]);
 
-    Route::group(['middleware' => ['throttle:api']], function () {
+    Route::group(['middleware' => ['auth:sanctum']], function () {
         // Маршруты для восстановления записей.
         # Автомобили.
         Route::patch('cars/{id}/restore', [CarController::class, 'restore']);
         Route::patch('car-colors/{id}/restore', [CarColorController::class, 'restore']);
-        Route::patch('car-counties/{id}/restore', [CarCountryController::class, 'restore']);
+        Route::patch('car-countries/{id}/restore', [CarCountryController::class, 'restore']);
         Route::patch('car-marks/{id}/restore', [CarMarkController::class, 'restore']);
         Route::patch('car-models/{id}/restore', [CarModelController::class, 'restore']);
         Route::patch('car-types/{id}/restore', [CarTypeController::class, 'restore']);
