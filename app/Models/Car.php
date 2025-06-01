@@ -38,7 +38,7 @@ class Car extends Model
             'vin' => 'string',
             'pts' => 'string',
             'price' => 'float',
-            'block' => 'boolean',
+            'block' => 'integer',
             'date_at' => 'date',
             'deleted_at' => 'datetime',
         ];

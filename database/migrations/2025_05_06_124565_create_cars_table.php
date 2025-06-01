@@ -22,7 +22,7 @@ return new class extends Migration {
             $table->string('pts', 20)->unique()->comment('PTS');
             $table->date('date_at')->comment('дата производства');
             $table->decimal('price', 10, 2)->comment('цена');
-            $table->boolean('block')->comment('блок');
+            $table->unsignedInteger('block')->comment('блок');
             $table->softDeletes();
 
             $table->timestamps();
