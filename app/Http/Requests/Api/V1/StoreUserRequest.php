@@ -36,7 +36,7 @@ class StoreUserRequest extends FormRequest
                 'string',
                 'min:8'
             ],
-            'name' => [
+            'firstname' => [
                 'required',
                 'string',
                 'max:50'

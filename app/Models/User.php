@@ -15,7 +15,7 @@ class User extends Authenticatable
 
     protected $fillable = [
         'login', 'password',
-        'name', 'surname', 'patronymic',
+        'firstname', 'surname', 'patronymic',
         'email', 'phone', 'birthday',
         'department_id', 'position_id', 'start_work', 'status_id', 'status_at',
         'permissions',
@@ -33,7 +33,7 @@ class User extends Authenticatable
         return [
             'login' => 'string',
             'password' => 'hashed',
-            'name' => 'string',
+            'firstname' => 'string',
             'surname' => 'string',
             'patronymic' => 'string',
             'email' => 'string',

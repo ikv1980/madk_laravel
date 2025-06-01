@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('login')->unique()->comment('логин');
             $table->string('password')->comment('пароль');
 
-            $table->string('name')->comment('имя');
+            $table->string('firstname')->comment('имя');
             $table->string('surname')->comment('фамилия');
             $table->string('patronymic')->nullable()->comment('отчество');
             $table->string('email')->unique()->nullable()->comment('email');
