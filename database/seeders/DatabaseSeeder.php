@@ -33,6 +33,7 @@ class DatabaseSeeder extends Seeder
             UserPositionSeeder::class,
             UserDepartmentPositionSeeder::class,
             UserStatusSeeder::class,
+            AdminSeeder::class,
             UserSeeder::class,
 
             DeliverySeeder::class,

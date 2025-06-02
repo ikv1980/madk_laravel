@@ -12,7 +12,7 @@ class TestDataCommand extends Command
 
     public function handle(): int
     {
-        $this->info('⏳ Обновление базы данных...');
+        $this->info('⏳ Перезагрузка базы данных...');
         $this->call('migrate:refresh');
 
         $this->info('📦 Наполнение тестовыми данными...');
