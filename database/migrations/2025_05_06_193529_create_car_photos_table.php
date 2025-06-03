@@ -15,11 +15,10 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('car_id')->unsigned()->nullable();
             $table->string('url');  // Путь к файлу в MinIO (например: "media/1/photo1.jpg")
+            // Вторичные ключи
+            $table->foreign('car_id')->references('id')->on('cars')->onDelete('set null');
 
             $table->timestamps();
-
-            // Внешние ключи
-            $table->foreign('car_id')->references('id')->on('cars')->onDelete('set null');
         });
     }
 

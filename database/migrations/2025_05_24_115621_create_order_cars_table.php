@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::create('order_cars', function (Blueprint $table) {
             $table->id();
+            // Вторичные ключи
             $table->foreignId('order_id')->constrained('orders')->onDelete('cascade');
             $table->foreignId('car_id')->constrained('cars')->onDelete('cascade');
-
             // Уникальность на двойку: department_id, position_id
             $table->unique(['order_id', 'car_id'], 'unique_order_car');
 

@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('payments', function (Blueprint $table) {
             $table->id();
             $table->string('payment_name')->unique();
+
             $table->softDeletes();
             $table->timestamps();
         });

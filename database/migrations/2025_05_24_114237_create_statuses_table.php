@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('status_name')->unique();
             $table->text('status_description')->nullable();
             $table->unsignedInteger('status_number')->unique();
+
             $table->softDeletes();
             $table->timestamps();
         });

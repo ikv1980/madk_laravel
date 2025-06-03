@@ -12,9 +12,9 @@ return new class extends Migration {
     {
         Schema::create('user_department_positions', function (Blueprint $table) {
             $table->id();
+            // Вторичные ключи
             $table->foreignId('department_id')->constrained('user_departments')->onDelete('cascade');
             $table->foreignId('position_id')->constrained('user_positions')->onDelete('cascade');
-
             // Уникальность на двойку: department_id, position_id
             $table->unique(['department_id', 'position_id'], 'unique_department_position');
 

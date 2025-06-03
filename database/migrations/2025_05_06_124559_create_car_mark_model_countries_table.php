@@ -12,13 +12,13 @@ return new class extends Migration {
     {
         Schema::create('car_mark_model_countries', function (Blueprint $table) {
             $table->id();
-
+            // Вторичные ключи
             $table->foreignId('mark_id')->constrained('car_marks')->onDelete('cascade');
             $table->foreignId('model_id')->constrained('car_models')->onDelete('cascade');
             $table->foreignId('country_id')->constrained('car_countries')->onDelete('cascade');
-
             // Уникальность на тройку: mark_id, model_id, country_id
             $table->unique(['mark_id', 'model_id', 'country_id'], 'unique_mark_model_country');
+
             $table->timestamps();
         });
     }

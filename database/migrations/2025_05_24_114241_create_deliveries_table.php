@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('deliveries', function (Blueprint $table) {
             $table->id();
             $table->string('delivery_name')->unique();
+
             $table->softDeletes();
             $table->timestamps();
         });

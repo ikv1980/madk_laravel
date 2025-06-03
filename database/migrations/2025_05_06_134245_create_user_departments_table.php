@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('department_name')->unique();
             $table->text('department_description')->nullable();
             $table->string('department_mail')->unique();
+
             $table->softDeletes();
             $table->timestamps();
         });

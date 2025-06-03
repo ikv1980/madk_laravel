@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('client_address')->nullable();
             $table->text('client_add_data')->nullable();
             $table->boolean('client_status')->default(0);
+
             $table->softDeletes();
             $table->timestamps();
         });

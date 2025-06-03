@@ -12,9 +12,10 @@ return new class extends Migration {
     {
         Schema::create('cars', function (Blueprint $table) {
             $table->id();
-
-            // Единая связь на комбинацию марка-модель-страна
-            $table->foreignId('mark_model_country_id')->constrained('car_mark_model_countries')->onDelete('restrict');
+            // Вторичные ключи
+            $table->foreignId('mark_id')->constrained('car_marks')->onDelete('cascade');
+            $table->foreignId('model_id')->constrained('car_models')->onDelete('cascade');
+            $table->foreignId('country_id')->constrained('car_countries')->onDelete('cascade');
             $table->foreignId('type_id')->constrained('car_types')->onDelete('cascade');
             $table->foreignId('color_id')->constrained('car_colors')->onDelete('cascade');
 
@@ -23,8 +24,8 @@ return new class extends Migration {
             $table->date('date_at')->comment('дата производства');
             $table->decimal('price', 10, 2)->comment('цена');
             $table->unsignedBigInteger('block')->comment('блок');
-            $table->softDeletes();
 
+            $table->softDeletes();
             $table->timestamps();
         });
     }

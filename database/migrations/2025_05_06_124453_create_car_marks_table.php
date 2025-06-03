@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('car_marks', function (Blueprint $table) {
             $table->id();
             $table->string('mark_name')->unique();
+
             $table->softDeletes();
             $table->timestamps();
         });

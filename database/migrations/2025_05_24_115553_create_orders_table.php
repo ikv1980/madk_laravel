@@ -13,11 +13,14 @@ return new class extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
+            // Вторичные ключи
             $table->foreignId('client_id')->constrained('clients')->onDelete('cascade');
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
             $table->foreignId('payment_id')->constrained('payments')->onDelete('cascade');
             $table->foreignId('delivery_id')->constrained('deliveries')->onDelete('cascade');
+
             $table->text('delivery_address')->nullable();
+
             $table->softDeletes();
             $table->timestamps();
         });
