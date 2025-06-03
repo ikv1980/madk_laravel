@@ -29,6 +29,7 @@ class OrderFactory extends Factory
             'payment_id' => Payment::inRandomOrder()->value('id'),
             'delivery_id' => Delivery::inRandomOrder()->value('id'),
             'delivery_address' => $faker->address(),
+            'created_at' => $faker->dateTimeBetween('-3 months', 'now'),
         ];
     }
 }
