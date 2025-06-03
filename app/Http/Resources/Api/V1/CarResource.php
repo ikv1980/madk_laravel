@@ -17,23 +17,22 @@ class CarResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'mark_model_country_id' => $this->mark_model_country_id,
-            'mark' => $this->whenLoaded('markModelCountry', function () {
+            'mark' => $this->whenLoaded('mark', function () {
                 return [
-                    'id' => $this->markModelCountry->mark?->id,
-                    'name' => $this->markModelCountry->mark?->mark_name,
+                    'id' => $this->mark?->id,
+                    'name' => $this->mark?->mark_name,
                 ];
             }),
-            'model' => $this->whenLoaded('markModelCountry', function () {
+            'model' => $this->whenLoaded('model', function () {
                 return [
-                    'id' => $this->markModelCountry->model?->id,
-                    'name' => $this->markModelCountry->model?->model_name,
+                    'id' => $this->model?->id,
+                    'name' => $this->model?->model_name,
                 ];
             }),
-            'country' => $this->whenLoaded('markModelCountry', function () {
+            'country' => $this->whenLoaded('country', function () {
                 return [
-                    'id' => $this->markModelCountry->country?->id,
-                    'name' => $this->markModelCountry->country?->country_name,
+                    'id' => $this->country?->id,
+                    'name' => $this->country?->country_name,
                 ];
             }),
             'type' => $this->whenLoaded('type', function () {

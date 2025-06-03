@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Api\V1;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class StoreCarRequest extends FormRequest
 {
@@ -22,10 +23,26 @@ class StoreCarRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'mark_model_country_id' => [
+            'mark_id' => [
                 'required',
                 'integer',
-                'exists:car_mark_model_countries,id',
+                'exists:car_marks,id',
+                Rule::unique('car_mark_model_countries')
+                    ->where(function ($query) {
+                        return $query->where('mark_id', $this->mark_id)
+                            ->where('model_id', $this->model_id)
+                            ->where('country_id', $this->country_id);
+                    }),
+            ],
+            'model_id' => [
+                'required',
+                'integer',
+                'exists:car_models,id',
+            ],
+            'country_id' => [
+                'required',
+                'integer',
+                'exists:car_countries,id',
             ],
             'type_id' => [
                 'required',
@@ -66,6 +83,19 @@ class StoreCarRequest extends FormRequest
                 'nullable',
                 'date',
             ],
+        ];
+    }
+
+
+    /**
+     * Кастомное сообщение об уникальности связки полей
+     *
+     * @return array
+     */
+    public function messages(): array
+    {
+        return [
+            'mark_id.unique' => 'Эта комбинация mark_id, model_id и country_id уже существует в базе данных.',
         ];
     }
 }

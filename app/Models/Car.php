@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -13,7 +14,9 @@ class Car extends Model
     use SoftDeletes, HasFactory;
 
     protected $fillable = [
-        'mark_model_country_id',
+        'mark_id',
+        'model_id',
+        'country_id',
         'type_id',
         'color_id',
         'vin',
@@ -32,7 +35,9 @@ class Car extends Model
     protected function casts(): array
     {
         return [
-            'mark_model_country_id' => 'integer',
+            'mark_id' => 'integer',
+            'model_id' => 'integer',
+            'country_id' => 'integer',
             'type_id' => 'integer',
             'color_id' => 'integer',
             'vin' => 'string',
@@ -45,11 +50,27 @@ class Car extends Model
     }
 
     /**
-     * Получить связь марка-модель-страна.
+     * Получить марку авто.
      */
-    public function markModelCountry(): BelongsTo
+    public function mark(): BelongsTo
     {
-        return $this->belongsTo(CarMarkModelCountry::class);
+        return $this->belongsTo(CarMark::class);
+    }
+
+    /**
+     * Получить модель авто.
+     */
+    public function model(): BelongsTo
+    {
+        return $this->belongsTo(CarModel::class);
+    }
+
+    /**
+     * Получить страну авто.
+     */
+    public function country(): BelongsTo
+    {
+        return $this->belongsTo(CarCountry::class);
     }
 
     /**
@@ -77,9 +98,9 @@ class Car extends Model
     }
 
     /**
-     * Получить все заказы с в которых есть этот автомобиль.
+     * Получить все заказы в которых есть этот автомобиль.
      */
-    public function orders()
+    public function orders(): BelongsToMany
     {
         return $this->belongsToMany(Car::class, 'order_cars', 'car_id', 'order_id');
     }

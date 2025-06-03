@@ -15,7 +15,7 @@ class CarController extends Controller
      */
     public function index()
     {
-        return CarResource::collection(Car::with(['markModelCountry.mark', 'markModelCountry.model', 'markModelCountry.country', 'type', 'color', 'photos'])->paginate());
+        return CarResource::collection(Car::with(['mark', 'model', 'country', 'type', 'color', 'photos'])->paginate());
     }
 
     /**
@@ -25,7 +25,7 @@ class CarController extends Controller
     {
         try {
             $user = Car::create($request->validated());
-            return new CarResource($user->load(['markModelCountry.mark', 'markModelCountry.model', 'markModelCountry.country', 'type', 'color', 'photos']));
+            return new CarResource($user->load(['mark', 'model', 'country', 'type', 'color', 'photos']));
         } catch (\Exception $e) {
             return response()->json(['error' => 'Не удалось создать запись: ' . $e->getMessage()], 500);
         }
@@ -36,7 +36,7 @@ class CarController extends Controller
      */
     public function show(Car $car)
     {
-        return new CarResource($car->load(['markModelCountry.mark', 'markModelCountry.model', 'markModelCountry.country', 'type', 'color', 'photos']));
+        return new CarResource($car->load(['mark', 'model', 'country', 'type', 'color', 'photos']));
     }
 
     /**
@@ -46,7 +46,7 @@ class CarController extends Controller
     {
         try {
             $car->update($request->validated());
-            return new CarResource($car->load(['markModelCountry.mark', 'markModelCountry.model', 'markModelCountry.country', 'type', 'color', 'photos']));
+            return new CarResource($car->load(['mark', 'model', 'country', 'type', 'color', 'photos']));
         } catch (\Exception $e) {
             return response()->json(['error' => 'Не удалось обновить запись: ' . $e->getMessage()], 500);
         }

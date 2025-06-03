@@ -36,7 +36,9 @@ return new class extends Migration {
     public function down(): void
     {
         Schema::table('cars', function (Blueprint $table) {
-            $table->dropForeign(['mark_model_country_id']);
+            $table->dropForeign(['mark_id']);
+            $table->dropForeign(['model_id']);
+            $table->dropForeign(['country_id']);
             $table->dropForeign(['type_id']);
             $table->dropForeign(['color_id']);
         });

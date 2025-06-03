@@ -5,6 +5,8 @@ namespace Database\Factories;
 use App\Models\CarColor;
 use App\Models\CarMarkModelCountry;
 use App\Models\CarType;
+use Database\Seeders\CarMarkModelCountrySeeder;
+use Database\Seeders\UserDepartmentPositionSeeder;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -19,8 +21,17 @@ class CarFactory extends Factory
      */
     public function definition(): array
     {
+        // Русская локаль для фейковых данных
+        $faker = \Faker\Factory::create('ru_RU');
+
+        // Выбираем случайную пару [department_id, position_id] из UserDepartmentPositionSeeder
+        $markModelCountry = new CarMarkModelCountrySeeder();
+        $pair = fake()->randomElement($markModelCountry->items);
+
         return [
-            'mark_model_country_id' => CarMarkModelCountry::inRandomOrder()->value('id'),
+            'mark_id' => $pair[0],
+            'model_id' => $pair[1],
+            'country_id' => $pair[2],
             'type_id' => CarType::inRandomOrder()->value('id'),
             'color_id' => CarColor::inRandomOrder()->value('id'),
             'vin' => strtoupper(
@@ -35,7 +46,7 @@ class CarFactory extends Factory
             ),
             'date_at' => fake()->dateTimeBetween('-5 years', 'now'),
             'price' => fake()->numberBetween(10, 50) * 100000,
-            'block' => fake()->boolean(20), // 20% вероятности блокировки
+            'block' => fake()->numberBetween(1, 20),
         ];
     }
 }

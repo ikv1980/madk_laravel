@@ -27,13 +27,6 @@ class UpdateCarMarkModelCountryRequest extends FormRequest
                 'required',
                 'integer',
                 'exists:car_marks,id',
-                Rule::unique('car_mark_model_countries')
-                    ->where(function ($query) {
-                        return $query
-                            ->where('model_id', $this->model_id)
-                            ->where('country_id', $this->country_id);
-                    })
-                    ->ignore($this->car_mark_model_country->id),
             ],
             'model_id' => [
                 'required',

@@ -23,10 +23,25 @@ class UpdateCarRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'mark_model_country_id' => [
+            'mark_id' => [
                 'required',
                 'integer',
-                'exists:car_mark_model_countries,id',
+                'exists:car_marks,id',
+                Rule::unique('car_mark_model_countries')
+                    ->where(function ($query) {
+                        $query->where('model_id', $this->model_id)
+                            ->where('country_id', $this->country_id);
+                    })->ignore($this->car->id),
+            ],
+            'model_id' => [
+                'required',
+                'integer',
+                'exists:car_models,id',
+            ],
+            'country_id' => [
+                'required',
+                'integer',
+                'exists:car_countries,id',
             ],
             'type_id' => [
                 'required',

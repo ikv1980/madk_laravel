@@ -42,8 +42,8 @@ class OrderCarResource extends JsonResource
                 return [
                     'id' => $this->car->id,
                     'color' => $this->car->color?->color_name,
-                    'mark' => $this->car->markModelCountry?->mark?->mark_name,
-                    'model' => $this->car->markModelCountry?->model?->model_name,
+                    'mark' => $this->car->mark?->mark_name,
+                    'model' => $this->car->model?->model_name,
                 ];
             }),
 

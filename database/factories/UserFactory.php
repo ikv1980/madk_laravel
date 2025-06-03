@@ -28,8 +28,8 @@ class UserFactory extends Factory
         $faker = \Faker\Factory::create('ru_RU');
 
         // Выбираем случайную пару [department_id, position_id] из UserDepartmentPositionSeeder
-        $departmentPositionPairs = new UserDepartmentPositionSeeder();
-        $pair = fake()->randomElement($departmentPositionPairs->items);
+        $departmentPosition = new UserDepartmentPositionSeeder();
+        $pair = fake()->randomElement($departmentPosition->items);
 
         return [
             'login' => $this->faker->unique()->userName(),
