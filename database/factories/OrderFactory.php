@@ -24,7 +24,7 @@ class OrderFactory extends Factory
         $faker = \Faker\Factory::create('ru_RU');
 
         return [
-            'client_id' => Client::inRandomOrder()->value('id'),
+            'client_id' => Client::where('client_status', true)->inRandomOrder()->value('id'),
             'user_id' => User::where('department_id', 4)->inRandomOrder()->value('id'),
             'payment_id' => Payment::inRandomOrder()->value('id'),
             'delivery_id' => Delivery::inRandomOrder()->value('id'),

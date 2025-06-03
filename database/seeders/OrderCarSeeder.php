@@ -18,7 +18,7 @@ class OrderCarSeeder extends Seeder
         // php artisan db:seed --class=OrderCarSeeder
 
         // Создаем данные через фабрику, но не сохраняем сразу
-        $data = OrderCar::factory(20)->make()->toArray();
+        $data = OrderCar::factory(30)->make()->toArray();
 
         // Добавляем created_at и updated_at в каждую запись
         $now = Carbon::now();

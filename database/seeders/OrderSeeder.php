@@ -14,6 +14,6 @@ class OrderSeeder extends Seeder
     {
         // Вызов сидера отдельно
         // php artisan db:seed --class=OrderSeeder
-        Order::factory(10)->create();
+        Order::factory(15)->create();
     }
 }

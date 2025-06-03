@@ -64,7 +64,7 @@ class AdminSeeder extends Seeder
                     'Permissions' => ['Read' => true, 'Write' => true]
                 ],
                 [
-                    'Name' => 'Status',
+                    'Name' => 'OrderStatus',
                     'RusName' => 'Статусы',
                     'Permissions' => ['Read' => true, 'Write' => true]
                 ],
@@ -115,7 +115,12 @@ class AdminSeeder extends Seeder
                 ],
                 [
                     'Name' => 'UserStatus',
-                    'RusName' => 'Статусысотрудников',
+                    'RusName' => 'Статусы сотрудников',
+                    'Permissions' => ['Read' => true, 'Write' => true]
+                ],
+                [
+                    'Name' => 'UserDepartmentPosition',
+                    'RusName' => 'Отдел-Должность',
                     'Permissions' => ['Read' => true, 'Write' => true]
                 ]
             ]

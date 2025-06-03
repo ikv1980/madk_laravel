@@ -14,6 +14,6 @@ class CarSeeder extends Seeder
     {
         // Вызов сидера отдельно
         // php artisan db:seed --class=CarSeeder
-        Car::factory(10)->create();
+        Car::factory(15)->create();
     }
 }
