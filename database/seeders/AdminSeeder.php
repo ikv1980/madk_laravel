@@ -43,6 +43,7 @@ class AdminSeeder extends Seeder
                 ]
             ],
             'Directories' => [
+                // ЗАКАЗЫ
                 [
                     'Name' => 'Order',
                     'RusName' => 'Заказы',
@@ -64,8 +65,14 @@ class AdminSeeder extends Seeder
                     'Permissions' => ['Read' => true, 'Write' => true]
                 ],
                 [
-                    'Name' => 'OrderStatus',
+                    'Name' => 'Status',
                     'RusName' => 'Статусы',
+                    'Permissions' => ['Read' => true, 'Write' => true]
+                ],
+                // ТРАНСПОРТ
+                [
+                    'Name' => 'Car',
+                    'RusName' => 'Автомобили',
                     'Permissions' => ['Read' => true, 'Write' => true]
                 ],
                 [
@@ -98,6 +105,7 @@ class AdminSeeder extends Seeder
                     'RusName' => 'Марка-Модель-Страна',
                     'Permissions' => ['Read' => true, 'Write' => true]
                 ],
+                // ПОЛЬЗОВАТЕЛИ
                 [
                     'Name' => 'User',
                     'RusName' => 'Сотрудники',
