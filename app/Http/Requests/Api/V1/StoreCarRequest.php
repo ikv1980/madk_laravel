@@ -27,12 +27,6 @@ class StoreCarRequest extends FormRequest
                 'required',
                 'integer',
                 'exists:car_marks,id',
-                Rule::unique('car_mark_model_countries')
-                    ->where(function ($query) {
-                        return $query->where('mark_id', $this->mark_id)
-                            ->where('model_id', $this->model_id)
-                            ->where('country_id', $this->country_id);
-                    }),
             ],
             'model_id' => [
                 'required',
