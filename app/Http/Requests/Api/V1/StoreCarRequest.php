@@ -79,17 +79,4 @@ class StoreCarRequest extends FormRequest
             ],
         ];
     }
-
-
-    /**
-     * Кастомное сообщение об уникальности связки полей
-     *
-     * @return array
-     */
-    public function messages(): array
-    {
-        return [
-            'mark_id.unique' => 'Эта комбинация mark_id, model_id и country_id уже существует в базе данных.',
-        ];
-    }
 }
