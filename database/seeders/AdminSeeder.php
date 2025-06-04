@@ -56,28 +56,23 @@ class AdminSeeder extends Seeder
                 ],
                 [
                     'Name' => 'Delivery',
-                    'RusName' => 'Доставки',
+                    'RusName' => 'Типы Доставки',
                     'Permissions' => ['Read' => true, 'Write' => true]
                 ],
                 [
                     'Name' => 'Payment',
-                    'RusName' => 'Оплаты',
+                    'RusName' => 'Типы Оплаты',
                     'Permissions' => ['Read' => true, 'Write' => true]
                 ],
                 [
-                    'Name' => 'Status',
-                    'RusName' => 'Статусы',
+                    'Name' => 'OrderStatus',
+                    'RusName' => 'Статусы заказа',
                     'Permissions' => ['Read' => true, 'Write' => true]
                 ],
                 // ТРАНСПОРТ
                 [
                     'Name' => 'Car',
                     'RusName' => 'Автомобили',
-                    'Permissions' => ['Read' => true, 'Write' => true]
-                ],
-                [
-                    'Name' => 'CarCountry',
-                    'RusName' => 'Страны',
                     'Permissions' => ['Read' => true, 'Write' => true]
                 ],
                 [
@@ -91,8 +86,13 @@ class AdminSeeder extends Seeder
                     'Permissions' => ['Read' => true, 'Write' => true]
                 ],
                 [
+                    'Name' => 'CarCountry',
+                    'RusName' => 'Страны',
+                    'Permissions' => ['Read' => true, 'Write' => true]
+                ],
+                [
                     'Name' => 'CarType',
-                    'RusName' => 'Типы',
+                    'RusName' => 'Типы кузова',
                     'Permissions' => ['Read' => true, 'Write' => true]
                 ],
                 [
@@ -102,7 +102,7 @@ class AdminSeeder extends Seeder
                 ],
                 [
                     'Name' => 'CarMarkModelCountry',
-                    'RusName' => 'Марка-Модель-Страна',
+                    'RusName' => 'Марка - Модель',
                     'Permissions' => ['Read' => true, 'Write' => true]
                 ],
                 // ПОЛЬЗОВАТЕЛИ
@@ -123,12 +123,12 @@ class AdminSeeder extends Seeder
                 ],
                 [
                     'Name' => 'UserStatus',
-                    'RusName' => 'Статусы сотрудников',
+                    'RusName' => 'Статусы',
                     'Permissions' => ['Read' => true, 'Write' => true]
                 ],
                 [
                     'Name' => 'UserDepartmentPosition',
-                    'RusName' => 'Отдел-Должность',
+                    'RusName' => 'Отдел - Должность',
                     'Permissions' => ['Read' => true, 'Write' => true]
                 ]
             ]

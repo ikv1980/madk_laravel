@@ -50,7 +50,7 @@ class UserFactory extends Factory
                 [
                     'Name' => 'dict',
                     'RusName' => 'Словари',
-                    'Permissions' => ['Read' => true, 'Write' => true]
+                    'Permissions' => ['Read' => false, 'Write' => false]
                 ]
             ],
             'Directories' => [
@@ -67,28 +67,23 @@ class UserFactory extends Factory
                 ],
                 [
                     'Name' => 'Delivery',
-                    'RusName' => 'Доставки',
+                    'RusName' => 'Типы Доставки',
                     'Permissions' => ['Read' => false, 'Write' => false]
                 ],
                 [
                     'Name' => 'Payment',
-                    'RusName' => 'Оплаты',
+                    'RusName' => 'Типы Оплаты',
                     'Permissions' => ['Read' => false, 'Write' => false]
                 ],
                 [
-                    'Name' => 'Status',
-                    'RusName' => 'Статусы',
+                    'Name' => 'OrderStatus',
+                    'RusName' => 'Статусы заказа',
                     'Permissions' => ['Read' => false, 'Write' => false]
                 ],
                 // ТРАНСПОРТ
                 [
                     'Name' => 'Car',
                     'RusName' => 'Автомобили',
-                    'Permissions' => ['Read' => false, 'Write' => false]
-                ],
-                [
-                    'Name' => 'CarCountry',
-                    'RusName' => 'Страны',
                     'Permissions' => ['Read' => false, 'Write' => false]
                 ],
                 [
@@ -102,8 +97,13 @@ class UserFactory extends Factory
                     'Permissions' => ['Read' => false, 'Write' => false]
                 ],
                 [
+                    'Name' => 'CarCountry',
+                    'RusName' => 'Страны',
+                    'Permissions' => ['Read' => false, 'Write' => false]
+                ],
+                [
                     'Name' => 'CarType',
-                    'RusName' => 'Типы',
+                    'RusName' => 'Типы кузова',
                     'Permissions' => ['Read' => false, 'Write' => false]
                 ],
                 [
@@ -113,7 +113,7 @@ class UserFactory extends Factory
                 ],
                 [
                     'Name' => 'CarMarkModelCountry',
-                    'RusName' => 'Марка-Модель-Страна',
+                    'RusName' => 'Марка - Модель',
                     'Permissions' => ['Read' => false, 'Write' => false]
                 ],
                 // ПОЛЬЗОВАТЕЛИ
@@ -134,12 +134,12 @@ class UserFactory extends Factory
                 ],
                 [
                     'Name' => 'UserStatus',
-                    'RusName' => 'Статусы сотрудников',
+                    'RusName' => 'Статусы',
                     'Permissions' => ['Read' => false, 'Write' => false]
                 ],
                 [
                     'Name' => 'UserDepartmentPosition',
-                    'RusName' => 'Отдел-Должность',
+                    'RusName' => 'Отдел - Должность',
                     'Permissions' => ['Read' => false, 'Write' => false]
                 ]
             ]
