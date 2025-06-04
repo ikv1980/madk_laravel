@@ -14,7 +14,7 @@ class AdminSeeder extends Seeder
     public function run(): void
     {
         // Разрешения для администратора
-        $permissions = [
+        $adminPermissions = [
             'Tabs' => [
                 [
                     'Name' => 'user',
@@ -135,7 +135,7 @@ class AdminSeeder extends Seeder
         ];
 
         // Преобразуем массив в JSON
-        $permissionsJson = json_encode($permissions, JSON_UNESCAPED_UNICODE);
+        $adminPermissionsJson = json_encode($adminPermissions, JSON_UNESCAPED_UNICODE);
 
         // Создаем администратора вручную
         $data =
@@ -154,7 +154,7 @@ class AdminSeeder extends Seeder
                 'start_work' => now()->format('Y-m-d'),
                 'status_id' => 1,
                 'status_at' => now()->format('Y-m-d'),
-                'permissions' => $permissionsJson
+                'permissions' => $adminPermissionsJson
             ];
         // Вызов сидера отдельно
         // php artisan db:seed --class=AdminSeeder

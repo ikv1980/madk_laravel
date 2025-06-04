@@ -24,6 +24,127 @@ class UserFactory extends Factory
      */
     public function definition(): array
     {
+        // Разрешения для администратора
+        $userPermissions = [
+            'Tabs' => [
+                [
+                    'Name' => 'user',
+                    'RusName' => 'Пользователь',
+                    'Permissions' => ['Read' => true, 'Write' => true]
+                ],
+                [
+                    'Name' => 'order',
+                    'RusName' => 'Заказы',
+                    'Permissions' => ['Read' => false, 'Write' => false]
+                ],
+                [
+                    'Name' => 'report',
+                    'RusName' => 'Отчеты',
+                    'Permissions' => ['Read' => false, 'Write' => false]
+                ],
+                [
+                    'Name' => 'setting',
+                    'RusName' => 'Настройки',
+                    'Permissions' => ['Read' => false, 'Write' => false]
+                ],
+                [
+                    'Name' => 'dict',
+                    'RusName' => 'Словари',
+                    'Permissions' => ['Read' => true, 'Write' => true]
+                ]
+            ],
+            'Directories' => [
+                // ЗАКАЗЫ
+                [
+                    'Name' => 'Order',
+                    'RusName' => 'Заказы',
+                    'Permissions' => ['Read' => false, 'Write' => false]
+                ],
+                [
+                    'Name' => 'Client',
+                    'RusName' => 'Клиенты',
+                    'Permissions' => ['Read' => false, 'Write' => false]
+                ],
+                [
+                    'Name' => 'Delivery',
+                    'RusName' => 'Доставки',
+                    'Permissions' => ['Read' => false, 'Write' => false]
+                ],
+                [
+                    'Name' => 'Payment',
+                    'RusName' => 'Оплаты',
+                    'Permissions' => ['Read' => false, 'Write' => false]
+                ],
+                [
+                    'Name' => 'Status',
+                    'RusName' => 'Статусы',
+                    'Permissions' => ['Read' => false, 'Write' => false]
+                ],
+                // ТРАНСПОРТ
+                [
+                    'Name' => 'Car',
+                    'RusName' => 'Автомобили',
+                    'Permissions' => ['Read' => false, 'Write' => false]
+                ],
+                [
+                    'Name' => 'CarCountry',
+                    'RusName' => 'Страны',
+                    'Permissions' => ['Read' => false, 'Write' => false]
+                ],
+                [
+                    'Name' => 'CarMark',
+                    'RusName' => 'Марки',
+                    'Permissions' => ['Read' => false, 'Write' => false]
+                ],
+                [
+                    'Name' => 'CarModel',
+                    'RusName' => 'Модели',
+                    'Permissions' => ['Read' => false, 'Write' => false]
+                ],
+                [
+                    'Name' => 'CarType',
+                    'RusName' => 'Типы',
+                    'Permissions' => ['Read' => false, 'Write' => false]
+                ],
+                [
+                    'Name' => 'CarColor',
+                    'RusName' => 'Цвета',
+                    'Permissions' => ['Read' => false, 'Write' => false]
+                ],
+                [
+                    'Name' => 'CarMarkModelCountry',
+                    'RusName' => 'Марка-Модель-Страна',
+                    'Permissions' => ['Read' => false, 'Write' => false]
+                ],
+                // ПОЛЬЗОВАТЕЛИ
+                [
+                    'Name' => 'User',
+                    'RusName' => 'Сотрудники',
+                    'Permissions' => ['Read' => true, 'Write' => false]
+                ],
+                [
+                    'Name' => 'UserDepartment',
+                    'RusName' => 'Отделы',
+                    'Permissions' => ['Read' => false, 'Write' => false]
+                ],
+                [
+                    'Name' => 'UserPosition',
+                    'RusName' => 'Должности',
+                    'Permissions' => ['Read' => false, 'Write' => false]
+                ],
+                [
+                    'Name' => 'UserStatus',
+                    'RusName' => 'Статусы сотрудников',
+                    'Permissions' => ['Read' => false, 'Write' => false]
+                ],
+                [
+                    'Name' => 'UserDepartmentPosition',
+                    'RusName' => 'Отдел-Должность',
+                    'Permissions' => ['Read' => false, 'Write' => false]
+                ]
+            ]
+        ];
+
         // Русская локаль для фейковых данных
         $faker = \Faker\Factory::create('ru_RU');
 
@@ -48,12 +169,7 @@ class UserFactory extends Factory
             'start_work' => $faker->date('Y-m-d', 'now'),
             'status_id' => $faker->numberBetween(1, 4),
             'status_at' => $faker->date('Y-m-d', 'now'),
-            'permissions' => $faker->randomElement([
-                ['view_users' => 'edit_users'],
-                ['view_reports' => 'edit_reports'],
-                ['view_users' => 'read_only', 'view_reports' => 'read_only'],
-                [],
-            ]),
+            'permissions' => $userPermissions,
             'remember_token' => Str::random(10),
         ];
     }
