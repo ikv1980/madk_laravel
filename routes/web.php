@@ -1,7 +1,12 @@
 <?php
 
+use App\Http\Controllers\Main\CarTypeController;
+use App\Http\Controllers\Main\IndexController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return "Hello World!";
-});
+// Администраторская панель
+Route::get('/', IndexController::class);
+
+
+Route::resource('car-types', CarTypeController::class);
+
