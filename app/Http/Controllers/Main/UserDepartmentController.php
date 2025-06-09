@@ -3,10 +3,10 @@
 namespace App\Http\Controllers\Main;
 
 use App\Http\Controllers\Controller;
-use App\Models\CarType;
+use App\Models\UserDepartment;
 use Illuminate\Http\Request;
 
-class CarTypeController extends Controller
+class UserDepartmentController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,14 +14,14 @@ class CarTypeController extends Controller
     public function index()
     {
         $count = env('PAGINATION_COUNT', 20);
-        $title = "Типы кузовов";
+        $title = "Отделы";
 
         $data = [
             'title' => $title,
-            'columns' => ['id', 'type_name'],
-            'headers' => ['ID', 'Наименование'],
-            'items' => CarType::paginate($count),
-            'route' => 'car-types',
+            'columns' => ['id', 'department_name', 'department_description', 'department_mail'],
+            'headers' => ['ID', 'Наименование', 'Описание', 'E-mail'],
+            'items' => UserDepartment::paginate($count),
+            'route' => 'user-departments',
         ];
 
         return view('main.dictionary', compact('data'));
