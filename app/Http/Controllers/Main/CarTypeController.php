@@ -14,8 +14,9 @@ class CarTypeController extends Controller
      */
     public function index()
     {
+        $count = env('PAGINATION_COUNT', 15);
         $title = "Типы кузовов";
-        $items = CarType::paginate(10);
+        $items = CarType::paginate($count);
 
         return view('car.type.index', compact('title', 'items'));
     }
