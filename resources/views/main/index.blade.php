@@ -1,3 +1,5 @@
+{{--Главная страница сайта--}}
+
 @extends('layouts.main')
 
 @section('content')

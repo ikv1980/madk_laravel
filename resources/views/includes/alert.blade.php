@@ -1,3 +1,7 @@
+{{--
+Компонент вывода информационного сообщения на странице.
+Установлен в main.blade.php как @include('includes.alert')
+--}}
 @if(session()->has('alert') && session()->has('alert_style'))
     @php
         $text = session()->pull('alert');

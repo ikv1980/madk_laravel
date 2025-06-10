@@ -1,4 +1,7 @@
-{{--Компонент вывода всех ошибок по списку--}}
+{{--
+Компонент вывода всех ошибок по списку.
+Установлен как тег <x-errors/> в методах  create (update)
+--}}
 @if($errors->any())
     <div class="alert callout callout-danger alert-dismissible py-2 mt-3 text-danger">
         <h5><i class="icon fas fa-exclamation-triangle"></i>{{__('Внимание')}}</h5>
