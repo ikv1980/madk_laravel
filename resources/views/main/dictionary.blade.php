@@ -21,16 +21,13 @@
                         <div class="row">
                             <div class="col-sm-12">
                                 <table id="example1_wrapper"
-                                       class="table table-bordered table-hover dataTable dtr-inline"
+                                       class="table table-bordered"
                                        aria-describedby="example2_info">
                                     <thead>
                                     <tr>
-                                        <th style="width: 40px"></th>
+                                        <th style="width: 75px"></th>
                                         @foreach ($data['headers'] as $header)
-                                            <th class="sorting sorting_asc" tabindex="0" aria-controls="example2"
-                                                rowspan="1" colspan="1" aria-sort="ascending"
-                                                aria-label="Rendering engine: activate to sort column descending">{{ $header }}
-                                            </th>
+                                            <th>{{ $header }}</th>
                                         @endforeach
                                     </tr>
                                     </thead>
@@ -40,9 +37,11 @@
                                         @foreach ($data['items'] as $index => $item)
                                             <tr class="{{ $index % 2 == 0 ? 'bg-light' : 'bg-white' }}">
                                                 <td>
-                                                    <a href="{{ route($data['route'].'.edit', $item->id) }}"
-                                                       class="text-success">
-                                                        <i class="danger nav-icon fas fa-edit"></i>
+                                                    <a href="{{ route($data['route'].'.show', $item->id) }}" class="text-primary mr-2">
+                                                        <i class="nav-icon far fa-eye"></i>
+                                                    </a>
+                                                    <a href="{{ route($data['route'].'.edit', $item->id) }}" class="text-success">
+                                                        <i class="nav-icon fas fa-edit"></i>
                                                     </a>
                                                 </td>
                                                 @foreach ($data['columns'] as $column)
@@ -65,10 +64,7 @@
                                     <tfoot>
                                     <th style="width: 40px"></th>
                                     @foreach ($data['headers'] as $header)
-                                        <th class="sorting sorting_asc" tabindex="0" aria-controls="example2"
-                                            rowspan="1" colspan="1" aria-sort="ascending"
-                                            aria-label="Rendering engine: activate to sort column descending">{{ $header }}
-                                        </th>
+                                        <th>{{ $header }}</th>
                                     @endforeach
                                     </tfoot>
                                 </table>

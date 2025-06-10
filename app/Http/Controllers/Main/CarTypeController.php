@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\V1\StoreCarTypeRequest;
 use App\Http\Requests\Api\V1\UpdateCarTypeRequest;
 use App\Models\CarType;
-use Illuminate\Http\Request;
 
 class CarTypeController extends Controller
 {
@@ -26,7 +25,7 @@ class CarTypeController extends Controller
             'route' => 'car-types',
         ];
 
-        return view('main.dictionary', compact('data'));
+        return view('car.type.index', compact('data'));
     }
 
     /**
@@ -34,7 +33,6 @@ class CarTypeController extends Controller
      */
     public function create()
     {
-        message(__('Запись успешно создана'), 'alert-success');
         $data = [
             'title' => 'Создание записи',
         ];
@@ -47,14 +45,9 @@ class CarTypeController extends Controller
     public function store(StoreCarTypeRequest $request)
     {
         try {
-            $object = CarType::query()->firstOrCreate($request->validated());
-
-            if ($object->wasRecentlyCreated) {
-                message(__('Запись успешно создана.'), 'alert-success');
-            } else {
-                message(__('Такая запись уже существует в БД.'), 'alert-warning');
-            }
-            return redirect()->route('car-types.show', $object->id);
+            $carType = CarType::query()->firstOrCreate($request->validated());
+            message(__('Запись успешно создана.'), 'alert-success');
+            return redirect()->route('car-types.show', $carType->id);
         } catch (\Exception $e) {
             $error = __('Не удалось создать запись: ' . $e->getMessage());
             message(($error), 'alert-danger');
@@ -65,29 +58,35 @@ class CarTypeController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(CarType $object)
+    public function show(CarType $carType)
     {
-        session()->forget('alert');
-        return view('car-types.show', compact('object'));
+        $data = [
+            'title' => 'Просмотр записи',
+        ];
+        return view('car.type.show', compact('data', 'carType'));
     }
+
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(CarType $object)
+    public function edit(CarType $carType)
     {
-        //
+        $data = [
+            'title' => 'Редактирование записи',
+        ];
+        return view('car.type.edit', compact('data', 'carType'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateCarTypeRequest $request, CarType $object)
+    public function update(UpdateCarTypeRequest $request, CarType $carType)
     {
         try {
-            $object->update($request->validated());
+            $carType->update($request->validated());
             message(__('Запись успешно изменена'), 'alert-info');
-            return redirect()->route('car-types.show', $object->id);
+            return redirect()->route('car-types.show', $carType->id);
         } catch (\Exception $e) {
             $error = __('Не удалось обновить запись: ' . $e->getMessage());
             message(($error), 'alert-danger');
@@ -98,8 +97,9 @@ class CarTypeController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(CarType $carType)
     {
-        //
+        $carType->delete();
+        return redirect()->route('car-types.index');
     }
 }

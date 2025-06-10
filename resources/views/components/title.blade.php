@@ -8,10 +8,11 @@
                 </div>
             @endisset
             <!-- Элемент справа -->
-            <div class="col-sm-6">
-                <ol class="breadcrumb float-sm-right">
-                    <li class="breadcrumb-item active">{{ $data['title'] }}</li>
-                </ol>
+            <div class="col-sm-6 text-right">
+                <a href="javascript:history.back()" class="ico btn-back">
+                    <i class="fas fa-arrow-right"></i>
+                    {{__('Назад')}}
+                </a>
             </div>
         </div>
     </div>
