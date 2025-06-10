@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Main;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Api\V1\StoreCarTypeRequest;
+use App\Http\Requests\Api\V1\UpdateCarTypeRequest;
 use App\Models\CarType;
 use Illuminate\Http\Request;
 
@@ -32,29 +34,47 @@ class CarTypeController extends Controller
      */
     public function create()
     {
-        //
+        message(__('Запись успешно создана'), 'alert-success');
+        $data = [
+            'title' => 'Создание записи',
+        ];
+        return view('car.type.create', compact('data'));
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreCarTypeRequest $request)
     {
-        //
+        try {
+            $object = CarType::query()->firstOrCreate($request->validated());
+
+            if ($object->wasRecentlyCreated) {
+                message(__('Запись успешно создана.'), 'alert-success');
+            } else {
+                message(__('Такая запись уже существует в БД.'), 'alert-warning');
+            }
+            return redirect()->route('car-types.show', $object->id);
+        } catch (\Exception $e) {
+            $error = __('Не удалось создать запись: ' . $e->getMessage());
+            message(($error), 'alert-danger');
+            return redirect()->back()->withInput()->with($error);
+        }
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(CarType $object)
     {
-        //
+        session()->forget('alert');
+        return view('car-types.show', compact('object'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(CarType $object)
     {
         //
     }
@@ -62,9 +82,17 @@ class CarTypeController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UpdateCarTypeRequest $request, CarType $object)
     {
-        //
+        try {
+            $object->update($request->validated());
+            message(__('Запись успешно изменена'), 'alert-info');
+            return redirect()->route('car-types.show', $object->id);
+        } catch (\Exception $e) {
+            $error = __('Не удалось обновить запись: ' . $e->getMessage());
+            message(($error), 'alert-danger');
+            return redirect()->back()->withInput()->with($error);
+        }
     }
 
     /**

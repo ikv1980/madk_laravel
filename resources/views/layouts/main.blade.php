@@ -15,6 +15,9 @@
     <link rel="stylesheet" href="{{ asset('adminlte/plugins/overlayScrollbars/css/OverlayScrollbars.min.css')}}">
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
+
+@include('includes.alert')
+
 <div class="wrapper">
 
     <!-- Preloader -->
