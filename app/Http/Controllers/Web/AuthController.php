@@ -5,77 +5,74 @@ namespace App\Http\Controllers\Web;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\V1\LoginUserRequest;
 use App\Http\Requests\Api\V1\RegisterUserRequest;
-use Illuminate\Support\Facades\Http;
+use App\Models\User;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
-    protected $apiUrl;
-
-    public function __construct()
-    {
-        $this->apiUrl = config('api.base_url') . '/api/v1';
-    }
-
+    // Общая форма регистрации/авторизации
     public function show()
     {
         return view('auth.auth');
     }
 
-
-
-    // Форма регистрации
-    public function register()
-    {
-        return view('auth.register');
-    }
+//    // Форма регистрации
+//    public function register()
+//    {
+//        return view('auth.register');
+//    }
 
     // Регистрация
-    public function store(RegisterUserRequest $request)
+    public function store(RegisterUserRequest $request): RedirectResponse
     {
-        $response = Http::post("{$this->apiUrl}/register", $request->all());
-
-        if ($response->successful()) {
-            return redirect()->route('auth.login');
+        try {
+            User::query()->create($request->validated());
+            message(__('Регистрация успешно завершена. Дождитесь подтверждения прав.'), 'alert-success');
+            return redirect()->route('auth.show');
+        } catch (\Exception $e) {
+            return back()->withErrors(['error' => 'Ошибка при регистрации: '.$e->getMessage()]);
         }
-
-        return back()->withErrors(['error' => 'Ошибка регистрации']);
     }
-
 
     // Форма авторизации
-    public function login()
-    {
-        return view('auth.login');
-    }
+//    public function login()
+//    {
+//        return view('auth.login');
+//    }
 
     // Авторизация
-    public function authenticate(LoginUserRequest $request)
+    public function authenticate(LoginUserRequest $request): RedirectResponse
     {
-        $response = Http::post("{$this->apiUrl}/login", $request->all());
+        // Нужно подтверждение от Админа о доступе
+        // Время сессии не более 120 часов или при выходе со страницы
+        $credentials = $request->only('login', 'password');
 
-        if ($response->successful()) {
-            session([
-                'token' => $response['token'],
-                'user' => $response['user']
-            ]);
+        if (Auth::attempt($credentials)) {
+            $request->session()->regenerate();
+
             message(__('Добро пожаловать в систему'), 'alert-success');
             return redirect()->route('home');
         }
-        return back()->withErrors(['error' => 'Неверные логин или пароль']);
+
+        return back()->withErrors([
+            'error' => 'Неверные логин или пароль',
+        ])->onlyInput('login');
     }
 
     // Выход из системы
-    public function logout()
+    public function logout(Request $request)
     {
-        $token = session('token');
+        // Выход из системы через Laravel Auth
+        Auth::logout();
 
-        if ($token) {
-            Http::withHeaders(['Authorization' => "Bearer {$token}"])
-                ->post("{$this->apiUrl}/logout"); // Используем $apiUrl
-        }
+        // Очистка сессии
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
 
-        session()->flush();
-
-        return redirect()->route('login');
+        // Редирект на страницу входа с сообщением
+        message(__('Вы успешно вышли из системы'), 'alert-info');
+        return redirect()->route('auth.show');
     }
 }

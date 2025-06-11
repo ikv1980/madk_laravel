@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Api\V1;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class RegisterUserRequest extends FormRequest
 {
@@ -43,6 +44,14 @@ class RegisterUserRequest extends FormRequest
                 'string',
                 'min:8'
             ],
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'login.unique' => 'Этот логин уже занят',
+            'password.min' => 'Пароль не менее 8 символов',
         ];
     }
 }

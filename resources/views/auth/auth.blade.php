@@ -2,13 +2,18 @@
 
 @section('content')
     <div class="login-box mx-auto" style="width: 800px;">
-
-
         <div class="card card-outline card-primary">
-            <div class="card-header text-center">
-                <a href="#" class="h5"><b>Рады вас видеть!</b></a>
+            <div class="card-header text-left">
+                {{__('Начальная форма входа на сайт "Автосалон"')}}
             </div>
+            @if($errors->any())
+                <div class="card-body px-3 py-0">
+                    <!--Блок ошибок-->
+                    <x-errors/>
+                </div>
+            @endif
 
+            <!--Карточка регистрации/авторизации-->
             <div class="card-body">
                 <dl class="row">
                     <!--Левая часть-->
@@ -20,7 +25,8 @@
                     <!--Правая часть-->
                     <dd class="col-sm-9">
                         <div class="card">
-                            <div class="card card-primary card-tabs">
+                            <div class="card card-info card-tabs">
+                                <!--Вкладки меню-->
                                 <div class="card-header p-0 pt-1">
                                     <ul class="nav nav-tabs" id="auth" role="tablist">
                                         <li class="nav-item">
@@ -36,6 +42,7 @@
                                         </li>
                                     </ul>
                                 </div>
+                                <!--Тело вкладок-->
                                 <div class="card-body">
                                     <div class="tab-content" id="authContent">
                                         <!-- Вкладка Авторизация -->
@@ -44,29 +51,28 @@
                                             <div class="tab-pane fade show active" id="tab-login">
                                                 <form action="{{ route('auth.authenticate') }}" method="post">
                                                     @csrf
-
+                                                    <!--Логин-->
                                                     <div class="input-group mb-3">
                                                         <input type="text" name="login" class="form-control"
-                                                               placeholder="Логин" required>
+                                                               placeholder="{{__('Логин')}}" required>
                                                         <div class="input-group-append">
                                                             <div class="input-group-text">
                                                                 <span class="fas fa-user"></span>
                                                             </div>
                                                         </div>
                                                     </div>
-
+                                                    <!--Пароль-->
                                                     <div class="input-group mb-3">
                                                         <input type="password" name="password" class="form-control"
-                                                               placeholder="Пароль" required>
+                                                               placeholder="{{__('Пароль')}}" required>
                                                         <div class="input-group-append">
                                                             <div class="input-group-text">
-                                                                <span class="fas fa-lock"></span>
+                                                                <span class="fas fa-key"></span>
                                                             </div>
                                                         </div>
                                                     </div>
-
                                                     <button type="submit" class="btn btn-primary btn-block">
-                                                        Авторизоваться
+                                                        {{__('Авторизоваться')}}
                                                     </button>
                                                 </form>
                                             </div>
@@ -76,49 +82,48 @@
                                              aria-labelledby="register">
                                             <form action="{{ route('auth.store') }}" method="post">
                                                 @csrf
-
+                                                <!--Имя-->
                                                 <div class="input-group mb-3">
                                                     <input type="text" name="firstname" class="form-control"
-                                                           placeholder="Имя" required>
+                                                           placeholder="{{__('Имя')}}" required>
                                                     <div class="input-group-append">
                                                         <div class="input-group-text">
-                                                            <span class="fas fa-id-card"></span>
+                                                            <span class="fas fa-address-card"></span>
                                                         </div>
                                                     </div>
                                                 </div>
-
+                                                <!--Фамилия-->
                                                 <div class="input-group mb-3">
                                                     <input type="text" name="surname" class="form-control"
-                                                           placeholder="Фамилия" required>
+                                                           placeholder="{{__('Фамилия')}}" required>
                                                     <div class="input-group-append">
                                                         <div class="input-group-text">
-                                                            <span class="fas fa-id-badge"></span>
+                                                            <span class="fas fa-address-card"></span>
                                                         </div>
                                                     </div>
                                                 </div>
-
+                                                <!--Логин-->
                                                 <div class="input-group mb-3">
                                                     <input type="text" name="login" class="form-control"
-                                                           placeholder="Логин" required>
+                                                           placeholder="{{__('Логин')}}" required>
                                                     <div class="input-group-append">
                                                         <div class="input-group-text">
-                                                            <span class="fas fa-user"></span>
+                                                            <span class="fas fa-user-alt"></span>
                                                         </div>
                                                     </div>
                                                 </div>
-
+                                                <!--Пароль-->
                                                 <div class="input-group mb-3">
                                                     <input type="password" name="password" class="form-control"
-                                                           placeholder="Пароль" required>
+                                                           placeholder="{{__('Пароль')}}" required>
                                                     <div class="input-group-append">
                                                         <div class="input-group-text">
-                                                            <span class="fas fa-lock"></span>
+                                                            <span class="fas fa-key"></span>
                                                         </div>
                                                     </div>
                                                 </div>
-
                                                 <button type="submit" class="btn btn-primary btn-block">
-                                                    Зарегистрироваться
+                                                    {{__('Зарегистрироваться')}}
                                                 </button>
                                             </form>
                                         </div>
@@ -131,105 +136,5 @@
             </div>
         </div>
     </div>
-
-
-
-{{--    <div class="card card-outline card-primary">--}}
-{{--        <div class="card-header text-center">--}}
-{{--            <a href="#" class="h5"><b>Окно авторизации</b></a>--}}
-{{--        </div>--}}
-
-{{--        <div class="card-body">--}}
-{{--            <!-- Вкладки -->--}}
-{{--            <ul class="nav nav-tabs justify-content-center">--}}
-{{--                <li class="nav-item">--}}
-{{--                    <a class="nav-link active" href="#tab-login" data-toggle="tab">Авторизация</a>--}}
-{{--                </li>--}}
-{{--                <li class="nav-item">--}}
-{{--                    <a class="nav-link" href="#tab-register" data-toggle="tab">Регистрация</a>--}}
-{{--                </li>--}}
-{{--            </ul>--}}
-{{--        </div>--}}
-
-
-{{--        <!-- Содержимое вкладок -->--}}
-{{--        <div class="tab-content">--}}
-{{--            <!-- Вкладка Авторизация -->--}}
-{{--            <div class="tab-pane fade show active" id="tab-login">--}}
-{{--                <form action="{{ route('auth.authenticate') }}" method="post">--}}
-{{--                    @csrf--}}
-
-{{--                    <div class="input-group mb-3">--}}
-{{--                        <input type="text" name="login" class="form-control" placeholder="Логин" required>--}}
-{{--                        <div class="input-group-append">--}}
-{{--                            <div class="input-group-text">--}}
-{{--                                <span class="fas fa-user"></span>--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
-{{--                    </div>--}}
-
-{{--                    <div class="input-group mb-3">--}}
-{{--                        <input type="password" name="password" class="form-control" placeholder="Пароль" required>--}}
-{{--                        <div class="input-group-append">--}}
-{{--                            <div class="input-group-text">--}}
-{{--                                <span class="fas fa-lock"></span>--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
-{{--                    </div>--}}
-
-{{--                    <button type="submit" class="btn btn-primary btn-block">Авторизоваться</button>--}}
-{{--                </form>--}}
-{{--            </div>--}}
-
-{{--            <!-- Вкладка Регистрация -->--}}
-{{--            <div class="tab-pane fade" id="tab-register">--}}
-
-
-{{--                <form action="{{ route('auth.store') }}" method="post">--}}
-{{--                    @csrf--}}
-
-{{--                    <div class="input-group mb-3">--}}
-{{--                        <input type="text" name="firstname" class="form-control" placeholder="Имя" required>--}}
-{{--                        <div class="input-group-append">--}}
-{{--                            <div class="input-group-text">--}}
-{{--                                <span class="fas fa-id-card"></span>--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
-{{--                    </div>--}}
-
-{{--                    <div class="input-group mb-3">--}}
-{{--                        <input type="text" name="surname" class="form-control" placeholder="Фамилия" required>--}}
-{{--                        <div class="input-group-append">--}}
-{{--                            <div class="input-group-text">--}}
-{{--                                <span class="fas fa-id-badge"></span>--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
-{{--                    </div>--}}
-
-{{--                    <div class="input-group mb-3">--}}
-{{--                        <input type="text" name="login" class="form-control" placeholder="Логин" required>--}}
-{{--                        <div class="input-group-append">--}}
-{{--                            <div class="input-group-text">--}}
-{{--                                <span class="fas fa-user"></span>--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
-{{--                    </div>--}}
-
-{{--                    <div class="input-group mb-3">--}}
-{{--                        <input type="password" name="password" class="form-control" placeholder="Пароль" required>--}}
-{{--                        <div class="input-group-append">--}}
-{{--                            <div class="input-group-text">--}}
-{{--                                <span class="fas fa-lock"></span>--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
-{{--                    </div>--}}
-
-{{--                    <button type="submit" class="btn btn-primary btn-block">Зарегистрироваться</button>--}}
-{{--                </form>--}}
-
-
-{{--            </div>--}}
-{{--        </div>--}}
-{{--    </div>--}}
 
 @stop
