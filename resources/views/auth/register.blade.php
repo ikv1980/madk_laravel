@@ -1,35 +1,79 @@
-@extends('layouts.main')
+@extends('layouts.empty')
 
 @section('content')
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-6">
-                <div class="card mt-5">
-                    <div class="card-header text-center">Регистрация</div>
-                    <div class="card-body">
-                        <form method="POST" action="{{ route('register') }}">
+    <div class="login-box mx-auto" style="width: 600px;">
+        <div class="card card-info">
+            <div class="card-header text-left">
+                {{__('"Автосалон". Регистрация пользователя')}}
+                {{--<a href="{{ route('login') }}">{{__('Вход')}}</a>--}}
+            </div>
+            <!--Карточка регистрации-->
+            <div class="card-body">
+                <div class="tab-content" id="authContent">
+                    <div class="tab-pane fade show active" id="tab-login">
+                        <form action="{{ route('auth.store') }}" method="post">
                             @csrf
-                            <div class="form-group mb-3">
-                                <label for="login">Логин</label>
-                                <input type="text" name="login" id="login" class="form-control" required>
+                            <!--Имя-->
+                            <div class="input-group mb-3">
+                                <input type="text" name="firstname" class="form-control"
+                                       placeholder="{{__('Имя')}}"
+                                       value="{{ old('firstname') }}" required>
+                                <div class="input-group-append">
+                                    <div class="input-group-text">
+                                        <span class="fas fa-address-card"></span>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="form-group mb-3">
-                                <label for="password">Пароль</label>
-                                <input type="password" name="password" id="password" class="form-control" required>
+                            <!--Фамилия-->
+                            <div class="input-group mb-3">
+                                <input type="text" name="surname" class="form-control"
+                                       placeholder="{{__('Фамилия')}}"
+                                       value="{{ old('surname') }}" required>
+                                <div class="input-group-append">
+                                    <div class="input-group-text">
+                                        <span class="fas fa-address-card"></span>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="form-group mb-3">
-                                <label for="firstname">Имя</label>
-                                <input type="text" name="firstname" id="firstname" class="form-control" required>
+                            <!--Логин-->
+                            <div class="input-group mb-3">
+                                <input type="text" name="login" class="form-control"
+                                       placeholder="{{__('Логин')}}"
+                                       value="{{ old('login') }}" required>
+                                <div class="input-group-append">
+                                    <div class="input-group-text">
+                                        <span class="fas fa-user-alt"></span>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="form-group mb-3">
-                                <label for="surname">Фамилия</label>
-                                <input type="text" name="surname" id="surname" class="form-control" required>
+                            <!--Пароль-->
+                            <div class="input-group mb-3">
+                                <input type="password" name="password" class="form-control"
+                                       placeholder="{{__('Пароль')}}" required>
+                                <div class="input-group-append">
+                                    <div class="input-group-text">
+                                        <span class="fas fa-key"></span>
+                                    </div>
+                                </div>
                             </div>
-                            <button type="submit" class="btn btn-primary w-100">Зарегистрироваться</button>
+                            <button type="submit" class="btn btn-primary btn-block">
+                                {{__('Зарегистрироваться')}}
+                            </button>
                         </form>
                     </div>
                 </div>
             </div>
+            <div class="card-footer">
+                <x-checkbox name="agreement" value="1">
+                    {{__('Согласие на обработку пользовательских данных')}}
+                </x-checkbox>
+            </div>
+            @if($errors->any())
+                <div class="card-body px-3 py-0">
+                    <!--Блок ошибок-->
+                    <x-errors/>
+                </div>
+            @endif
         </div>
     </div>
-@endsection
+@stop

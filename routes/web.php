@@ -9,8 +9,6 @@ use Illuminate\Support\Facades\Route;
 // Маршруты для регистрации - авторизации
 Route::middleware('guest')->group(function () {
 
-    Route::get('/auth', [AuthController::class, 'show'])->name('auth.show');
-
     Route::get('/register', [AuthController::class, 'register'])->name('register');
     Route::post('/register', [AuthController::class, 'store'])->name('auth.store');
 
@@ -21,9 +19,8 @@ Route::middleware('guest')->group(function () {
 Route::middleware('auth')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout'])->name('auth.logout');
 
-// Администраторская панель
+    // Администраторская панель
     Route::get('/', IndexController::class)->name('home');
-
 });
 
 

@@ -12,17 +12,11 @@ use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
-    // Общая форма регистрации/авторизации
-    public function show()
+    // Форма регистрации
+    public function register()
     {
-        return view('auth.auth');
+        return view('auth.register');
     }
-
-//    // Форма регистрации
-//    public function register()
-//    {
-//        return view('auth.register');
-//    }
 
     // Регистрация
     public function store(RegisterUserRequest $request): RedirectResponse
@@ -30,17 +24,17 @@ class AuthController extends Controller
         try {
             User::query()->create($request->validated());
             message(__('Регистрация успешно завершена. Дождитесь подтверждения прав.'), 'alert-success');
-            return redirect()->route('auth.show');
+            return redirect()->route('login');
         } catch (\Exception $e) {
             return back()->withErrors(['error' => 'Ошибка при регистрации: '.$e->getMessage()]);
         }
     }
 
     // Форма авторизации
-//    public function login()
-//    {
-//        return view('auth.login');
-//    }
+    public function login()
+    {
+        return view('auth.login');
+    }
 
     // Авторизация
     public function authenticate(LoginUserRequest $request): RedirectResponse
@@ -51,7 +45,6 @@ class AuthController extends Controller
 
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
-
             message(__('Добро пожаловать в систему'), 'alert-success');
             return redirect()->route('home');
         }
@@ -73,6 +66,6 @@ class AuthController extends Controller
 
         // Редирект на страницу входа с сообщением
         message(__('Вы успешно вышли из системы'), 'alert-info');
-        return redirect()->route('auth.show');
+        return redirect()->route('login');
     }
 }
