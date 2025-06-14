@@ -8,10 +8,10 @@
         <div class="col-md-6">
             <div class="card">
                 <div class="card-header d-flex align-items-center">
-                    <a href="{{ route('user-positions.edit', $userPosition->id) }}" class="btn btn-primary mr-auto">
+                    <a href="{{ route('user-statuses.edit', $userStatus->id) }}" class="btn btn-primary mr-auto">
                         {{ __('Редактировать') }}
                     </a>
-                    <form action="{{ route('user-positions.destroy', $userPosition->id) }}" method="post">
+                    <form action="{{ route('user-statuses.destroy', $userStatus->id) }}" method="post">
                         @csrf
                         @method('delete')
                         <button type="submit" class="btn btn-danger">{{ __('Удалить') }}</button>
@@ -20,10 +20,10 @@
                 <div class="card-body">
                     <div class="form-group">
                         <!--Пользовательские данные-->
-                        <label>{{__('Название должности')}}</label>
-                        <input class="form-control" value="{{ $userPosition->position_name }}" readonly>
-                        <label>{{__('Описание должности')}}</label>
-                        <textarea class="form-control" readonly>{{ $userPosition->position_description }}</textarea>
+                        <label>{{__('Название статуса')}}</label>
+                        <input class="form-control" value="{{ $userStatus->status_name }}" readonly>
+                        <label>{{__('Номер статуса')}}</label>
+                        <input class="form-control" value="{{ $userStatus->status_number }}" readonly>
                     </div>
                 </div>
             </div>

@@ -5,6 +5,7 @@ use App\Http\Controllers\Web\CarTypeController;
 use App\Http\Controllers\Web\IndexController;
 use App\Http\Controllers\Web\UserDepartmentController;
 use App\Http\Controllers\Web\UserPositionController;
+use App\Http\Controllers\Web\UserStatusController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('guest')->group(function () {
@@ -38,5 +39,5 @@ Route::resource('car-types', CarTypeController::class);
 Route::resource('users', UserPositionController::class);
 Route::resource('user-departments', UserDepartmentController::class);
 Route::resource('user-positions', UserPositionController::class);
-Route::resource('user-statuses', UserPositionController::class);
+Route::resource('user-statuses', UserStatusController::class);
 
