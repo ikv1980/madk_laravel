@@ -144,10 +144,20 @@
     <aside class="main-sidebar sidebar-dark-primary elevation-4">
         <!-- Brand Logo -->
         <a href="{{route('home')}}" class="brand-link">
+            <img src="images/logo/logo.png" alt="Logo" class="brand-image" style="opacity: .8">
             <span class="brand-text font-weight-light">Автосалон</span>
         </a>
         <!-- Sidebar -->
         <div class="sidebar">
+            <!-- Sidebar User -->
+            <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+                <div class="image">
+                    <img src="images/logo/default.png" alt="User Image">
+                </div>
+                <div class="info text-yellow">
+                    <span>{{ Auth::user()->firstname }} {{ Auth::user()->surname }}</span>
+                </div>
+            </div>
             <!-- Sidebar Menu -->
             <nav class="mt-2">
                 <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
@@ -158,7 +168,7 @@
                             <i class="nav-icon fas fa-shopping-bag"></i>
                             <p>
                                 Заказы
-                                <i class="fas fa-angle-left right"></i>
+                                <i class="fas fa-angle-right right"></i>
                             </p>
                         </a>
                         <ul class="nav nav-treeview">
@@ -200,7 +210,7 @@
                             <i class="nav-icon fas fa-car"></i>
                             <p>
                                 Транспорт
-                                <i class="fas fa-angle-left right"></i>
+                                <i class="fas fa-angle-right right"></i>
                             </p>
                         </a>
                         <ul class="nav nav-treeview">
@@ -248,7 +258,7 @@
                             <i class="nav-icon fas fa-users"></i>
                             <p>
                                 Пользователи
-                                <i class="fas fa-angle-left right"></i>
+                                <i class="fas fa-angle-right right"></i>
                             </p>
                         </a>
                         <ul class="nav nav-treeview">
