@@ -263,7 +263,7 @@
                         </a>
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
-                                <a href="pages/tables/simple.html" class="nav-link">
+                                <a href="{{ route('users.index') }}" class="nav-link">
                                     <i class="nav-icon fas fa-angle-right"></i>
                                     <p>Сотрудники</p>
                                 </a>
@@ -275,13 +275,13 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="pages/tables/jsgrid.html" class="nav-link">
+                                <a href="{{ route('user-positions.index') }}" class="nav-link">
                                     <i class="nav-icon fas fa-angle-right"></i>
                                     <p>Должности</p>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="pages/tables/jsgrid.html" class="nav-link">
+                                <a href="{{ route('user-statuses.index') }}" class="nav-link">
                                     <i class="nav-icon fas fa-angle-right"></i>
                                     <p>Статусы</p>
                                 </a>
