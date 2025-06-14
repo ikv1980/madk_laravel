@@ -3,6 +3,7 @@
 use App\Http\Controllers\Web\AuthController;
 use App\Http\Controllers\Web\CarTypeController;
 use App\Http\Controllers\Web\IndexController;
+use App\Http\Controllers\Web\UserController;
 use App\Http\Controllers\Web\UserDepartmentController;
 use App\Http\Controllers\Web\UserPositionController;
 use App\Http\Controllers\Web\UserStatusController;
@@ -36,7 +37,7 @@ Route::middleware('auth')->group(function () {
 // Справочники
 Route::resource('car-types', CarTypeController::class);
 // Пользователи
-Route::resource('users', UserPositionController::class);
+Route::resource('users', UserController::class);
 Route::resource('user-departments', UserDepartmentController::class);
 Route::resource('user-positions', UserPositionController::class);
 Route::resource('user-statuses', UserStatusController::class);

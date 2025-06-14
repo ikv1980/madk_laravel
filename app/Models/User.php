@@ -3,6 +3,7 @@
 namespace App\Models;
 
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -73,5 +74,25 @@ class User extends Authenticatable
     public function status(): BelongsTo
     {
         return $this->belongsTo(UserStatus::class);
+    }
+
+    public function getFullnameAttribute(): string
+    {
+        return trim("{$this->surname} {$this->firstname} {$this->patronymic}");
+    }
+
+    public function getStartWorkAttribute($value)
+    {
+        return $value ? Carbon::parse($value)->format('d.m.Y') : '-';
+    }
+
+    public function getBirthdayAttribute($value)
+    {
+        return $value ? Carbon::parse($value)->format('d.m.Y') : '-';
+    }
+
+    public function getStatusAtAttribute($value)
+    {
+        return $value ? Carbon::parse($value)->format('d.m.Y') : '-';
     }
 }

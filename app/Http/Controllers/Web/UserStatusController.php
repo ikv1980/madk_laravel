@@ -15,7 +15,7 @@ class UserStatusController extends Controller
     public function index()
     {
         $count = env('PAGINATION_COUNT', 20);
-        $title = "Список статусов";
+        $title = "Справочник \"Статусы\"";
 
         $data = [
             'title' => $title,

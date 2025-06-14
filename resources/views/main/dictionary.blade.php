@@ -51,10 +51,14 @@
                                                 </td>
                                                 @foreach ($data['columns'] as $column)
                                                     <td>
-                                                        {{ data_get($item, $column) }}
+                                                        @php
+                                                            // Получаем значение через точечную нотацию
+                                                            $value = data_get($item, $column);
+                                                            // Если значение null или не найдено — выводим прочерк
+                                                            echo $value ?? '-';
+                                                        @endphp
                                                     </td>
                                                 @endforeach
-
                                             </tr>
                                         @endforeach
                                     @else

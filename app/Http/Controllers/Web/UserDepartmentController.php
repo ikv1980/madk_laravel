@@ -15,7 +15,7 @@ class UserDepartmentController extends Controller
     public function index()
     {
         $count = env('PAGINATION_COUNT', 20);
-        $title = "Список отделов";
+        $title = "Справочник \"Отделы\"";
 
         $data = [
             'title' => $title,
