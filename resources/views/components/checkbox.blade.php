@@ -5,7 +5,7 @@
 
 @php($id = Str::uuid())
 
-<div class="form-check">
+<div class="form-check mx-0">
     <input {{ $attributes->class([
         'form-check-input'
     ])->merge([

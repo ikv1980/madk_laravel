@@ -44,6 +44,10 @@ class RegisterUserRequest extends FormRequest
                 'string',
                 'min:8'
             ],
+            'agreement' => [
+                'required',
+                'accepted'
+            ],
         ];
     }
 
@@ -52,6 +56,7 @@ class RegisterUserRequest extends FormRequest
         return [
             'login.unique' => 'Этот логин уже занят',
             'password.min' => 'Пароль не менее 8 символов',
+            'agreement.required' => 'Согласие на обработку данных обязательно',
         ];
     }
 }

@@ -39,10 +39,19 @@ class AuthController extends Controller
     // Авторизация
     public function authenticate(LoginUserRequest $request): RedirectResponse
     {
-        // Нужно подтверждение от Админа о доступе
-        // Время сессии не более 120 часов или при выходе со страницы
         $credentials = $request->only('login', 'password');
 
+        // Находим пользователя по логину
+        $user = User::query()->where('login', $credentials['login'])->first();
+
+        // Если пользователь существует, но статус = null или 2
+        if ($user && ($user->status_id === null || $user->status_id == 2)) {
+            return back()
+                ->withErrors(['error' => 'У пользователя нет доступа. Обратитесь к администратору'])
+                ->onlyInput('login');
+        }
+
+        // Стандартная аутентификация
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
             message(__('Добро пожаловать в систему'), 'alert-success');

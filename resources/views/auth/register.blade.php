@@ -4,8 +4,14 @@
     <div class="login-box mx-auto" style="width: 600px;">
         <div class="card card-info">
             <div class="card-header text-left">
-                {{__('"Автосалон". Регистрация пользователя')}}
-                {{--<a href="{{ route('login') }}">{{__('Вход')}}</a>--}}
+                <div class="d-flex justify-content-between align-items-center">
+                    {{__('"Автосалон". Регистрация пользователя')}}
+                    <div class="text-yellow">
+                        <i class="fas fa-angle-left"></i>
+                        <a href="{{ route('login') }}" >{{__('Авторизация')}}</a>
+                        <i class="fas fa-angle-right"></i>
+                    </div>
+                </div>
             </div>
             <!--Карточка регистрации-->
             <div class="card-body">
@@ -56,6 +62,11 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="input-group mb-3 text-dark">
+                                <x-checkbox name="agreement" value="1">
+                                    {{__('Согласие на обработку пользовательских данных')}}
+                                </x-checkbox>
+                            </div>
                             <button type="submit" class="btn btn-primary btn-block">
                                 {{__('Зарегистрироваться')}}
                             </button>
@@ -63,11 +74,7 @@
                     </div>
                 </div>
             </div>
-            <div class="card-footer">
-                <x-checkbox name="agreement" value="1">
-                    {{__('Согласие на обработку пользовательских данных')}}
-                </x-checkbox>
-            </div>
+
             @if($errors->any())
                 <div class="card-body px-3 py-0">
                     <!--Блок ошибок-->

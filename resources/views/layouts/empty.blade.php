@@ -23,7 +23,7 @@
 
 @include('includes.alert')
 
-<div class="wrapper d-flex flex-column min-vh-100 bg-light">
+<div class="wrapper d-flex flex-column min-vh-100 bg-gradient-gray">
     {{-- Контент в центре --}}
     <div class="flex-grow-1 d-flex align-items-center justify-content-center">
         @yield('content')

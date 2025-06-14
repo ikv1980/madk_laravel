@@ -3,7 +3,7 @@
 - регистрация и авторизация
 - справочники
 --}}
-<!DOCTYPE html>
+    <!DOCTYPE html>
 <html lang="ru">
 <head>
     <meta charset="utf-8">
@@ -38,11 +38,6 @@
                 <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
             </li>
         </ul>
-        // Кнопка выхода
-        <form action="{{ route('auth.logout') }}" method="POST">
-            @csrf
-            <button type="submit" class="btn btn-link">Выйти</button>
-        </form>
         <!-- Right navbar links -->
         <ul class="navbar-nav ml-auto">
             <!-- Messages Dropdown Menu -->
@@ -135,6 +130,12 @@
                     <i class="fas fa-expand-arrows-alt"></i>
                 </a>
             </li>
+            <form action="{{ route('auth.logout') }}" method="POST">
+                @csrf
+                <button type="submit" class="btn bg-danger">
+                    <i class="fas fa-sign-out-alt"></i>{{__('Выйти')}}
+                </button>
+            </form>
         </ul>
     </nav>
     <!-- /.navbar -->
@@ -142,10 +143,9 @@
     <!-- Main Sidebar Container -->
     <aside class="main-sidebar sidebar-dark-primary elevation-4">
         <!-- Brand Logo -->
-        <a href="index3.html" class="brand-link">
+        <a href="{{route('home')}}" class="brand-link">
             <span class="brand-text font-weight-light">Автосалон</span>
         </a>
-
         <!-- Sidebar -->
         <div class="sidebar">
             <!-- Sidebar Menu -->
