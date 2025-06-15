@@ -35,7 +35,7 @@
                             <x-form-group-input
                                 name="birthday"
                                 label="{{ __('Дата рождения') }}"
-                                value="{{ $user->birthday ? Carbon\Carbon::parse($user->birthday)->format('Y-m-d') : '' }}"
+                                value="{{ $user->birthday_input }}"
                                 type="date"
                             />
                             <!-- Телефон -->
@@ -103,7 +103,7 @@
                             <x-form-group-input
                                 name="start_work"
                                 label="{{ __('Дата приема') }}"
-                                value="{{ $user->start_work ? Carbon\Carbon::parse($user->start_work)->format('Y-m-d') : '' }}"
+                                value="{{ $user->start_work_input }}"
                                 type="date"
                             />
                             <!-- Статус -->
@@ -128,7 +128,7 @@
                             <x-form-group-input
                                 name="status_at"
                                 label="{{ __('Дата статуса') }}"
-                                value="{{ $user->status_at ? Carbon\Carbon::parse($user->status_at)->format('Y-m-d') : '' }}"
+                                value="{{ $user->status_at_input }}"
                                 type="date"
                             />
                         </div>

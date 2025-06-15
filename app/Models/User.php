@@ -76,23 +76,63 @@ class User extends Authenticatable
         return $this->belongsTo(UserStatus::class);
     }
 
+    // Полное ФИО
     public function getFullnameAttribute(): string
     {
         return trim("{$this->surname} {$this->firstname} {$this->patronymic}");
     }
 
-    public function getStartWorkAttribute($value)
-    {
-        return $value ? Carbon::parse($value)->format('d.m.Y') : '-';
-    }
-
+    // День рождения
     public function getBirthdayAttribute($value)
     {
         return $value ? Carbon::parse($value)->format('d.m.Y') : '-';
     }
+    public function getBirthdayInputAttribute()
+    {
+        if (empty($this->attributes['birthday'])) {
+            return '';
+        }
 
+        try {
+            return Carbon::parse($this->attributes['birthday'])->format('Y-m-d');
+        } catch (\Exception $e) {
+            return '';
+        }
+    }
+
+    // Дата приема на работу
+    public function getStartWorkAttribute($value)
+    {
+        return $value ? Carbon::parse($value)->format('d.m.Y') : '-';
+    }
+    public function getStartWorkInputAttribute()
+    {
+        if (empty($this->attributes['start_work'])) {
+            return '';
+        }
+
+        try {
+            return Carbon::parse($this->attributes['start_work'])->format('Y-m-d');
+        } catch (\Exception $e) {
+            return '';
+        }
+    }
+
+    // Дата статуса
     public function getStatusAtAttribute($value)
     {
         return $value ? Carbon::parse($value)->format('d.m.Y') : '-';
+    }
+    public function getStatusAtInputAttribute()
+    {
+        if (empty($this->attributes['status_at'])) {
+            return '';
+        }
+
+        try {
+            return Carbon::parse($this->attributes['status_at'])->format('Y-m-d');
+        } catch (\Exception $e) {
+            return '';
+        }
     }
 }
