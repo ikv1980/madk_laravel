@@ -35,12 +35,12 @@ class UpdateUserRequest extends FormRequest
                 'min:8'
             ],
             'firstname' => [
-                'required',
+                'nullable',
                 'string',
                 'max:50'
             ],
             'surname' => [
-                'required',
+                'nullable',
                 'string',
                 'max:50'
             ],

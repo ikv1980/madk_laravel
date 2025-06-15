@@ -24,21 +24,11 @@ Route::middleware('auth')->group(function () {
     // Администраторская панель
     Route::get('/', IndexController::class)->name('home');
 
-
-
-
-
+    // Справочники ТРАНСПОРТ
+    Route::resource('car-types', CarTypeController::class);
+    // Справочники ПОЛЬЗОВАТЕЛИ
+    Route::resource('users', UserController::class);
+    Route::resource('user-departments', UserDepartmentController::class);
+    Route::resource('user-positions', UserPositionController::class);
+    Route::resource('user-statuses', UserStatusController::class);
 });
-
-
-
-
-
-// Справочники
-Route::resource('car-types', CarTypeController::class);
-// Пользователи
-Route::resource('users', UserController::class);
-Route::resource('user-departments', UserDepartmentController::class);
-Route::resource('user-positions', UserPositionController::class);
-Route::resource('user-statuses', UserStatusController::class);
-

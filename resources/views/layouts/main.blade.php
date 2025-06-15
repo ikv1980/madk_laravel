@@ -151,12 +151,18 @@
         <div class="sidebar">
             <!-- Sidebar User -->
             <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-                <div class="image">
-                    <img src="{{ asset('images/logo/default.png') }}" alt="User Image">
-                </div>
-                <div class="info text-yellow">
-                    <span>{{ Auth::user()->firstname }} {{ Auth::user()->surname }}</span>
-                </div>
+                <a href="{{ route('users.update', Auth::user()->id) }}"
+                   class="d-flex align-items-center text-decoration-none">
+                    <img
+                        src="{{ asset('images/logo/default.png') }}"
+                        alt="User Image"
+                        class="img-circle elevation-2 me-2"
+                        style="width: 35px; height: 35px;"
+                    >
+                    <div class="info text-yellow">
+                        <span>{{ Auth::user()->firstname }} {{ Auth::user()->surname }}</span>
+                    </div>
+                </a>
             </div>
             <!-- Sidebar Menu -->
             <nav class="mt-2">
