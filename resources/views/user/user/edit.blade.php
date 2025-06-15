@@ -59,8 +59,8 @@
                         <div>
                             <!-- Отдел -->
                             <div class="form-group row">
-                                <label class="col-sm-2 col-form-label">{{__('Отдел')}}</label>
-                                <div class="col-sm-10">
+                                <label class="col-sm-3 col-form-label">{{__('Отдел')}}</label>
+                                <div class="col-sm-9">
                                     <select
                                         class="custom-select rounded-0"
                                         id="department"
@@ -78,8 +78,8 @@
                             </div>
                             <!-- Должность -->
                             <div class="form-group row">
-                                <label class="col-sm-2 col-form-label">{{__('Должность')}}</label>
-                                <div class="col-sm-10">
+                                <label class="col-sm-3 col-form-label">{{__('Должность')}}</label>
+                                <div class="col-sm-9">
                                     <select
                                         class="custom-select rounded-0"
                                         id="position"
@@ -108,8 +108,8 @@
                             />
                             <!-- Статус -->
                             <div class="form-group row">
-                                <label class="col-sm-2 col-form-label">{{__('Статус')}}</label>
-                                <div class="col-sm-10">
+                                <label class="col-sm-3 col-form-label">{{__('Статус')}}</label>
+                                <div class="col-sm-9">
                                     <select
                                         class="custom-select rounded-0"
                                         id="status"

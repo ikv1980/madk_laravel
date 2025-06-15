@@ -4,9 +4,10 @@
     'value' => '',
     'type' => 'text',
     'placeholder' => __('Введите значение'),
-    'labelCol' => '2',
-    'inputCol' => '10',
-    'attributes' => []
+    'labelCol' => '3',
+    'inputCol' => '9',
+    'attributes' => [],
+    'addClass' => ''
 ])
 
 <div class="form-group row">
@@ -18,8 +19,8 @@
             name="{{ $name }}"
             value="{{ old($name, $value) }}"
             type="{{ $type }}"
-            class="form-control"
-            placeholder="{{ $placeholder }}"
+            class="form-control {{ $addClass }}"
+        placeholder="{{ $placeholder }}"
         @foreach($attributes as $attr => $val)
             {{ $attr }}="{{ $val }}"
         @endforeach
