@@ -7,7 +7,6 @@ use App\Http\Requests\Api\V1\StoreUserRequest;
 use App\Http\Requests\Api\V1\UpdateUserRequest;
 use App\Models\User;
 use App\Models\UserDepartment;
-use App\Models\UserPosition;
 use App\Models\UserStatus;
 
 class UserController extends Controller
@@ -47,16 +46,15 @@ class UserController extends Controller
      */
     public function create()
     {
-        $departments = UserDepartment::all();
-        $positions = UserPosition::all();
+        $departments = UserDepartment::with('positions')->get();
         $statuses = UserStatus::all();
 
         $data = [
             'title' => 'Создание записи',
             'departments' => $departments,
-            'positions' => $positions,
             'statuses' => $statuses,
         ];
+
         return view('user.user.create', compact('data'));
     }
 
@@ -68,7 +66,7 @@ class UserController extends Controller
         try {
             $user = User::query()->firstOrCreate($request->validated());
             message(__('Запись успешно создана.'), 'alert-success');
-            return redirect()->route('users.user.show', $user->id);
+            return redirect()->route('users.show', $user->id);
         } catch (\Exception $e) {
             $error = __('Не удалось создать запись: ' . $e->getMessage());
             message(($error), 'alert-danger');
@@ -86,7 +84,6 @@ class UserController extends Controller
         ];
         return view('user.user.show', compact('data', 'user'));
     }
-
 
     /**
      * Show the form for editing the specified resource.
@@ -118,7 +115,7 @@ class UserController extends Controller
             }
             $user->update($data);
             message(__('Запись успешно изменена'), 'alert-info');
-            return redirect()->route('users.user.show', $user->id);
+            return redirect()->route('users.show', $user->id);
         } catch (\Exception $e) {
             $error = __('Не удалось обновить запись: ' . $e->getMessage());
             message(($error), 'alert-danger');
@@ -132,6 +129,6 @@ class UserController extends Controller
     public function destroy(User $user)
     {
         $user->delete();
-        return redirect()->route('users.user.index');
+        return redirect()->route('users.index');
     }
 }

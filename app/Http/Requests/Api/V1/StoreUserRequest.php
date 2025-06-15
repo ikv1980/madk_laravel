@@ -60,7 +60,8 @@ class StoreUserRequest extends FormRequest
             'phone' => [
                 'nullable',
                 'string',
-                'max:20'
+                'max:20',
+                'regex:/^\+?[0-9]+$/'
             ],
             'birthday' => [
                 'nullable',

@@ -9,13 +9,16 @@
             <div class="card">
                 <form action="{{ route('user-positions.store') }}" method="post">
                     @csrf
+
                     <div class="card-body">
                         <div class="form-group">
                             <!--Пользовательские данные-->
                             <label>{{__('Название должности')}}</label>
-                            <input name="position_name" type="text" class="form-control" placeholder="{{__('Введите значение')}}">
+                            <input name="position_name" type="text" class="form-control"
+                                   placeholder="{{__('Введите значение')}}">
                             <label>{{__('Описание должности')}}</label>
-                            <textarea name="position_description" type="text" class="form-control" placeholder="{{__('Введите значение')}}"></textarea>
+                            <textarea name="position_description" type="text" class="form-control"
+                                      placeholder="{{__('Введите значение')}}"></textarea>
                         </div>
                     </div>
                     <div class="card-footer">
