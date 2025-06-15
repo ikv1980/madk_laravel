@@ -111,13 +111,12 @@ class UserController extends Controller
     public function update(UpdateUserRequest $request, User $user)
     {
         try {
-//            В контроллере добавьте преобразование даты:
-//            $data = $request->all();
-//            $data['birthday'] = Carbon::parse($data['birthday']);
-//            $user->update($data);
-
-
-            $user->update($request->validated());
+            $data = $request->validated();
+            // Если пароль пустой, то удаляем из обновления
+            if (empty($data['password'])) {
+                unset($data['password']);
+            }
+            $user->update($data);
             message(__('Запись успешно изменена'), 'alert-info');
             return redirect()->route('users.user.show', $user->id);
         } catch (\Exception $e) {

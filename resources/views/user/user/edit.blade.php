@@ -10,113 +10,149 @@
                 <form action="{{ route('users.update', $user->id ) }}" method="post">
                     @csrf
                     @method('patch')
+                    <!-- Данные формы -->
                     <div class="card-body">
-                        <div class="form-group">
-                            <!--Пользовательские данные-->
-                            <label>{{__('Фамилия')}}</label>
-                            <input name="surname"
-                                   value="{{ $user->surname }}"
-                                   type="text"
-                                   class="form-control"
-                                   placeholder="{{__('Введите значение')}}">
-                            <label>{{__('Имя')}}</label>
-                            <input name="firstname"
-                                   value="{{ $user->firstname }}"
-                                   type="text"
-                                   class="form-control"
-                                   placeholder="{{__('Введите значение')}}">
-                            <label>{{__('Отчество')}}</label>
-                            <input name="patronymic"
-                                   value="{{ $user->patronymic }}"
-                                   type="text"
-                                   class="form-control"
-                                   placeholder="{{__('Введите значение')}}">
-                            <label>{{__('Дата рождения')}}</label>
-                            <input name="birthday"
-                                   value="{{ $user->birthday ? Carbon\Carbon::parse($user->birthday)->format('Y-m-d') : '' }}"
-                                   type="date"
-                                   class="form-control"
-                                   placeholder="{{__('Введите значение')}}">
-                            <label>{{__('Телефон')}}</label>
-                            <input name="phone"
-                                   value="{{ old('phone', $user->phone) }}"
-                                   type="tel"
-                                   class="form-control"
-                                   placeholder="{{__('Формат ввода +79998887766')}}"
-                                   pattern="\+7\d{10}">
-                            <label>{{__('E-mail')}}</label>
-                            <input name="email"
-                                   value="{{ old('email', $user->email) }}"
-                                   type="email"
-                                   class="form-control"
-                                   placeholder="{{__('Введите значение')}}">
-                            <label>{{__('Отдел')}}</label>
-                            <select
-                                class="custom-select rounded-0"
-                                id="department"
-                                name="department_id"
-                                onchange="updatePositions(this.value)">
-                                <option value="">Выберите отдел</option>
-                                @foreach($data['departments'] as $department)
-                                    <option value="{{ $department->id }}"
-                                        {{ $user->department_id == $department->id ? 'selected' : '' }}>
-                                        {{ $department->department_name }}
-                                    </option>
-                                @endforeach
-                            </select>
-                            <label>{{__('Должность')}}</label>
-                            <select
-                                class="custom-select rounded-0"
-                                id="position"
-                                name="position_id">
-                                <option value="">Сначала выберите отдел</option>
-                                @if($user->department_id)
-                                    @php
-                                        $selectedDepartment = $data['departments']->firstWhere('id', $user->department_id);
-                                    @endphp
-                                    @foreach($selectedDepartment->positions as $position)
-                                        <option value="{{ $position->id }}"
-                                            {{ $user->position_id == $position->id ? 'selected' : '' }}>
-                                            {{ $position->position_name }}
-                                        </option>
-                                    @endforeach
-                                @endif
-                            </select>
-                            <label>{{__('Дата приема')}}</label>
-                            <input name="birthday"
-                                   value="{{ $user->start_work ? Carbon\Carbon::parse($user->start_work)->format('Y-m-d') : '' }}"
-                                   type="date"
-                                   class="form-control"
-                                   placeholder="{{__('Введите значение')}}">
-                            <label>{{__('Статус')}}</label>
-                            <select
-                                class="custom-select rounded-0"
-                                id="status"
-                                name="status_id">
-                                <option value="">Выберите отдел</option>
-                                @foreach($data['statuses'] as $status)
-                                    <option value="{{ $status->id }}"
-                                        {{ $user->status_id == $status->id ? 'selected' : '' }}>
-                                        {{ $status->status_name }}
-                                    </option>
-                                @endforeach
-                            </select>
-                            <label>{{__('Дата статуса')}}</label>
-                            <input name="birthday"
-                                   value="{{ $user->status_at ? Carbon\Carbon::parse($user->status_at)->format('Y-m-d') : '' }}"
-                                   type="date"
-                                   class="form-control"
-                                   placeholder="{{__('Введите значение')}}">
-                            <label>{{__('Логин')}}</label>
-                            <input name="login" value="{{ $user->login }}" type="text" class="form-control"
-                                   placeholder="{{__('Введите значение')}}">
-                            <label>{{__('Пароль')}}</label>
-                            <input name="password" type="password" class="form-control" placeholder="{{__('Пароль')}}">
+                        <div>
+                            <!-- Фамилия -->
+                            <x-form-group-input
+                                name="surname"
+                                label="{{ __('Фамилия') }}"
+                                value="{{ $user->surname }}"
+                            />
+                            <!-- Имя -->
+                            <x-form-group-input
+                                name="firstname"
+                                label="{{ __('Имя') }}"
+                                value="{{ $user->firstname }}"
+                            />
+                            <!-- Отчество -->
+                            <x-form-group-input
+                                name="patronymic"
+                                label="{{ __('Отчество') }}"
+                                value="{{ $user->patronymic }}"
+                            />
+                            <!-- Дата рождения -->
+                            <x-form-group-input
+                                name="birthday"
+                                label="{{ __('Дата рождения') }}"
+                                value="{{ $user->birthday ? Carbon\Carbon::parse($user->birthday)->format('Y-m-d') : '' }}"
+                                type="date"
+                            />
+                            <!-- Телефон -->
+                            <x-form-group-input
+                                name="phone"
+                                label="{{ __('Телефон') }}"
+                                value="{{ old('phone', $user->phone) }}"
+                                type="tel"
+                                placeholder="{{ __('Формат ввода +79998887766') }}"
+                                pattern="+7\d{10}"
+                            />
+                            <!-- Email -->
+                            <x-form-group-input
+                                name="email"
+                                label="{{ __('E-mail') }}"
+                                value="{{ old('email', $user->email) }}"
+                                type="email"
+                            />
                         </div>
-                    </div>
-                    <div class="card-footer">
-                        <button type="submit" class="btn btn-primary">{{__('Обновить')}}</button>
-                        <x-errors/>
+                        <hr class="my-3 border-2 border-secondary opacity-50">
+                        <div>
+                            <!-- Отдел -->
+                            <div class="form-group row">
+                                <label class="col-sm-2 col-form-label">{{__('Отдел')}}</label>
+                                <div class="col-sm-10">
+                                    <select
+                                        class="custom-select rounded-0"
+                                        id="department"
+                                        name="department_id"
+                                        onchange="updatePositions(this.value)">
+                                        <option value="">Выберите отдел</option>
+                                        @foreach($data['departments'] as $department)
+                                            <option value="{{ $department->id }}"
+                                                {{ $user->department_id == $department->id ? 'selected' : '' }}>
+                                                {{ $department->department_name }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                            <!-- Должность -->
+                            <div class="form-group row">
+                                <label class="col-sm-2 col-form-label">{{__('Должность')}}</label>
+                                <div class="col-sm-10">
+                                    <select
+                                        class="custom-select rounded-0"
+                                        id="position"
+                                        name="position_id">
+                                        <option value="">Сначала выберите отдел</option>
+                                        @if($user->department_id)
+                                            @php
+                                                $selectedDepartment = $data['departments']->firstWhere('id', $user->department_id);
+                                            @endphp
+                                            @foreach($selectedDepartment->positions as $position)
+                                                <option value="{{ $position->id }}"
+                                                    {{ $user->position_id == $position->id ? 'selected' : '' }}>
+                                                    {{ $position->position_name }}
+                                                </option>
+                                            @endforeach
+                                        @endif
+                                    </select>
+                                </div>
+                            </div>
+                            <!-- Дата приема на работу -->
+                            <x-form-group-input
+                                name="start_work"
+                                label="{{ __('Дата приема') }}"
+                                value="{{ $user->start_work ? Carbon\Carbon::parse($user->start_work)->format('Y-m-d') : '' }}"
+                                type="date"
+                            />
+                            <!-- Статус -->
+                            <div class="form-group row">
+                                <label class="col-sm-2 col-form-label">{{__('Статус')}}</label>
+                                <div class="col-sm-10">
+                                    <select
+                                        class="custom-select rounded-0"
+                                        id="status"
+                                        name="status_id">
+                                        <option value="">Выберите статус</option>
+                                        @foreach($data['statuses'] as $status)
+                                            <option value="{{ $status->id }}"
+                                                {{ $user->status_id == $status->id ? 'selected' : '' }}>
+                                                {{ $status->status_name }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                            <!-- Дата статуса -->
+                            <x-form-group-input
+                                name="status_at"
+                                label="{{ __('Дата статуса') }}"
+                                value="{{ $user->status_at ? Carbon\Carbon::parse($user->status_at)->format('Y-m-d') : '' }}"
+                                type="date"
+                            />
+                        </div>
+                        <hr class="my-3 border-2 border-secondary opacity-50">
+                        <div>
+                            <!-- Логин -->
+                            <x-form-group-input
+                                name="login"
+                                label="{{ __('Логин') }}"
+                                value="{{ $user->login }}"
+                            />
+                            <!-- Пароль -->
+                            <x-form-group-input
+                                name="password"
+                                label="{{ __('Пароль') }}"
+                                type="password"
+                                placeholder="{{__('Пароль')}}"
+                            />
+                        </div>
+                        <div>
+                            <button type="submit" class="btn btn-primary">{{__('Обновить')}}</button>
+                            <!-- Ошибки -->
+                            <x-errors/>
+                        </div>
                     </div>
                 </form>
             </div>

@@ -30,7 +30,7 @@ class UpdateUserRequest extends FormRequest
                 Rule::unique('users', 'login')->ignore($this->user->id),
             ],
             'password' => [
-                'required',
+                'nullable',
                 'string',
                 'min:8'
             ],
