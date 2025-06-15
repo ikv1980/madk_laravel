@@ -55,7 +55,7 @@
                 </div>
             </div>
             <!-- Данные пользователя -->
-            {{--<x-user-card></x-user-card>--}}
+            <x-user-card></x-user-card>
         </div>
     </section>
     <!-- /.content -->
